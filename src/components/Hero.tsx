@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronRight, Rocket, Shield, Zap } from "lucide-react";
+import { ChevronRight, Rocket, Shield, Zap, Twitter, Github, MessageSquare } from "lucide-react";
 import FloatingShapes from "./FloatingShapes";
 
 const Hero = () => {
@@ -69,14 +69,28 @@ const Hero = () => {
                 Kryverzent is a high-performance technology foundry. We engineer scalable systems, AI-driven architectures, and digital experiences that redefine the modern frontier.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-6">
-                <button className="w-full sm:w-auto px-10 py-5 bg-primary text-white font-bold text-sm tracking-widest uppercase hover:scale-105 transition-all border-glow flex items-center justify-center gap-3 group font-syncopate">
-                  Initiate Project
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button className="w-full sm:w-auto px-10 py-5 glass text-white font-bold text-sm tracking-widest uppercase hover:bg-white/10 transition-all font-syncopate">
-                  Database
-                </button>
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                  <button className="w-full sm:w-auto px-10 py-5 bg-primary text-white font-bold text-sm tracking-widest uppercase hover:scale-105 transition-all border-glow flex items-center justify-center gap-3 group font-syncopate">
+                    Deploy System Now
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <div className="flex items-center gap-4 py-2 px-4 glass rounded-xl">
+                    <a href="#" className="text-gray-400 hover:text-primary transition-colors p-2">
+                      <Twitter className="w-5 h-5" />
+                    </a>
+                    <a href="#" className="text-gray-400 hover:text-primary transition-colors p-2">
+                      <Github className="w-5 h-5" />
+                    </a>
+                    <a href="#" className="text-gray-400 hover:text-primary transition-colors p-2">
+                      <MessageSquare className="w-5 h-5" />
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-mono text-primary/60">
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  LIMITED SLOTS FOR Q3 2099 REMAINING
+                </div>
               </div>
             </motion.div>
           </div>
