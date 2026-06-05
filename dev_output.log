@@ -1,0 +1,13 @@
+
+> kryverzent-site@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.1.7
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+
+ ✓ Starting...
+ ✓ Ready in 1842ms
+ ○ Compiling / ...
+ ✓ Compiled / in 8.1s (1567 modules)
+ GET / 200 in 8780ms
