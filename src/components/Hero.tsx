@@ -66,7 +66,7 @@ const Hero = () => {
               </h1>
 
               <p className="max-w-xl text-lg md:text-xl text-gray-400 mb-12 leading-relaxed font-rajdhani font-medium">
-                Kryverzent is a high-performance technology foundry. We engineer scalable systems, AI-driven architectures, and digital experiences that redefine the modern frontier.
+                Kryvazent is a high-performance technology foundry. We engineer scalable systems, AI-driven architectures, and digital experiences that redefine the modern frontier.
               </p>
 
               <div className="flex flex-col gap-6">

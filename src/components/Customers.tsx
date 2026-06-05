@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { Globe, Shield, Cpu, Zap, Rocket, Activity } from "lucide-react";
 
 const customers = [
-  { name: "TechNova", industry: "Cloud Computing", icon: Cpu },
-  { name: "Aetheria", industry: "Renewable Energy", icon: Globe },
-  { name: "Veridian", industry: "Biotech", icon: Activity },
+  { name: "Rajapura", industry: "Heritage & Supply", icon: Shield },
+  { name: "EMergeSL", industry: "Education & Tech", icon: Cpu },
+  { name: "Vision Expert", industry: "Optical Engineering", icon: Activity },
   { name: "Quantum", industry: "Cybersecurity", icon: Shield },
   { name: "Stellar", industry: "Aerospace", icon: Rocket },
   { name: "Nexus", industry: "Global Logistics", icon: Zap },

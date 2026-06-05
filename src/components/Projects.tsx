@@ -10,24 +10,40 @@ const projects = [
     category: "FinTech / AI",
     description: "A futuristic financial monitoring system with predictive analytics and real-time data visualization.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    tech: ["Next.js", "Python", "TensorFlow"],
+    stats: "40% faster insights",
+    client: "Global Bank",
+    year: "2099",
   },
   {
     title: "CyberCore CRM",
     category: "SaaS / Cloud",
     description: "Next-gen customer relationship management platform with seamless third-party integrations.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    tech: ["React", "Node.js", "AWS"],
+    stats: "10k+ active nodes",
+    client: "Nexus Solutions",
+    year: "2098",
   },
   {
     title: "Aether OS",
     category: "System Software",
     description: "A lightweight, secure operating system designed for edge computing and IoT devices.",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+    tech: ["Rust", "C++", "Docker"],
+    stats: "0.5ms latency",
+    client: "SpaceX 2.0",
+    year: "2099",
   },
   {
     title: "Vortex VR",
     category: "AR/VR / Gaming",
     description: "Immersive virtual reality engine that pushes the limits of real-time rendering and interactivity.",
     image: "https://images.unsplash.com/photo-1478416272538-5f7e51dc5400?auto=format&fit=crop&q=80&w=800",
+    tech: ["Unity", "C#", "Oculus SDK"],
+    stats: "120FPS sustained",
+    client: "Onyx Games",
+    year: "2097",
   },
 ];
 
@@ -68,13 +84,36 @@ const Projects = () => {
               </div>
 
               <div className="absolute bottom-0 left-0 p-8 w-full">
-                <span className="text-primary text-xs font-bold uppercase tracking-widest mb-2 block">
-                  {project.category}
-                </span>
-                <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-gray-300 text-sm max-w-md opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                <div className="flex justify-between items-end mb-2">
+                  <span className="text-primary text-xs font-bold uppercase tracking-[0.2em] font-syncopate">
+                    {project.category}
+                  </span>
+                  <span className="text-[10px] text-gray-500 font-mono uppercase">
+                    STAT://{project.stats}
+                  </span>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 font-syncopate uppercase tracking-tight">{project.title}</h3>
+
+                <div className="flex flex-wrap gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                  {project.tech.map((t, i) => (
+                    <span key={i} className="px-2 py-1 text-[8px] border border-white/20 text-gray-400 font-mono uppercase rounded">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="text-gray-300 text-sm max-w-md opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 font-rajdhani leading-relaxed mb-4">
                   {project.description}
                 </p>
+
+                <div className="flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity delay-200">
+                  <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest">
+                    CLIENT://{project.client}
+                  </span>
+                  <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest">
+                    YEAR://{project.year}
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}

@@ -25,7 +25,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">Email Us</p>
-                  <p className="text-lg font-medium">hello@kryverzent.com</p>
+                  <p className="text-lg font-medium">info@kryvazent.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-6 group">
@@ -34,7 +34,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">Call Us</p>
-                  <p className="text-lg font-medium">+1 (888) KRY-VERZ</p>
+                  <p className="text-lg font-medium">+94 70 444 3997</p>
                 </div>
               </div>
               <div className="flex items-center gap-6 group">
@@ -43,7 +43,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">Visit Us</p>
-                  <p className="text-lg font-medium">Silicon Valley, CA / Remote Global</p>
+                  <p className="text-lg font-medium leading-tight">Colombo,<br />Western Province, Sri Lanka</p>
                 </div>
               </div>
             </div>
