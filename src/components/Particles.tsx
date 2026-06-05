@@ -21,6 +21,12 @@ const Particles = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
+    const mouse = { x: 0, y: 0, radius: 100 };
+
+    const handleMouseMove = (event: MouseEvent) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    };
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -45,6 +51,22 @@ const Particles = () => {
       }
 
       update() {
+        // Mouse interaction
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouse.radius) {
+          const forceDirectionX = dx / distance;
+          const forceDirectionY = dy / distance;
+          const force = (mouse.radius - distance) / mouse.radius;
+          const directionX = forceDirectionX * force * 5;
+          const directionY = forceDirectionY * force * 5;
+
+          this.x -= directionX;
+          this.y -= directionY;
+        }
+
         this.x += this.speedX;
         this.y += this.speedY;
 
@@ -96,12 +118,14 @@ const Particles = () => {
     };
 
     window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', handleMouseMove);
     resize();
     init();
     animate();
 
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, [mounted]);

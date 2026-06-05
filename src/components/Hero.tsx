@@ -1,10 +1,16 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronRight, Rocket, Shield, Zap } from "lucide-react";
 
 const Hero = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+  const rotate = useTransform(scrollY, [0, 500], [0, 15]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
       {/* Background elements */}
@@ -35,7 +41,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div ref={containerRef} className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 items-center">
 
           {/* Main Title Content */}
@@ -74,8 +80,9 @@ const Hero = () => {
           </div>
 
           {/* Bento Grid HUD Content */}
-          <div className="lg:col-span-5 w-full">
+          <div className="lg:col-span-5 w-full perspective-1000">
             <motion.div
+              style={{ y: y1, rotateX: rotate }}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}

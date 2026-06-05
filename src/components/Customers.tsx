@@ -14,26 +14,56 @@ const customers = [
 
 const Customers = () => {
   return (
-    <section id="customers" className="py-24 px-6 border-y border-white/5 bg-white/[0.02]">
-      <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-gray-500 mb-12">
-          Trusted by Industry Leaders
+    <section id="customers" className="py-20 px-6 border-y border-white/5 bg-black relative overflow-hidden">
+      {/* Decorative scanline for this section */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,rgba(214,33,51,0.03)_50%,transparent_100%)] w-1/2 h-full -skew-x-12 animate-[pulse_4s_infinite]" />
+
+      <div className="max-w-7xl mx-auto text-center relative z-10">
+        <h2 className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary/60 mb-16 font-syncopate">
+          Verified Network Partners
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 opacity-50">
-          {customers.map((customer, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-center grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-            >
-              <span className="text-xl font-black tracking-tighter text-white">{customer.name}</span>
-              <span className="text-[10px] text-primary font-bold">{customer.industry}</span>
-            </motion.div>
-          ))}
+        <div className="relative flex overflow-x-hidden group">
+          <div className="py-12 animate-marquee flex items-center whitespace-nowrap gap-12 lg:gap-24">
+            {[...customers, ...customers].map((customer, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.1, color: "#D62133" }}
+                className="flex flex-col items-start justify-center min-w-[200px] border-l border-primary/20 pl-6 cursor-pointer"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <span className="text-2xl md:text-3xl font-bold tracking-tighter text-white font-syncopate uppercase">
+                    {customer.name}
+                  </span>
+                </div>
+                <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase">
+                  IND://{customer.industry}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Duplicate for seamless loop */}
+          <div className="absolute top-0 py-12 animate-marquee2 flex items-center whitespace-nowrap gap-12 lg:gap-24">
+            {[...customers, ...customers].map((customer, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.1, color: "#D62133" }}
+                className="flex flex-col items-start justify-center min-w-[200px] border-l border-primary/20 pl-6 cursor-pointer"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <span className="text-2xl md:text-3xl font-bold tracking-tighter text-white font-syncopate uppercase">
+                    {customer.name}
+                  </span>
+                </div>
+                <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase">
+                  IND://{customer.industry}
+                </span>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
