@@ -20,7 +20,7 @@ const Hero = () => {
           <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
             Future of Software Development
           </span>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tight text-white mb-6 leading-none">
+          <h1 className="text-5xl md:text-8xl font-black tracking-tight text-white mb-6 leading-none font-[family-name:var(--font-orbitron)]">
             ENGINEERING THE <br />
             <span className="text-primary text-glow">IMPOSSIBLE.</span>
           </h1>
