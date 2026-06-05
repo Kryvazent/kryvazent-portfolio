@@ -14,11 +14,11 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">About Kryverzent</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 font-syncopate">About <span className="text-primary">Kryvazent</span></h2>
             <div className="w-20 h-1.5 bg-primary rounded-full mb-8" />
 
-            <p className="text-gray-400 text-lg mb-6 leading-relaxed">
-              Founded at the intersection of imagination and engineering, Kryverzent is a premier software development firm dedicated to building the infrastructure of tomorrow.
+            <p className="text-gray-400 text-lg mb-6 leading-relaxed font-rajdhani">
+              Founded at the intersection of imagination and engineering, Kryvazent is a premier software development firm dedicated to building the infrastructure of tomorrow.
             </p>
             <p className="text-gray-400 text-lg mb-10 leading-relaxed">
               We don't just write code; we architect experiences. Our team of elite engineers and visionary designers work in tandem to deliver solutions that are as beautiful as they are powerful.

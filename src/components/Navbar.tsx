@@ -36,15 +36,15 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative w-10 h-10 bg-primary/20 rounded-full p-2 group-hover:bg-primary/40 transition-colors border border-primary/30">
+          <div className="relative w-10 h-10 transition-transform group-hover:scale-110">
             <Image
-              src="/logo.png"
+              src="/logo_new.png"
               alt="Kryvazent Logo"
               fill
-              className="object-contain brightness-0 invert scale-75"
+              className="object-contain"
             />
           </div>
-          <span className="text-xl font-bold tracking-tighter text-white uppercase font-syncopate">
+          <span className="text-xl font-bold tracking-tighter text-primary uppercase font-syncopate">
             Kryvazent
           </span>
         </Link>

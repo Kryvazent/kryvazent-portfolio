@@ -11,10 +11,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
-            <div className="relative w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center p-1 border border-primary/30">
-              <Image src="/logo.png" alt="Kryvazent Logo" width={20} height={20} className="brightness-0 invert" />
+            <div className="relative w-8 h-8">
+              <Image src="/logo_new.png" alt="Kryvazent Logo" width={32} height={32} className="object-contain" />
             </div>
-            <span className="text-lg font-bold tracking-tighter uppercase font-syncopate">Kryvazent</span>
+            <span className="text-lg font-bold tracking-tighter uppercase font-syncopate text-primary">Kryvazent</span>
           </div>
 
           <div className="flex items-center gap-6">
