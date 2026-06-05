@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Orbitron } from "next/font/google";
+import { Geist, Geist_Mono, Syncopate, Rajdhani } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,9 +12,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const syncopate = Syncopate({
+  variable: "--font-syncopate",
   subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${syncopate.variable} ${rajdhani.variable} antialiased font-rajdhani`}>
         {children}
       </body>
     </html>

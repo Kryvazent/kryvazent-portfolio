@@ -75,6 +75,22 @@ const Particles = () => {
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
+
+        // Connect particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
+            ctx.strokeStyle = `rgba(214, 33, 51, ${0.1 * (1 - distance / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
       }
       animationFrameId = requestAnimationFrame(animate);
     };

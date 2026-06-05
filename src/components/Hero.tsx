@@ -6,58 +6,122 @@ import { ChevronRight, Rocket, Shield, Zap } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 grid-background pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 grid-background opacity-20 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] pointer-events-none animate-pulse" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
-            Future of Software Development
-          </span>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tight text-white mb-6 leading-none font-[family-name:var(--font-orbitron)]">
-            ENGINEERING THE <br />
-            <span className="text-primary text-glow">IMPOSSIBLE.</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">
-            At Kryverzent, we build high-performance software solutions that push the boundaries of technology. Futuristic, scalable, and relentlessly efficient.
-          </p>
+      {/* Decorative HUD Elements */}
+      <div className="absolute top-40 left-10 hidden lg:block opacity-40">
+        <div className="text-[10px] font-mono text-primary space-y-1">
+          <p>SCANNING_CORE_SYSTEMS...</p>
+          <p>LATENCY: 0.002ms</p>
+          <p>UPTIME: 99.999%</p>
+          <div className="w-32 h-1 bg-white/10 overflow-hidden">
+            <motion.div
+              className="h-full bg-primary"
+              animate={{ x: [-128, 128] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+            />
+          </div>
+        </div>
+      </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-8 py-4 rounded-xl bg-primary text-white font-bold text-lg hover:scale-105 transition-all border-glow flex items-center gap-2 group">
-              Start Your Project
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 rounded-xl glass text-white font-bold text-lg hover:bg-white/10 transition-all">
-              View Our Work
-            </button>
-          </div>
-        </motion.div>
+      <div className="absolute bottom-40 right-10 hidden lg:block opacity-40">
+        <div className="text-[10px] font-mono text-primary text-right space-y-1">
+          <p>LOC: 40.7128° N, 74.0060° W</p>
+          <p>PROTOCOL: KRYV_2099</p>
+          <p>STATUS: ACTIVE</p>
+        </div>
+      </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-        >
-          <div className="flex flex-col items-center gap-2">
-            <Zap className="text-primary w-8 h-8" />
-            <span className="text-sm font-medium text-gray-500 uppercase tracking-widest">Ultra Fast</span>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 items-center">
+
+          {/* Main Title Content */}
+          <div className="lg:col-span-7 text-left">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-[1px] bg-primary" />
+                <span className="text-primary text-xs font-bold uppercase tracking-[0.3em] font-syncopate">
+                  System Initialized
+                </span>
+              </div>
+
+              <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8 leading-[0.9] font-syncopate uppercase">
+                Future <br />
+                <span className="text-primary text-glow">Built.</span>
+              </h1>
+
+              <p className="max-w-xl text-lg md:text-xl text-gray-400 mb-12 leading-relaxed font-rajdhani font-medium">
+                Kryverzent is a high-performance technology foundry. We engineer scalable systems, AI-driven architectures, and digital experiences that redefine the modern frontier.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <button className="w-full sm:w-auto px-10 py-5 bg-primary text-white font-bold text-sm tracking-widest uppercase hover:scale-105 transition-all border-glow flex items-center justify-center gap-3 group font-syncopate">
+                  Initiate Project
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button className="w-full sm:w-auto px-10 py-5 glass text-white font-bold text-sm tracking-widest uppercase hover:bg-white/10 transition-all font-syncopate">
+                  Database
+                </button>
+              </div>
+            </motion.div>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <Shield className="text-primary w-8 h-8" />
-            <span className="text-sm font-medium text-gray-500 uppercase tracking-widest">Secure by Design</span>
+
+          {/* Bento Grid HUD Content */}
+          <div className="lg:col-span-5 w-full">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="grid grid-cols-2 gap-4"
+            >
+              <div className="col-span-2 glass-dark p-6 border border-white/5 relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-1 h-full bg-primary" />
+                <div className="flex justify-between items-start mb-4">
+                  <Zap className="text-primary w-6 h-6" />
+                  <span className="text-[10px] font-mono text-gray-500">OPTIMIZED_V01</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2 font-syncopate uppercase">Performance</h3>
+                <p className="text-xs text-gray-400 font-rajdhani uppercase tracking-wider leading-relaxed">
+                  Sub-millisecond latency for global scale applications.
+                </p>
+              </div>
+
+              <div className="glass-dark p-6 border border-white/5 relative overflow-hidden group">
+                <Shield className="text-primary w-6 h-6 mb-4" />
+                <h3 className="text-sm font-bold text-white mb-1 font-syncopate uppercase">Secure</h3>
+                <p className="text-[10px] text-gray-500 font-mono">ENCRYPTION: AES-256</p>
+              </div>
+
+              <div className="glass-dark p-6 border border-white/5 relative overflow-hidden group">
+                <Rocket className="text-primary w-6 h-6 mb-4" />
+                <h3 className="text-sm font-bold text-white mb-1 font-syncopate uppercase">Scale</h3>
+                <p className="text-[10px] text-gray-500 font-mono">NODES: 4,096+</p>
+              </div>
+
+              <div className="col-span-2 glass p-4 border border-primary/20 flex items-center justify-between">
+                <div className="flex gap-2">
+                  {[1,2,3,4,5].map(i => (
+                    <motion.div
+                      key={i}
+                      className="w-1.5 h-1.5 bg-primary/50"
+                      animate={{ opacity: [0.2, 1, 0.2] }}
+                      transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.2 }}
+                    />
+                  ))}
+                </div>
+                <span className="text-[10px] font-mono text-primary animate-pulse uppercase tracking-[0.2em]">System Optimal</span>
+              </div>
+            </motion.div>
           </div>
-          <div className="flex flex-col items-center gap-2 hidden md:flex">
-            <Rocket className="text-primary w-8 h-8" />
-            <span className="text-sm font-medium text-gray-500 uppercase tracking-widest">Scalable Tech</span>
-          </div>
-        </motion.div>
+
+        </div>
       </div>
     </section>
   );

@@ -10,7 +10,8 @@ import Particles from "@/components/Particles";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background relative">
+    <main className="min-h-screen bg-background relative overflow-hidden">
+      <div className="scanline" />
       <Particles />
       <Navbar />
       <Hero />
