@@ -2,12 +2,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Globe, Shield, Cpu, Zap, Rocket, Activity } from "lucide-react";
+import { Globe, Shield, Cpu, Zap, Rocket, Activity, GraduationCap, Crown, Glasses } from "lucide-react";
 
 const customers = [
-  { name: "Rajapura", industry: "Heritage & Supply", icon: Shield },
-  { name: "EMergeSL", industry: "Education & Tech", icon: Cpu },
-  { name: "Vision Expert", industry: "Optical Engineering", icon: Activity },
+  { name: "Rajapura", industry: "Heritage & Supply", icon: Crown },
+  { name: "EMergeSL", industry: "Education & Tech", icon: GraduationCap },
+  { name: "Vision Expert", industry: "Optical Engineering", icon: Glasses },
   { name: "Quantum", industry: "Cybersecurity", icon: Shield },
   { name: "Stellar", industry: "Aerospace", icon: Rocket },
   { name: "Nexus", industry: "Global Logistics", icon: Zap },
