@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronRight, Rocket, Shield, Zap } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
+      <FloatingShapes />
       {/* Background elements */}
       <div className="absolute inset-0 grid-background opacity-20 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] pointer-events-none animate-pulse" />
