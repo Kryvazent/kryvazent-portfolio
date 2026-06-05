@@ -80,39 +80,43 @@ const Projects = () => {
                   alt={project.title}
                   className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent opacity-90 transition-opacity" />
               </div>
 
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <div className="flex justify-between items-end mb-2">
-                  <span className="text-primary text-xs font-bold uppercase tracking-[0.2em] font-syncopate">
-                    {project.category}
-                  </span>
-                  <span className="text-[10px] text-gray-500 font-mono uppercase">
-                    STAT://{project.stats}
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4 font-syncopate uppercase tracking-tight">{project.title}</h3>
-
-                <div className="flex flex-wrap gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                  {project.tech.map((t, i) => (
-                    <span key={i} className="px-2 py-1 text-[8px] border border-white/20 text-gray-400 font-mono uppercase rounded">
-                      {t}
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <div className="relative z-10">
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-primary text-sm font-black uppercase tracking-[0.2em] font-syncopate text-glow">
+                      {project.category}
                     </span>
-                  ))}
-                </div>
+                    <span className="text-[10px] text-gray-400 font-mono uppercase tracking-widest">
+                      STAT://{project.stats}
+                    </span>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 font-syncopate uppercase tracking-tighter leading-none">{project.title}</h3>
 
-                <p className="text-gray-300 text-sm max-w-md opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 font-rajdhani leading-relaxed mb-4">
-                  {project.description}
-                </p>
+                  <div className="flex flex-wrap gap-2 mb-6 opacity-100">
+                    {project.tech.map((t, i) => (
+                      <span key={i} className="px-3 py-1 text-[10px] border border-white/30 text-white font-mono uppercase rounded-md bg-black/40 backdrop-blur-sm">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
 
-                <div className="flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity delay-200">
-                  <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest">
-                    CLIENT://{project.client}
-                  </span>
-                  <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest">
-                    YEAR://{project.year}
-                  </span>
+                  <div className="space-y-4">
+                    <p className="text-gray-100 text-base max-w-lg font-rajdhani font-medium leading-relaxed drop-shadow-md">
+                      {project.description}
+                    </p>
+
+                    <div className="flex justify-between items-center border-t border-white/10 pt-4">
+                      <span className="text-[11px] text-gray-400 font-mono uppercase tracking-widest">
+                        CLIENT://{project.client}
+                      </span>
+                      <span className="text-[11px] text-gray-400 font-mono uppercase tracking-widest">
+                        YEAR://{project.year}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
