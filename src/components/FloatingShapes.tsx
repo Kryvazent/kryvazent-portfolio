@@ -18,7 +18,7 @@ const FloatingShapes = () => {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute top-1/4 right-1/4 w-32 h-32 opacity-20"
+        className="absolute top-1/4 right-1/4 w-16 h-16 md:w-32 md:h-32 opacity-20"
         style={{ transformStyle: "preserve-3d" }}
       >
         <div className="relative w-full h-full" style={{ transformStyle: "preserve-3d" }}>
@@ -59,7 +59,7 @@ const FloatingShapes = () => {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute bottom-1/4 left-1/4 w-48 h-48 border border-primary/10 rounded-full opacity-10"
+        className="absolute bottom-1/4 left-1/4 w-24 h-24 md:w-48 md:h-48 border border-primary/10 rounded-full opacity-10"
       >
         <div className="absolute inset-0 border-t-2 border-primary/30 rounded-full animate-spin-slow" />
         <div className="absolute inset-4 border-b-2 border-primary/20 rounded-full animate-reverse-spin" />

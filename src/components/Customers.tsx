@@ -25,12 +25,12 @@ const Customers = () => {
         </h2>
 
         <div className="relative flex overflow-x-hidden group">
-          <div className="py-12 animate-marquee flex items-center whitespace-nowrap gap-12 lg:gap-24">
+          <div className="py-12 animate-marquee flex items-center whitespace-nowrap gap-8 md:gap-12 lg:gap-24">
             {[...customers, ...customers].map((customer, index) => (
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-6 min-w-[300px] glass p-6 border-l-4 border-l-primary cursor-pointer group"
+                className="flex items-center gap-4 md:gap-6 min-w-[250px] md:min-w-[300px] glass p-4 md:p-6 border-l-4 border-l-primary cursor-pointer group"
               >
                 <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <customer.icon className="w-8 h-8" />
@@ -48,12 +48,12 @@ const Customers = () => {
           </div>
 
           {/* Duplicate for seamless loop */}
-          <div className="absolute top-0 py-12 animate-marquee2 flex items-center whitespace-nowrap gap-12 lg:gap-24">
+          <div className="absolute top-0 py-12 animate-marquee2 flex items-center whitespace-nowrap gap-8 md:gap-12 lg:gap-24">
             {[...customers, ...customers].map((customer, index) => (
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-6 min-w-[300px] glass p-6 border-l-4 border-l-primary cursor-pointer group"
+                className="flex items-center gap-4 md:gap-6 min-w-[250px] md:min-w-[300px] glass p-4 md:p-6 border-l-4 border-l-primary cursor-pointer group"
               >
                 <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <customer.icon className="w-8 h-8" />

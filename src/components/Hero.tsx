@@ -60,7 +60,7 @@ const Hero = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8 leading-[0.9] font-syncopate uppercase">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8 leading-[0.9] font-syncopate uppercase">
                 Future <br />
                 <span className="text-primary text-glow">Built.</span>
               </h1>

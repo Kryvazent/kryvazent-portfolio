@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +68,47 @@ const Navbar = () => {
             Get in Touch
           </Link>
         </div>
+
+        {/* Mobile Menu Trigger */}
+        <button
+          className="md:hidden text-white p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X /> : <Menu />}
+        </button>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden glass border-t border-white/10 mt-4 overflow-hidden"
+          >
+            <div className="flex flex-col gap-4 p-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-medium text-gray-300 hover:text-primary transition-colors font-rajdhani"
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link
+                href="#contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full text-center py-4 rounded-xl bg-primary text-white font-bold tracking-widest uppercase text-sm font-syncopate border-glow"
+              >
+                Get in Touch
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };
