@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronRight, Rocket, Shield, Zap, Twitter, Github, MessageSquare } from "lucide-react";
+import { ChevronRight, FolderOpen, Globe, MessageSquare, Rocket, Shield, Zap } from "lucide-react";
 import FloatingShapes from "./FloatingShapes";
 import ThreeScene from "./ThreeScene";
 
@@ -81,13 +81,13 @@ const Hero = () => {
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                   <div className="flex items-center gap-4 py-2 px-4 glass rounded-xl w-full sm:w-auto justify-center">
-                    <a href="#" className="text-muted hover:text-primary transition-colors p-2">
-                      <Twitter className="w-5 h-5" />
+                    <a href="/" aria-label="Kryverzent website" className="text-muted hover:text-primary transition-colors p-2">
+                      <Globe className="w-5 h-5" />
                     </a>
-                    <a href="#" className="text-muted hover:text-primary transition-colors p-2">
-                      <Github className="w-5 h-5" />
+                    <a href="#projects" aria-label="Kryverzent projects" className="text-muted hover:text-primary transition-colors p-2">
+                      <FolderOpen className="w-5 h-5" />
                     </a>
-                    <a href="#" className="text-muted hover:text-primary transition-colors p-2">
+                    <a href="mailto:info@kryverzent.com" aria-label="Email Kryverzent" className="text-muted hover:text-primary transition-colors p-2">
                       <MessageSquare className="w-5 h-5" />
                     </a>
                   </div>

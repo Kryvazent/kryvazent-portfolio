@@ -71,6 +71,24 @@ const structuredData = {
         "Kryverzent is a software development and technology engineering company that builds custom web applications, mobile applications, AI-enabled systems, cloud infrastructure, backend platforms, and digital product experiences.",
       email: "info@kryverzent.com",
       telephone: "+94704443997",
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: "info@kryverzent.com",
+          telephone: "+94704443997",
+          areaServed: ["LK", "Global"],
+          availableLanguage: ["en"],
+        },
+        {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: "info@kryverzent.com",
+          telephone: "+94704443997",
+          areaServed: ["LK", "Global"],
+          availableLanguage: ["en"],
+        },
+      ],
       address: {
         "@type": "PostalAddress",
         addressLocality: "Colombo",
@@ -109,6 +127,26 @@ const structuredData = {
           },
         },
       })),
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Kryverzent software development services",
+        itemListElement: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.name,
+            description: service.description,
+            provider: {
+              "@id": `${siteUrl}/#organization`,
+            },
+          },
+        })),
+      },
+      foundingLocation: {
+        "@type": "Place",
+        name: "Colombo, Western Province, Sri Lanka",
+      },
+      priceRange: "$$",
       slogan: "Engineering the Impossible",
     },
     {

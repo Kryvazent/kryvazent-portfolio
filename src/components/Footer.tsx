@@ -18,16 +18,16 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <Link href="#" className="text-subtle hover:text-primary transition-colors">
+            <Link href="mailto:info@kryverzent.com" className="text-subtle hover:text-primary transition-colors" aria-label="Email Kryverzent">
               <MessageSquare className="w-5 h-5" />
             </Link>
-            <Link href="#" className="text-subtle hover:text-primary transition-colors">
+            <Link href="/" className="text-subtle hover:text-primary transition-colors" aria-label="Share Kryverzent website">
               <Share2 className="w-5 h-5" />
             </Link>
-            <Link href="#" className="text-subtle hover:text-primary transition-colors">
+            <Link href="/" className="text-subtle hover:text-primary transition-colors" aria-label="Kryverzent website">
               <Globe className="w-5 h-5" />
             </Link>
-            <Link href="#" className="text-subtle hover:text-primary transition-colors">
+            <Link href="#services" className="text-subtle hover:text-primary transition-colors" aria-label="Kryverzent services">
               <Cpu className="w-5 h-5" />
             </Link>
           </div>
