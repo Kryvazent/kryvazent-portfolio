@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Globe, Shield, Cpu, Zap, Rocket, Activity, GraduationCap, Crown, Glasses } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
 
 const customers = [
   { name: "Rajapura", industry: "Heritage & Supply", icon: Crown },
@@ -16,6 +17,7 @@ const customers = [
 const Customers = () => {
   return (
     <section id="customers" className="py-12 lg:py-32 px-6 border-y border-white/5 bg-black relative overflow-hidden">
+      <FloatingShapes />
       {/* Decorative scanline for this section */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,rgba(214,33,51,0.03)_50%,transparent_100%)] w-1/2 h-full -skew-x-12 animate-[pulse_4s_infinite]" />
 
