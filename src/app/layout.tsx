@@ -25,7 +25,7 @@ const rajdhani = Rajdhani({
 });
 
 export const metadata: Metadata = {
-  title: "Kryvazent | Engineering the Impossible",
+  title: "Kryverzent | Engineering the Impossible",
   description: "Futuristic software development company specializing in high-performance web apps, AI, and cloud infrastructure.",
 };
 

@@ -49,22 +49,22 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 px-6 bg-black/50">
+    <section id="projects" className="py-12 lg:py-24 px-6 bg-black/50">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 lg:mb-16 gap-6">
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Selected Projects</h2>
-            <div className="w-20 h-1.5 bg-primary rounded-full mb-6" />
-            <p className="text-gray-400 max-w-xl">
+            <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Selected Projects</h2>
+            <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-4 lg:mb-6" />
+            <p className="text-gray-400 max-w-xl text-sm lg:text-base font-rajdhani">
               Exploring the frontiers of technology through our latest engineering marvels.
             </p>
           </div>
-          <button className="text-primary font-bold hover:underline flex items-center gap-2">
+          <button className="text-primary font-bold hover:underline flex items-center gap-2 text-sm lg:text-base">
             View All Work <ExternalLink className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -83,32 +83,32 @@ const Projects = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent opacity-90 transition-opacity" />
               </div>
 
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+              <div className="absolute inset-0 p-4 lg:p-8 flex flex-col justify-end">
                 <div className="relative z-10">
-                  <div className="flex justify-between items-end mb-2">
-                    <span className="text-primary text-sm font-black uppercase tracking-[0.2em] font-syncopate text-glow">
+                  <div className="flex justify-between items-end mb-1 lg:mb-2">
+                    <span className="text-primary text-[10px] lg:text-sm font-black uppercase tracking-[0.2em] font-syncopate text-glow">
                       {project.category}
                     </span>
-                    <span className="text-[10px] text-gray-400 font-mono uppercase tracking-widest">
+                    <span className="text-[8px] lg:text-[10px] text-gray-400 font-mono uppercase tracking-widest">
                       STAT://{project.stats}
                     </span>
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 font-syncopate uppercase tracking-tighter leading-none">{project.title}</h3>
+                  <h3 className="text-xl md:text-4xl font-bold text-white mb-2 lg:mb-4 font-syncopate uppercase tracking-tighter leading-none">{project.title}</h3>
 
-                  <div className="flex flex-wrap gap-2 mb-6 opacity-100">
+                  <div className="flex flex-wrap gap-2 mb-4 lg:mb-6 opacity-100">
                     {project.tech.map((t, i) => (
-                      <span key={i} className="px-3 py-1 text-[10px] border border-white/30 text-white font-mono uppercase rounded-md bg-black/40 backdrop-blur-sm">
+                      <span key={i} className="px-2 lg:px-3 py-0.5 lg:py-1 text-[8px] lg:text-[10px] border border-white/30 text-white font-mono uppercase rounded-md bg-black/40 backdrop-blur-sm">
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  <div className="space-y-4">
-                    <p className="text-gray-100 text-base max-w-lg font-rajdhani font-medium leading-relaxed drop-shadow-md">
+                  <div className="space-y-2 lg:space-y-4">
+                    <p className="text-gray-100 text-xs lg:text-base max-w-lg font-rajdhani font-medium leading-relaxed drop-shadow-md">
                       {project.description}
                     </p>
 
-                    <div className="flex justify-between items-center border-t border-white/10 pt-4">
+                    <div className="flex justify-between items-center border-t border-white/10 pt-2 lg:pt-4">
                       <span className="text-[11px] text-gray-400 font-mono uppercase tracking-widest">
                         CLIENT://{project.client}
                       </span>

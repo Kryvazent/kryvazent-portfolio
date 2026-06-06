@@ -41,13 +41,13 @@ const Navbar = () => {
           <div className="relative w-10 h-10 transition-transform group-hover:scale-110">
             <Image
               src="/logo_new.png"
-              alt="Kryvazent Logo"
+              alt="Kryverzent Logo"
               fill
               className="object-contain"
             />
           </div>
           <span className="text-xl font-bold tracking-tighter text-primary uppercase font-syncopate">
-            Kryvazent
+            Kryverzent
           </span>
         </Link>
 

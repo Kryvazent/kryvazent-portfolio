@@ -12,9 +12,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
             <div className="relative w-8 h-8">
-              <Image src="/logo_new.png" alt="Kryvazent Logo" width={32} height={32} className="object-contain" />
+              <Image src="/logo_new.png" alt="Kryverzent Logo" width={32} height={32} className="object-contain" />
             </div>
-            <span className="text-lg font-bold tracking-tighter uppercase font-syncopate text-primary">Kryvazent</span>
+            <span className="text-lg font-bold tracking-tighter uppercase font-syncopate text-primary">Kryverzent</span>
           </div>
 
           <div className="flex items-center gap-6">
@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
 
           <p className="text-gray-500 text-sm font-rajdhani">
-            © {new Date().getFullYear()} Kryvazent Systems Inc. All rights reserved.
+            © {new Date().getFullYear()} Kryverzent Systems Inc. All rights reserved.
           </p>
         </div>
       </div>

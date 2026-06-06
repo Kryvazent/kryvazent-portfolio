@@ -39,17 +39,17 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 px-6 relative">
+    <section id="services" className="py-12 lg:py-24 px-6 relative">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Core Capabilities</h2>
-          <div className="w-20 h-1.5 bg-primary rounded-full mb-6" />
-          <p className="text-gray-400 max-w-2xl">
+        <div className="mb-8 lg:mb-16">
+          <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Core Capabilities</h2>
+          <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-4 lg:mb-6" />
+          <p className="text-gray-400 max-w-2xl text-sm lg:text-base font-rajdhani">
             We specialize in delivering cutting-edge software solutions that solve real-world problems with futuristic technology.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -57,13 +57,13 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="glass p-8 rounded-2xl border-white/5 hover:border-primary/50 transition-colors group"
+              className="glass p-6 lg:p-8 rounded-2xl border-white/5 hover:border-primary/50 transition-colors group"
             >
-              <div className="text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
+              <div className="text-primary mb-4 lg:mb-6 group-hover:scale-110 transition-transform duration-300">
+                {React.cloneElement(service.icon as React.ReactElement<any>, { className: "w-8 h-8 lg:w-10 lg:h-10" })}
               </div>
-              <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-              <p className="text-gray-400 leading-relaxed">
+              <h3 className="text-lg lg:text-xl font-bold mb-2 lg:mb-4 font-syncopate uppercase">{service.title}</h3>
+              <p className="text-sm lg:text-base text-gray-400 leading-relaxed font-rajdhani">
                 {service.description}
               </p>
             </motion.div>
