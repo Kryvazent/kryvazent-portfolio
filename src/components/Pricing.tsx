@@ -34,14 +34,14 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="py-12 lg:py-32 px-6 bg-black relative overflow-hidden">
+    <section id="pricing" className="py-12 lg:py-32 px-6 bg-surface-strong relative overflow-hidden">
       <FloatingShapes />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-8 lg:mb-20">
-          <h2 className="text-2xl md:text-5xl font-bold uppercase tracking-tighter text-white font-syncopate mb-4 lg:mb-6">
+          <h2 className="text-2xl md:text-5xl font-bold uppercase tracking-normal text-foreground font-syncopate mb-4 lg:mb-6">
             System <span className="text-primary">Tiers</span>
           </h2>
-          <p className="text-gray-400 font-rajdhani max-w-2xl mx-auto text-sm lg:text-lg">
+          <p className="text-muted font-rajdhani max-w-2xl mx-auto text-sm lg:text-lg">
             Choose the level of engineering required for your mission. Transparent pricing, no hidden protocols.
           </p>
         </div>
@@ -57,7 +57,7 @@ const Pricing = () => {
               className={`relative p-6 lg:p-8 rounded-3xl border ${
                 plan.highlight
                   ? "bg-primary/5 border-primary shadow-[0_0_30px_rgba(214,33,51,0.2)]"
-                  : "bg-white/5 border-white/10"
+                  : "bg-surface border-line"
               } flex flex-col`}
             >
               {plan.highlight && (
@@ -67,28 +67,28 @@ const Pricing = () => {
               )}
 
               <div className="flex items-center gap-3 lg:gap-4 mb-4 lg:mb-6">
-                <div className={`p-2 lg:p-3 rounded-xl ${plan.highlight ? "bg-primary text-white" : "bg-white/10 text-primary"}`}>
+                <div className={`p-2 lg:p-3 rounded-xl ${plan.highlight ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}>
                   <plan.icon className="w-5 h-5 lg:w-6 lg:h-6" />
                 </div>
-                <h3 className="text-lg lg:text-xl font-bold text-white font-syncopate uppercase tracking-tight">
+                <h3 className="text-lg lg:text-xl font-bold text-foreground font-syncopate uppercase tracking-normal">
                   {plan.name}
                 </h3>
               </div>
 
               <div className="mb-4 lg:mb-8">
-                <span className="text-3xl lg:text-4xl font-bold text-white font-syncopate">
+                <span className="text-3xl lg:text-4xl font-bold text-foreground font-syncopate">
                   {plan.price === "Custom" ? "" : "$"}{plan.price}
                 </span>
-                {plan.price !== "Custom" && <span className="text-gray-500 text-xs lg:text-sm ml-2 font-mono">/MO</span>}
+                {plan.price !== "Custom" && <span className="text-subtle text-xs lg:text-sm ml-2 font-mono">/MO</span>}
               </div>
 
-              <p className="text-gray-400 text-xs lg:text-sm mb-6 lg:mb-8 font-rajdhani leading-relaxed">
+              <p className="text-muted text-xs lg:text-sm mb-6 lg:mb-8 font-rajdhani leading-relaxed">
                 {plan.description}
               </p>
 
               <div className="space-y-3 lg:space-y-4 mb-8 lg:mb-10 flex-grow">
                 {plan.features.map((feature, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-gray-300 font-rajdhani">
+                  <div key={i} className="flex items-center gap-3 text-sm text-muted font-rajdhani">
                     <Check className="w-4 h-4 text-primary flex-shrink-0" />
                     <span>{feature}</span>
                   </div>
@@ -98,7 +98,7 @@ const Pricing = () => {
               <button className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-xs font-syncopate transition-all ${
                 plan.highlight
                   ? "bg-primary text-white hover:bg-primary/90 border-glow"
-                  : "bg-white/10 text-white hover:bg-white/20 border border-white/10"
+                  : "bg-surface text-foreground hover:bg-primary/10 border border-line"
               }`}>
                 Initialize Tier
               </button>

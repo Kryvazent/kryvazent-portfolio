@@ -46,7 +46,7 @@ const Services = () => {
         <div className="mb-8 lg:mb-16">
           <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Core Capabilities</h2>
           <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-4 lg:mb-6" />
-          <p className="text-gray-400 max-w-2xl text-sm lg:text-base font-rajdhani">
+          <p className="text-muted max-w-2xl text-sm lg:text-base font-rajdhani">
             We specialize in delivering cutting-edge software solutions that solve real-world problems with futuristic technology.
           </p>
         </div>
@@ -59,13 +59,13 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="glass p-6 lg:p-8 rounded-2xl border-white/5 hover:border-primary/50 transition-colors group"
+              className="glass p-6 lg:p-8 rounded-2xl border-line hover:border-primary/50 transition-colors group"
             >
               <div className="text-primary mb-4 lg:mb-6 group-hover:scale-110 transition-transform duration-300">
                 {React.cloneElement(service.icon as React.ReactElement<any>, { className: "w-8 h-8 lg:w-10 lg:h-10" })}
               </div>
               <h3 className="text-lg lg:text-xl font-bold mb-2 lg:mb-4 font-syncopate uppercase">{service.title}</h3>
-              <p className="text-sm lg:text-base text-gray-400 leading-relaxed font-rajdhani">
+              <p className="text-sm lg:text-base text-muted leading-relaxed font-rajdhani">
                 {service.description}
               </p>
             </motion.div>

@@ -51,14 +51,14 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-12 lg:py-24 px-6 bg-black/50 relative overflow-hidden">
+    <section id="projects" className="py-12 lg:py-24 px-6 bg-surface relative overflow-hidden">
       <FloatingShapes />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 lg:mb-16 gap-6">
           <div>
             <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Selected Projects</h2>
             <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-4 lg:mb-6" />
-            <p className="text-gray-400 max-w-xl text-sm lg:text-base font-rajdhani">
+            <p className="text-muted max-w-xl text-sm lg:text-base font-rajdhani">
               Exploring the frontiers of technology through our latest engineering marvels.
             </p>
           </div>
@@ -94,11 +94,11 @@ const Projects = () => {
                     <span className="text-primary text-[10px] lg:text-sm font-black uppercase tracking-[0.2em] font-syncopate text-glow">
                       {project.category}
                     </span>
-                    <span className="text-[8px] lg:text-[10px] text-gray-400 font-mono uppercase tracking-widest">
+                    <span className="text-[8px] lg:text-[10px] text-white/70 font-mono uppercase tracking-widest">
                       STAT://{project.stats}
                     </span>
                   </div>
-                  <h3 className="text-xl md:text-4xl font-bold text-white mb-2 lg:mb-4 font-syncopate uppercase tracking-tighter leading-none">{project.title}</h3>
+                  <h3 className="text-xl md:text-4xl font-bold text-white mb-2 lg:mb-4 font-syncopate uppercase tracking-normal leading-none">{project.title}</h3>
 
                   <div className="flex flex-wrap gap-2 mb-4 lg:mb-6 opacity-100">
                     {project.tech.map((t, i) => (
@@ -109,15 +109,15 @@ const Projects = () => {
                   </div>
 
                   <div className="space-y-2 lg:space-y-4">
-                    <p className="text-gray-100 text-xs lg:text-base max-w-lg font-rajdhani font-medium leading-relaxed drop-shadow-md">
+                    <p className="text-white/90 text-xs lg:text-base max-w-lg font-rajdhani font-medium leading-relaxed drop-shadow-md">
                       {project.description}
                     </p>
 
                     <div className="flex justify-between items-center border-t border-white/10 pt-2 lg:pt-4">
-                      <span className="text-[11px] text-gray-400 font-mono uppercase tracking-widest">
+                      <span className="text-[11px] text-white/70 font-mono uppercase tracking-widest">
                         CLIENT://{project.client}
                       </span>
-                      <span className="text-[11px] text-gray-400 font-mono uppercase tracking-widest">
+                      <span className="text-[11px] text-white/70 font-mono uppercase tracking-widest">
                         YEAR://{project.year}
                       </span>
                     </div>

@@ -22,7 +22,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Services", href: "#services" },
     { name: "Projects", href: "#projects" },
-    { name: "Customers", href: "#customers" },
+    { name: "Partners", href: "#customers" },
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
   ];
@@ -32,21 +32,22 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4",
-        isScrolled ? "glass border-b border-white/10 py-3" : "bg-transparent"
+        "fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 py-4",
+        isScrolled ? "glass border-b border-line py-3" : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative w-10 h-10 transition-transform group-hover:scale-110">
+          <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-2xl bg-white p-1.5 shadow-[0_0_22px_rgba(255,255,255,0.18)] ring-1 ring-white/70 transition-transform group-hover:scale-105 sm:h-12 sm:w-12">
             <Image
               src="/logo_new.png"
               alt="Kryverzent Logo"
               fill
-              className="object-contain"
+              sizes="48px"
+              className="object-contain p-1"
             />
           </div>
-          <span className="text-xl font-bold tracking-tighter text-primary uppercase font-syncopate">
+          <span className="text-base font-bold tracking-normal text-primary uppercase font-syncopate sm:text-xl">
             Kryverzent
           </span>
         </Link>
@@ -56,7 +57,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-400 hover:text-primary transition-colors"
+              className="text-sm font-medium text-muted hover:text-primary transition-colors"
             >
               {link.name}
             </Link>
@@ -71,8 +72,9 @@ const Navbar = () => {
 
         {/* Mobile Menu Trigger */}
         <button
-          className="md:hidden text-white p-2"
+          className="md:hidden text-foreground p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle navigation menu"
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
@@ -85,7 +87,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-white/10 mt-4 overflow-hidden"
+            className="md:hidden glass border-t border-line mt-4 overflow-hidden"
           >
             <div className="flex flex-col gap-4 p-6">
               {navLinks.map((link) => (
@@ -93,7 +95,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-gray-300 hover:text-primary transition-colors font-rajdhani"
+                  className="text-lg font-medium text-muted hover:text-primary transition-colors font-rajdhani"
                 >
                   {link.name}
                 </Link>

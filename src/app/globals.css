@@ -1,15 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #050505;
-  --color-foreground: #ffffff;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --color-primary: #D62133;
   --color-accent-red: #FF1F1F;
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
 }
 
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
+  color-scheme: light;
+  --background: #f7f8fb;
+  --foreground: #111318;
+  --surface: rgba(255, 255, 255, 0.74);
+  --surface-strong: #ffffff;
+  --muted: #566173;
+  --subtle: #7c8494;
+  --line: rgba(17, 24, 39, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-dark-bg: rgba(255, 255, 255, 0.9);
+  --grid-line: rgba(214, 33, 51, 0.08);
+  --scanline-color: rgba(214, 33, 51, 0.035);
+  --scroll-track: #eef1f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: #050505;
+    --foreground: #ffffff;
+    --surface: rgba(255, 255, 255, 0.03);
+    --surface-strong: #000000;
+    --muted: #9ca3af;
+    --subtle: #6b7280;
+    --line: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-dark-bg: rgba(0, 0, 0, 0.6);
+    --grid-line: rgba(214, 33, 51, 0.05);
+    --scanline-color: rgba(214, 33, 51, 0.02);
+    --scroll-track: #050505;
+  }
 }
 
 @layer base {
@@ -32,17 +66,17 @@
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
   }
 
   .glass-dark {
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--glass-dark-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
   }
 
   .scanline {
@@ -52,7 +86,7 @@
     background: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0) 0%,
-      rgba(214, 33, 51, 0.02) 50%,
+      var(--scanline-color) 50%,
       rgba(0, 0, 0, 0) 100%
     );
     opacity: 0.5;
@@ -73,8 +107,8 @@
 
   .grid-background {
     background-image:
-      linear-gradient(rgba(214, 33, 51, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(214, 33, 51, 0.05) 1px, transparent 1px);
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 50px 50px;
   }
 
@@ -82,18 +116,9 @@
     animation: marquee 60s linear infinite;
   }
 
-  .animate-marquee2 {
-    animation: marquee2 60s linear infinite;
-  }
-
   @keyframes marquee {
     0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-  }
-
-  @keyframes marquee2 {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
   }
 
   .perspective-1000 {
@@ -120,7 +145,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--scroll-track);
 }
 
 ::-webkit-scrollbar-thumb {

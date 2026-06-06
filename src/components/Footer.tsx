@@ -7,33 +7,33 @@ import { MessageSquare, Share2, Globe, Cpu } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="py-12 px-6 border-t border-white/5">
+    <footer className="py-12 px-6 border-t border-line">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
           <div className="flex items-center gap-2">
-            <div className="relative w-8 h-8">
-              <Image src="/logo_new.png" alt="Kryverzent Logo" width={32} height={32} className="object-contain" />
+            <div className="relative h-10 w-10 overflow-hidden rounded-2xl bg-white p-1.5 shadow-[0_0_18px_rgba(255,255,255,0.14)] ring-1 ring-white/70">
+              <Image src="/logo_new.png" alt="Kryverzent Logo" fill sizes="40px" className="object-contain p-1" />
             </div>
-            <span className="text-lg font-bold tracking-tighter uppercase font-syncopate text-primary">Kryverzent</span>
+            <span className="text-lg font-bold tracking-normal uppercase font-syncopate text-primary">Kryverzent</span>
           </div>
 
           <div className="flex items-center gap-6">
-            <Link href="#" className="text-gray-500 hover:text-primary transition-colors">
+            <Link href="#" className="text-subtle hover:text-primary transition-colors">
               <MessageSquare className="w-5 h-5" />
             </Link>
-            <Link href="#" className="text-gray-500 hover:text-primary transition-colors">
+            <Link href="#" className="text-subtle hover:text-primary transition-colors">
               <Share2 className="w-5 h-5" />
             </Link>
-            <Link href="#" className="text-gray-500 hover:text-primary transition-colors">
+            <Link href="#" className="text-subtle hover:text-primary transition-colors">
               <Globe className="w-5 h-5" />
             </Link>
-            <Link href="#" className="text-gray-500 hover:text-primary transition-colors">
+            <Link href="#" className="text-subtle hover:text-primary transition-colors">
               <Cpu className="w-5 h-5" />
             </Link>
           </div>
 
-          <p className="text-gray-500 text-sm font-rajdhani">
-            © {new Date().getFullYear()} Kryverzent Systems Inc. All rights reserved.
+          <p className="text-subtle text-sm font-rajdhani">
+            Copyright {new Date().getFullYear()} Kryverzent Systems Inc. All rights reserved.
           </p>
         </div>
       </div>

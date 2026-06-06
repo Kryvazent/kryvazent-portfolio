@@ -1,75 +1,147 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Globe, Shield, Cpu, Zap, Rocket, Activity, GraduationCap, Crown, Glasses } from "lucide-react";
+import { Activity, Building2, Cloud, Crown, Database, Glasses, Shield, type LucideIcon } from "lucide-react";
 import FloatingShapes from "./FloatingShapes";
 
-const customers = [
-  { name: "Rajapura", industry: "Heritage & Supply", icon: Crown },
-  { name: "EMergeSL", industry: "Education & Tech", icon: GraduationCap },
-  { name: "Vision Expert", industry: "Optical Engineering", icon: Glasses },
-  { name: "Quantum", industry: "Cybersecurity", icon: Shield },
-  { name: "Stellar", industry: "Aerospace", icon: Rocket },
-  { name: "Nexus", industry: "Global Logistics", icon: Zap },
+type LogoTone = "dark" | "gray" | "light";
+
+interface PartnerLogo {
+  name: string;
+  initials?: string;
+  tagline?: string;
+  imageSrc?: string;
+  icon?: LucideIcon;
+  tone: LogoTone;
+  wide?: boolean;
+}
+
+const partnerLogos: PartnerLogo[] = [
+  {
+    name: "Vision Expert",
+    tagline: "Optical Studio",
+    icon: Glasses,
+    tone: "dark",
+  },
+  {
+    name: "Rajapura",
+    tagline: "Since 1973",
+    icon: Crown,
+    tone: "gray",
+  },
+  {
+    name: "EMergeSL",
+    imageSrc: "/partners/emergesl.jpeg",
+    tone: "light",
+    wide: true,
+  },
+  {
+    name: "Quantum",
+    initials: "Q",
+    icon: Shield,
+    tone: "dark",
+  },
+  {
+    name: "MedNova",
+    initials: "MN",
+    icon: Activity,
+    tone: "light",
+  },
+  {
+    name: "CloudForge",
+    initials: "CF",
+    icon: Cloud,
+    tone: "gray",
+  },
+  {
+    name: "DataNest",
+    initials: "DN",
+    icon: Database,
+    tone: "light",
+  },
+  {
+    name: "Vertex Labs",
+    initials: "VL",
+    icon: Building2,
+    tone: "dark",
+  },
 ];
 
-const Customers = () => {
+const logoToneClasses: Record<LogoTone, string> = {
+  dark: "bg-[#050505] text-white",
+  gray: "bg-[#4a4a4a] text-white",
+  light: "bg-white text-[#111318]",
+};
+
+const PartnerLogoTile = ({ logo, index }: { logo: PartnerLogo; index: number }) => {
+  const Icon = logo.icon;
+  const sizeClasses = logo.wide
+    ? "h-24 w-[260px] sm:h-28 sm:w-[320px]"
+    : "h-24 w-24 sm:h-28 sm:w-28";
+  const labelClasses = logo.initials ? "text-sm sm:text-base" : "text-[10px] sm:text-xs";
+
   return (
-    <section id="customers" className="py-12 lg:py-32 px-6 border-y border-white/5 bg-black relative overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.04 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -4 }}
+      className={`relative flex ${sizeClasses} shrink-0 items-center justify-center overflow-hidden border border-line shadow-[0_12px_32px_rgba(0,0,0,0.08)] ${logoToneClasses[logo.tone]}`}
+    >
+      {logo.imageSrc ? (
+        <Image
+          src={logo.imageSrc}
+          alt={`${logo.name} logo`}
+          fill
+          sizes="(max-width: 640px) 220px, 310px"
+          className="object-contain p-4 grayscale contrast-125"
+        />
+      ) : (
+        <div className="flex h-full w-full flex-col items-center justify-center px-3 text-center">
+          {Icon && <Icon className="mb-2 h-7 w-7 opacity-80" />}
+          <span className={`${labelClasses} font-black leading-tight tracking-normal font-syncopate`}>
+            {logo.initials ?? logo.name}
+          </span>
+          {logo.tagline && (
+            <span className="mt-1 text-[8px] uppercase tracking-[0.18em] opacity-70 font-rajdhani">
+              {logo.tagline}
+            </span>
+          )}
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+const Customers = () => {
+  const renderLogoGroup = (ariaHidden = false) => (
+    <div
+      className="flex shrink-0 items-center gap-12 pr-12 sm:gap-16 sm:pr-16 md:gap-24 md:pr-24 lg:gap-28 lg:pr-28"
+      aria-hidden={ariaHidden}
+    >
+      {partnerLogos.map((logo, index) => (
+        <PartnerLogoTile key={`${ariaHidden ? "duplicate" : "primary"}-${logo.name}`} logo={logo} index={index} />
+      ))}
+    </div>
+  );
+
+  return (
+    <section id="customers" className="py-12 lg:py-28 px-4 sm:px-6 border-y border-line bg-surface-strong relative overflow-hidden">
       <FloatingShapes />
-      {/* Decorative scanline for this section */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,rgba(214,33,51,0.03)_50%,transparent_100%)] w-1/2 h-full -skew-x-12 animate-[pulse_4s_infinite]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
-        <h2 className="text-xl md:text-3xl font-bold uppercase tracking-[0.2em] lg:tracking-[0.3em] text-white mb-12 lg:mb-20 font-syncopate">
+        <h2 className="text-xl md:text-3xl font-bold uppercase tracking-[0.16em] lg:tracking-[0.3em] text-foreground mb-8 lg:mb-12 font-syncopate">
           Verified <span className="text-primary">Network</span> Partners
         </h2>
 
-        <div className="relative flex overflow-x-hidden group">
-          <div className="py-6 lg:py-12 animate-marquee flex items-center whitespace-nowrap gap-6 lg:gap-24">
-            {[...customers, ...customers].map((customer, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-4 md:gap-6 min-w-[250px] md:min-w-[300px] glass p-4 md:p-6 border-l-4 border-l-primary cursor-pointer group"
-              >
-                <div className="p-2 lg:p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                  <customer.icon className="w-6 h-6 lg:w-8 lg:h-8" />
-                </div>
-                <div className="flex flex-col items-start">
-                  <span className="text-lg lg:text-xl font-bold tracking-tighter text-white font-syncopate uppercase">
-                    {customer.name}
-                  </span>
-                  <span className="text-[8px] lg:text-[10px] text-gray-500 font-mono tracking-widest uppercase">
-                    IND://{customer.industry}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Duplicate for seamless loop */}
-          <div className="absolute top-0 py-6 lg:py-12 animate-marquee2 flex items-center whitespace-nowrap gap-6 lg:gap-24">
-            {[...customers, ...customers].map((customer, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-4 md:gap-6 min-w-[200px] lg:min-w-[300px] glass p-4 md:p-6 border-l-4 border-l-primary cursor-pointer group"
-              >
-                <div className="p-2 lg:p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                  <customer.icon className="w-6 h-6 lg:w-8 lg:h-8" />
-                </div>
-                <div className="flex flex-col items-start">
-                  <span className="text-lg lg:text-xl font-bold tracking-tighter text-white font-syncopate uppercase">
-                    {customer.name}
-                  </span>
-                  <span className="text-[8px] lg:text-[10px] text-gray-500 font-mono tracking-widest uppercase">
-                    IND://{customer.industry}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+        <div className="relative -mx-4 overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] sm:-mx-6 lg:py-6">
+          <div className="animate-marquee flex w-max items-center hover:[animation-play-state:paused]">
+            {renderLogoGroup()}
+            {renderLogoGroup(true)}
           </div>
         </div>
       </div>
