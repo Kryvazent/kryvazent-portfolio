@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Check, Zap, Shield, Cpu } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
 
 const plans = [
   {
@@ -33,8 +34,9 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="py-12 lg:py-32 px-6 bg-black relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="pricing" className="py-12 lg:py-32 px-6 bg-black relative overflow-hidden">
+      <FloatingShapes />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-8 lg:mb-20">
           <h2 className="text-2xl md:text-5xl font-bold uppercase tracking-tighter text-white font-syncopate mb-4 lg:mb-6">
             System <span className="text-primary">Tiers</span>

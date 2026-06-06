@@ -3,13 +3,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
 
 const Contact = () => {
   return (
     <section id="contact" className="py-12 lg:py-24 px-6 relative overflow-hidden">
+      <FloatingShapes />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <div>
             <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Let's Build the Future</h2>

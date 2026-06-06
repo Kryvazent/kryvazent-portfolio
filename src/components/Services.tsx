@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code2, Cpu, Globe, Layout, Layers, Smartphone } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
 
 const services = [
   {
@@ -39,8 +40,9 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-12 lg:py-24 px-6 relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" className="py-12 lg:py-24 px-6 relative overflow-hidden">
+      <FloatingShapes />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-8 lg:mb-16">
           <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Core Capabilities</h2>
           <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-4 lg:mb-6" />

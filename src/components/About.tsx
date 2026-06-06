@@ -3,11 +3,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Cpu, Target, Users } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
 
 const About = () => {
   return (
     <section id="about" className="py-12 lg:py-24 px-6 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <FloatingShapes />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}

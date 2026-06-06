@@ -3,6 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import FloatingShapes from "./FloatingShapes";
 
 const projects = [
   {
@@ -49,8 +51,9 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-12 lg:py-24 px-6 bg-black/50">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="py-12 lg:py-24 px-6 bg-black/50 relative overflow-hidden">
+      <FloatingShapes />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 lg:mb-16 gap-6">
           <div>
             <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Selected Projects</h2>
@@ -75,10 +78,12 @@ const Projects = () => {
               className="group relative overflow-hidden rounded-3xl"
             >
               <div className="aspect-[16/9] w-full relative">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent opacity-90 transition-opacity" />
               </div>
