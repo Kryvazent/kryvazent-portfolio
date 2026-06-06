@@ -5,12 +5,6 @@
 [build.environment]
   NEXT_PUBLIC_SITE_URL = "https://www.kryvazent.com/"
 
-[[redirects]]
-  from = "https://kryvazent.com/*"
-  to = "https://www.kryvazent.com/:splat"
-  status = 301
-  force = true
-
 [[headers]]
   for = "/*"
   [headers.values]
