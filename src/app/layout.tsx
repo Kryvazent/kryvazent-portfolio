@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: "%s | Kryverzent",
   },
   description:
-    "Kryverzent is a software development and technology engineering company building custom web applications, mobile apps, AI-enabled products, cloud infrastructure, backend systems, and digital experiences for growing businesses.",
+    "Kryverzent is a software development and technology engineering company in Sri Lanka building custom web applications, mobile apps, AI-enabled products, cloud infrastructure, backend systems, APIs, and digital product experiences for startups and growing businesses.",
   keywords: [
     "Kryverzent",
     "software development company",
@@ -52,9 +52,11 @@ export const metadata: Metadata = {
   creator: "Kryverzent",
   publisher: "Kryverzent",
   category: "Technology",
+  classification: "Software development, AI engineering, cloud infrastructure, mobile app development, and digital product engineering",
   alternates: {
     canonical: "/",
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -93,6 +95,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     apple: "/logo_new.png",
+  },
+  other: {
+    "ai-purpose":
+      "Kryverzent builds custom software products including web apps, mobile apps, AI systems, cloud infrastructure, backend platforms, APIs, and UI/UX experiences.",
+    "business-location": "Colombo, Western Province, Sri Lanka",
+    "contact-email": "info@kryverzent.com",
   },
 };
 

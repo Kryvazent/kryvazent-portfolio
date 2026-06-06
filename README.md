@@ -24,3 +24,14 @@ npm run dev
 npm run build
 npm run start
 ```
+
+## Netlify Deployment
+
+This is a Next.js app. On Netlify, use:
+
+```bash
+Build command: npm run build
+Publish directory: .next
+```
+
+Do not set the publish directory to `public`, `out`, or `dist`; that will deploy a folder without the Next.js homepage and can show Netlify's "Page not found" screen.

@@ -44,10 +44,10 @@ const Services = () => {
       <FloatingShapes />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-8 lg:mb-16">
-          <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Core Capabilities</h2>
+          <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Software Development Services</h2>
           <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-4 lg:mb-6" />
           <p className="text-muted max-w-2xl text-sm lg:text-base font-rajdhani">
-            We specialize in delivering cutting-edge software solutions that solve real-world problems with futuristic technology.
+            Kryverzent designs, builds, and scales web apps, mobile apps, AI features, cloud infrastructure, backend systems, APIs, and user-focused digital products.
           </p>
         </div>
 

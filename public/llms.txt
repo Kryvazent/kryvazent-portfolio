@@ -1,0 +1,36 @@
+# Kryverzent
+
+Kryverzent is a software development and technology engineering company based in Colombo, Western Province, Sri Lanka. The company builds custom web applications, mobile applications, AI-enabled systems, cloud infrastructure, backend platforms, APIs, and digital product experiences for startups, growing businesses, and organizations.
+
+## Primary Purpose
+
+The website explains what Kryverzent does, what services it offers, the types of software projects it can build, the partner network connected to the company, available project tiers, company background, and contact information.
+
+## Core Services
+
+- Custom web application development for dashboards, portals, internal tools, and customer-facing platforms.
+- Mobile application development for iOS, Android, and cross-platform product experiences.
+- Cloud infrastructure, hosting, deployment, DevOps, and scalable production environments.
+- AI and machine learning integration for automation, intelligent workflows, recommendations, search, and data-driven product features.
+- UI and UX engineering for responsive, usable, polished web and mobile interfaces.
+- Backend engineering, API development, databases, authentication, and system integrations.
+
+## Audience
+
+Kryverzent is for businesses and organizations that need reliable software engineering, digital product development, AI features, cloud systems, or modernization of existing technology.
+
+## Contact
+
+- Email: info@kryverzent.com
+- Phone: +94 70 444 3997
+- Location: Colombo, Western Province, Sri Lanka
+
+## Website Sections
+
+- Home/Hero: Summarizes Kryverzent as a software engineering studio.
+- Partners: Shows network partner logos.
+- Services: Lists core software development capabilities.
+- Projects: Shows example technology projects and project categories.
+- Pricing: Shows project tier options.
+- About: Explains Kryverzent's company mission and background.
+- Contact: Provides ways to start a software project with Kryverzent.
