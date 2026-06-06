@@ -35,3 +35,11 @@ Publish directory: out
 ```
 
 This project is configured as a static Next.js export for Netlify. Do not set the publish directory to `public`, `dist`, or `.next`; use `out` so Netlify receives the generated `index.html`.
+
+For metadata, sitemap, Open Graph, and AI/business enrichment tools, set:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
+```
+
+Use the real production domain once one is connected. Tools such as Apollo often enrich company data by domain, so a temporary `netlify.app` URL may not have a company record even when the page itself is working.

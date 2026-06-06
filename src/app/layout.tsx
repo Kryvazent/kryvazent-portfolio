@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Syncopate, Rajdhani } from "next/font/google";
 import StructuredData from "@/components/StructuredData";
+import { siteUrlObject } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,10 +26,8 @@ const rajdhani = Rajdhani({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const siteUrl = new URL("https://www.kryverzent.com");
-
 export const metadata: Metadata = {
-  metadataBase: siteUrl,
+  metadataBase: siteUrlObject,
   applicationName: "Kryverzent",
   title: {
     default: "Kryverzent | Software Development, AI, Cloud and Digital Product Engineering",

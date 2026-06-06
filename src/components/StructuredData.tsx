@@ -1,4 +1,4 @@
-const siteUrl = "https://www.kryverzent.com";
+import { siteUrl } from "@/lib/site";
 
 const services = [
   {

@@ -2,6 +2,9 @@
   command = "npm run build"
   publish = "out"
 
+[build.environment]
+  NEXT_PUBLIC_SITE_URL = "https://taupe-brigadeiros-7b3b57.netlify.app"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
