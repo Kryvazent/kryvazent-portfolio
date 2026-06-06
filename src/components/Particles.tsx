@@ -21,7 +21,7 @@ const Particles = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const mouse = { x: 0, y: 0, radius: 100 };
+    const mouse = { x: 0, y: 0, radius: 150 };
 
     const handleMouseMove = (event: MouseEvent) => {
       mouse.x = event.clientX;
@@ -36,22 +36,28 @@ const Particles = () => {
     class Particle {
       x: number;
       y: number;
+      baseX: number;
+      baseY: number;
       size: number;
       speedX: number;
       speedY: number;
+      depth: number;
       color: string;
 
       constructor() {
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
-        this.size = Math.random() * 2 + 0.1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        this.color = 'rgba(214, 33, 51, 0.3)';
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.depth = Math.random() * 3 + 1; // 1 to 4
+        this.size = (Math.random() * 2 + 0.5) / (this.depth * 0.5);
+        this.speedX = (Math.random() * 0.4 - 0.2) / this.depth;
+        this.speedY = (Math.random() * 0.4 - 0.2) / this.depth;
+        this.color = `rgba(214, 33, 51, ${0.4 / this.depth})`;
       }
 
       update() {
-        // Mouse interaction
+        // Mouse interaction (Repulsion)
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -60,16 +66,21 @@ const Particles = () => {
           const forceDirectionX = dx / distance;
           const forceDirectionY = dy / distance;
           const force = (mouse.radius - distance) / mouse.radius;
-          const directionX = forceDirectionX * force * 5;
-          const directionY = forceDirectionY * force * 5;
+          const directionX = forceDirectionX * force * 3;
+          const directionY = forceDirectionY * force * 3;
 
           this.x -= directionX;
           this.y -= directionY;
         }
 
+        // Parallax effect based on mouse position
+        const parallaxX = (mouse.x - canvas!.width / 2) * (0.01 * this.depth);
+        const parallaxY = (mouse.y - canvas!.height / 2) * (0.01 * this.depth);
+
         this.x += this.speedX;
         this.y += this.speedY;
 
+        // Wrap around
         if (this.x > canvas!.width) this.x = 0;
         else if (this.x < 0) this.x = canvas!.width;
         if (this.y > canvas!.height) this.y = 0;
@@ -87,7 +98,8 @@ const Particles = () => {
 
     const init = () => {
       particles = [];
-      for (let i = 0; i < 100; i++) {
+      const particleCount = Math.min(180, (window.innerWidth * window.innerHeight) / 8000);
+      for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
     };
@@ -104,9 +116,10 @@ const Particles = () => {
           const dy = particles[i].y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
-            ctx.strokeStyle = `rgba(214, 33, 51, ${0.1 * (1 - distance / 150)})`;
-            ctx.lineWidth = 0.5;
+          if (distance < 120) {
+            const opacity = (1 - distance / 120) * (0.15 / ((particles[i].depth + particles[j].depth) / 2));
+            ctx.strokeStyle = `rgba(214, 33, 51, ${opacity})`;
+            ctx.lineWidth = 0.5 / ((particles[i].depth + particles[j].depth) / 2);
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);

@@ -1,30 +1,44 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 interface FloatingShapesProps {
   className?: string;
 }
 
 const FloatingShapes = ({ className = "absolute inset-0" }: FloatingShapesProps) => {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 40,
+        y: (e.clientY / window.innerHeight - 0.5) * 40,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <div className={`${className} pointer-events-none overflow-hidden z-0`}>
       {/* 3D Octahedron CSS Shape - Large Top Right */}
       <motion.div
+        style={{
+          x: mousePos.x * 0.5,
+          y: mousePos.y * 0.5,
+          transformStyle: "preserve-3d",
+        }}
         animate={{
           rotateY: [0, 360],
           rotateX: [0, 180, 0],
-          y: [0, -40, 0],
-          x: [0, 20, 0],
         }}
         transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "linear",
+          rotateY: { duration: 25, repeat: Infinity, ease: "linear" },
+          rotateX: { duration: 30, repeat: Infinity, ease: "linear" },
         }}
         className="absolute top-10 right-[10%] w-12 h-12 md:w-24 md:h-24 opacity-10"
-        style={{ transformStyle: "preserve-3d" }}
       >
         <div className="relative w-full h-full" style={{ transformStyle: "preserve-3d" }}>
           {[0, 90, 180, 270].map((rotate, i) => (
@@ -53,10 +67,14 @@ const FloatingShapes = ({ className = "absolute inset-0" }: FloatingShapesProps)
 
       {/* 3D Cube - Middle Left */}
       <motion.div
+        style={{
+          x: -mousePos.x * 0.8,
+          y: -mousePos.y * 0.8,
+          transformStyle: "preserve-3d",
+        }}
         animate={{
           rotateX: [0, 360],
           rotateY: [0, 360],
-          y: [0, 30, 0],
         }}
         transition={{
           duration: 20,
@@ -64,30 +82,27 @@ const FloatingShapes = ({ className = "absolute inset-0" }: FloatingShapesProps)
           ease: "linear",
         }}
         className="absolute top-1/3 left-[8%] w-12 h-12 md:w-20 md:h-20 opacity-[0.08]"
-        style={{ transformStyle: "preserve-3d" }}
       >
         <div className="relative w-full h-full" style={{ transformStyle: "preserve-3d" }}>
-          {/* Front */}
           <div className="absolute inset-0 border border-primary/50 bg-primary/5" style={{ transform: "translateZ(40px)" }} />
-          {/* Back */}
           <div className="absolute inset-0 border border-primary/50 bg-primary/5" style={{ transform: "rotateY(180deg) translateZ(40px)" }} />
-          {/* Left */}
           <div className="absolute inset-0 border border-primary/50 bg-primary/5" style={{ transform: "rotateY(-90deg) translateZ(40px)" }} />
-          {/* Right */}
           <div className="absolute inset-0 border border-primary/50 bg-primary/5" style={{ transform: "rotateY(90deg) translateZ(40px)" }} />
-          {/* Top */}
           <div className="absolute inset-0 border border-primary/50 bg-primary/5" style={{ transform: "rotateX(90deg) translateZ(40px)" }} />
-          {/* Bottom */}
           <div className="absolute inset-0 border border-primary/50 bg-primary/5" style={{ transform: "rotateX(-90deg) translateZ(40px)" }} />
         </div>
       </motion.div>
 
       {/* 3D Tetrahedron (Pyramid) - Bottom Right */}
       <motion.div
+        style={{
+          x: mousePos.x * 1.2,
+          y: mousePos.y * 0.3,
+          transformStyle: "preserve-3d",
+        }}
         animate={{
           rotateY: [0, 360],
           rotateZ: [0, 180, 0],
-          x: [0, -30, 0],
         }}
         transition={{
           duration: 22,
@@ -95,7 +110,6 @@ const FloatingShapes = ({ className = "absolute inset-0" }: FloatingShapesProps)
           ease: "linear",
         }}
         className="absolute bottom-[15%] right-[15%] w-12 h-12 md:w-20 md:h-20 opacity-[0.06]"
-        style={{ transformStyle: "preserve-3d" }}
       >
         <div className="relative w-full h-full" style={{ transformStyle: "preserve-3d" }}>
            {[0, 120, 240].map((rotate, i) => (
@@ -108,41 +122,72 @@ const FloatingShapes = ({ className = "absolute inset-0" }: FloatingShapesProps)
               }}
             />
           ))}
-          {/* Base */}
           <div className="absolute w-full h-full bg-primary/10 border border-primary/30" style={{ transform: "rotateX(90deg) translateZ(-35px)" }} />
         </div>
       </motion.div>
 
-      {/* Small Floating Octahedrons */}
+      {/* Floating Data Streams */}
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+          key={`stream-${i}`}
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 800, opacity: [0, 0.2, 0] }}
+          transition={{
+            duration: 10 + i * 2,
+            repeat: Infinity,
+            delay: i * 3,
+            ease: "linear"
+          }}
+          className="absolute w-[1px] bg-gradient-to-b from-transparent via-primary to-transparent h-40"
+          style={{ left: `${15 + i * 20}%`, top: 0 }}
+        />
+      ))}
+
+      {/* 3D Wireframe Spheres (approximation with rings) */}
+      <motion.div
+        style={{
+          x: -mousePos.x * 0.4,
+          y: mousePos.y * 0.6,
+          transformStyle: "preserve-3d",
+        }}
+        animate={{ rotateX: 360, rotateY: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[20%] left-[40%] w-32 h-32 opacity-[0.03]"
+      >
+        <div className="absolute inset-0 border border-primary rounded-full" />
+        <div className="absolute inset-0 border border-primary rounded-full rotate-x-90" />
+        <div className="absolute inset-0 border border-primary rounded-full rotate-y-90" />
+      </motion.div>
+
+      {/* Small Floating Bits */}
       {[
-        { top: '20%', left: '25%', delay: 0, size: 'w-4 h-4' },
-        { top: '60%', left: '40%', delay: 2, size: 'w-6 h-6' },
-        { top: '80%', left: '10%', delay: 5, size: 'w-5 h-5' },
-        { top: '15%', right: '30%', delay: 1, size: 'w-4 h-4' },
-        { top: '70%', right: '25%', delay: 4, size: 'w-6 h-6' },
+        { top: '15%', left: '10%', size: 'w-1 h-1' },
+        { top: '45%', left: '80%', size: 'w-2 h-2' },
+        { top: '85%', left: '30%', size: 'w-1 h-1' },
+        { top: '10%', left: '70%', size: 'w-2 h-2' },
+        { top: '60%', left: '15%', size: 'w-1 h-1' },
+        { top: '30%', left: '90%', size: 'w-1 h-1' },
+        { top: '75%', left: '65%', size: 'w-2 h-2' },
       ].map((pos, idx) => (
         <motion.div
           key={idx}
-          animate={{
-            rotateY: [0, 360],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 15 + idx * 2,
-            repeat: Infinity,
-            delay: pos.delay,
-            ease: "linear",
-          }}
-          className={`absolute ${pos.size} opacity-[0.05]`}
           style={{
+            x: mousePos.x * (idx % 2 === 0 ? 1.5 : -1.5),
+            y: mousePos.y * (idx % 3 === 0 ? 1 : -1),
             top: pos.top,
             left: pos.left,
-            right: pos.right,
-            transformStyle: "preserve-3d"
           }}
-        >
-          <div className="relative w-full h-full bg-primary/20 border border-primary/40 rotate-45" />
-        </motion.div>
+          animate={{
+            opacity: [0.1, 0.3, 0.1],
+            scale: [1, 1.5, 1],
+          }}
+          transition={{
+            duration: 4 + idx,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className={`absolute ${pos.size} bg-primary rounded-full blur-[1px]`}
+        />
       ))}
 
       {/* Tech Rings */}
