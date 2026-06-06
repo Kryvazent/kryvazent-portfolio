@@ -31,7 +31,7 @@ This is a Next.js app. On Netlify, use:
 
 ```bash
 Build command: npm run build
-Publish directory: .next
+Publish directory: out
 ```
 
-Do not set the publish directory to `public`, `out`, or `dist`; that will deploy a folder without the Next.js homepage and can show Netlify's "Page not found" screen.
+This project is configured as a static Next.js export for Netlify. Do not set the publish directory to `public`, `dist`, or `.next`; use `out` so Netlify receives the generated `index.html`.
