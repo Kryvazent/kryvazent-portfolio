@@ -1,17 +1,22 @@
 import type { MetadataRoute } from "next";
+import { site } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Kryverzent - Software Development and Technology Engineering",
-    short_name: "Kryverzent",
-    description:
-      "Kryverzent builds custom web applications, mobile apps, AI-enabled systems, cloud infrastructure, backend platforms, APIs, and digital product experiences.",
+    id: "/",
+    name: `${site.name} - Custom Software, AI and Cloud Engineering`,
+    short_name: site.name,
+    description: site.shortDescription,
     start_url: "/",
+    scope: "/",
     display: "standalone",
+    orientation: "portrait-primary",
     background_color: "#050505",
     theme_color: "#D62133",
+    lang: "en-LK",
+    categories: ["business", "productivity", "technology"],
     icons: [
       {
         src: "/logo_new.png",

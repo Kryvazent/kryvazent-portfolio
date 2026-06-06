@@ -12,28 +12,28 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
           <div className="flex items-center gap-2">
             <div className="relative h-10 w-10 overflow-hidden rounded-2xl bg-white p-1.5 shadow-[0_0_18px_rgba(255,255,255,0.14)] ring-1 ring-white/70">
-              <Image src="/logo_new.png" alt="Kryverzent Logo" fill sizes="40px" className="object-contain p-1" />
+              <Image src="/logo_new.png" alt="Kryvazent Logo" fill sizes="40px" className="object-contain p-1" />
             </div>
-            <span className="text-lg font-bold tracking-normal uppercase font-syncopate text-primary">Kryverzent</span>
+            <span className="text-lg font-bold tracking-normal uppercase font-syncopate text-primary">Kryvazent</span>
           </div>
 
           <div className="flex items-center gap-6">
-            <Link href="mailto:info@kryverzent.com" className="text-subtle hover:text-primary transition-colors" aria-label="Email Kryverzent">
+            <Link href="mailto:info@kryvazent.com" className="text-subtle hover:text-primary transition-colors" aria-label="Email Kryvazent">
               <MessageSquare className="w-5 h-5" />
             </Link>
-            <Link href="/" className="text-subtle hover:text-primary transition-colors" aria-label="Share Kryverzent website">
+            <Link href="/" className="text-subtle hover:text-primary transition-colors" aria-label="Share Kryvazent website">
               <Share2 className="w-5 h-5" />
             </Link>
-            <Link href="/" className="text-subtle hover:text-primary transition-colors" aria-label="Kryverzent website">
+            <Link href="/" className="text-subtle hover:text-primary transition-colors" aria-label="Kryvazent website">
               <Globe className="w-5 h-5" />
             </Link>
-            <Link href="#services" className="text-subtle hover:text-primary transition-colors" aria-label="Kryverzent services">
+            <Link href="/#services" className="text-subtle hover:text-primary transition-colors" aria-label="Kryvazent services">
               <Cpu className="w-5 h-5" />
             </Link>
           </div>
 
           <p className="text-subtle text-sm font-rajdhani">
-            Copyright {new Date().getFullYear()} Kryverzent Systems Inc. All rights reserved.
+            Copyright {new Date().getFullYear()} Kryvazent Systems Inc. All rights reserved.
           </p>
         </div>
       </div>

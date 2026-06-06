@@ -1,214 +1,110 @@
-import { siteUrl } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site";
+import { primaryKeywords, primaryNavLinks, seoServices, servicePath, site } from "@/lib/seo";
 
-const services = [
-  {
-    name: "Custom web application development",
-    description:
-      "Designing and building reliable business web applications, dashboards, portals, internal tools, and customer-facing platforms.",
+const serviceOffers = seoServices.map((service) => ({
+  "@type": "Offer",
+  url: absoluteUrl(servicePath(service.slug)),
+  itemOffered: {
+    "@type": "Service",
+    "@id": `${absoluteUrl(servicePath(service.slug))}#service`,
+    name: service.title,
+    serviceType: service.title,
+    description: service.description,
+    provider: {
+      "@id": `${site.url}/#organization`,
+    },
+    areaServed: [
+      {
+        "@type": "Country",
+        name: site.country,
+      },
+      {
+        "@type": "Place",
+        name: "Global",
+      },
+    ],
   },
-  {
-    name: "Mobile application development",
-    description:
-      "Creating native and cross-platform mobile apps with polished user experiences for iOS and Android users.",
-  },
-  {
-    name: "Cloud infrastructure and DevOps",
-    description:
-      "Planning, deploying, and maintaining cloud infrastructure, CI/CD workflows, hosting, and scalable production environments.",
-  },
-  {
-    name: "AI and machine learning product integration",
-    description:
-      "Adding AI-powered automation, intelligent search, recommendations, data workflows, and machine learning features to digital products.",
-  },
-  {
-    name: "UI and UX engineering",
-    description:
-      "Designing and implementing usable, responsive, conversion-aware interfaces for web and mobile products.",
-  },
-  {
-    name: "Backend system design and API development",
-    description:
-      "Building secure APIs, databases, authentication systems, backend services, and integrations for scalable applications.",
-  },
-];
-
-const faqEntries = [
-  {
-    question: "What does Kryverzent do?",
-    answer:
-      "Kryverzent is a software development and technology engineering company that builds custom web applications, mobile apps, AI-enabled systems, cloud infrastructure, backend platforms, and digital product experiences.",
-  },
-  {
-    question: "Who is Kryverzent for?",
-    answer:
-      "Kryverzent works with startups, growing businesses, and organizations that need reliable software engineering for new products, modernization, automation, or scalable digital systems.",
-  },
-  {
-    question: "What services does Kryverzent provide?",
-    answer:
-      "Kryverzent provides custom web app development, mobile development, cloud infrastructure, DevOps, AI and machine learning integration, UI/UX engineering, backend development, and API architecture.",
-  },
-  {
-    question: "Where is Kryverzent based?",
-    answer:
-      "Kryverzent is based in Colombo, Western Province, Sri Lanka, and serves clients in Sri Lanka and globally.",
-  },
-];
+}));
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["Organization", "ProfessionalService"],
-      "@id": `${siteUrl}/#organization`,
-      name: "Kryverzent",
-      legalName: "Kryverzent Systems Inc.",
-      url: siteUrl,
-      logo: `${siteUrl}/logo_new.png`,
-      image: `${siteUrl}/logo_new.png`,
-      description:
-        "Kryverzent is a software development and technology engineering company that builds custom web applications, mobile applications, AI-enabled systems, cloud infrastructure, backend platforms, and digital product experiences.",
-      email: "info@kryverzent.com",
-      telephone: "+94704443997",
+      "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      legalName: site.legalName,
+      url: site.url,
+      logo: site.logo,
+      image: site.logo,
+      description: site.description,
+      email: site.email,
+      telephone: site.phoneHref,
       contactPoint: [
         {
           "@type": "ContactPoint",
           contactType: "sales",
-          email: "info@kryverzent.com",
-          telephone: "+94704443997",
-          areaServed: ["LK", "Global"],
-          availableLanguage: ["en"],
+          email: site.email,
+          telephone: site.phoneHref,
+          areaServed: [site.countryCode, "Global"],
+          availableLanguage: [site.language],
         },
         {
           "@type": "ContactPoint",
           contactType: "customer support",
-          email: "info@kryverzent.com",
-          telephone: "+94704443997",
-          areaServed: ["LK", "Global"],
-          availableLanguage: ["en"],
+          email: site.email,
+          telephone: site.phoneHref,
+          areaServed: [site.countryCode, "Global"],
+          availableLanguage: [site.language],
         },
       ],
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Colombo",
-        addressRegion: "Western Province",
-        addressCountry: "LK",
+        addressLocality: site.city,
+        addressRegion: site.region,
+        addressCountry: site.countryCode,
       },
       areaServed: [
         {
           "@type": "Country",
-          name: "Sri Lanka",
+          name: site.country,
         },
         {
           "@type": "Place",
           name: "Global",
         },
       ],
-      knowsAbout: [
-        "Software engineering",
-        "Web application development",
-        "Mobile application development",
-        "Artificial intelligence",
-        "Machine learning",
-        "Cloud infrastructure",
-        "Backend architecture",
-        "User interface design",
-        "User experience engineering",
-      ],
-      makesOffer: services.map((service) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: service.name,
-          description: service.description,
-          provider: {
-            "@id": `${siteUrl}/#organization`,
-          },
-        },
-      })),
+      knowsAbout: primaryKeywords,
+      makesOffer: serviceOffers,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Kryverzent software development services",
-        itemListElement: services.map((service) => ({
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: service.name,
-            description: service.description,
-            provider: {
-              "@id": `${siteUrl}/#organization`,
-            },
-          },
-        })),
-      },
-      foundingLocation: {
-        "@type": "Place",
-        name: "Colombo, Western Province, Sri Lanka",
+        name: `${site.name} software development services`,
+        itemListElement: serviceOffers,
       },
       priceRange: "$$",
-      slogan: "Engineering the Impossible",
+      slogan: site.slogan,
     },
     {
       "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      url: siteUrl,
-      name: "Kryverzent",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
       publisher: {
-        "@id": `${siteUrl}/#organization`,
+        "@id": `${site.url}/#organization`,
       },
-      description:
-        "The official Kryverzent website explains the company's software development services, project capabilities, technology tiers, partner network, company background, and contact information.",
-      inLanguage: "en",
+      description: site.shortDescription,
+      inLanguage: site.language,
       about: {
-        "@id": `${siteUrl}/#organization`,
+        "@id": `${site.url}/#organization`,
       },
     },
-    {
-      "@type": "WebPage",
-      "@id": `${siteUrl}/#webpage`,
-      url: siteUrl,
-      name: "Kryverzent software development and technology engineering company",
-      isPartOf: {
-        "@id": `${siteUrl}/#website`,
-      },
-      about: {
-        "@id": `${siteUrl}/#organization`,
-      },
-      primaryImageOfPage: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/logo_new.png`,
-      },
-      description:
-        "This homepage introduces Kryverzent, explains its software engineering services, highlights project capabilities, shows network partners, describes pricing tiers, and provides contact information.",
-      mainEntity: {
-        "@id": `${siteUrl}/#services`,
-      },
-      inLanguage: "en",
-    },
-    {
-      "@type": "ItemList",
-      "@id": `${siteUrl}/#services`,
-      name: "Kryverzent software engineering services",
-      itemListElement: services.map((service, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: service.name,
-        description: service.description,
-      })),
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteUrl}/#faq`,
-      mainEntity: faqEntries.map((entry) => ({
-        "@type": "Question",
-        name: entry.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: entry.answer,
-        },
-      })),
-    },
+    ...primaryNavLinks.map((link, index) => ({
+      "@type": "SiteNavigationElement",
+      "@id": `${site.url}/#navigation-${index + 1}`,
+      position: index + 1,
+      name: link.name,
+      url: absoluteUrl(link.href),
+    })),
   ],
 };
 
@@ -217,7 +113,7 @@ const StructuredData = () => {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
+        __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
       }}
     />
   );

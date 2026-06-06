@@ -7,7 +7,7 @@ import FloatingShapes from "./FloatingShapes";
 
 const About = () => {
   return (
-    <section id="about" className="py-12 lg:py-24 px-6 relative overflow-hidden">
+    <section id="about" aria-labelledby="about-heading" className="py-12 lg:py-24 px-6 relative overflow-hidden">
       <FloatingShapes />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -16,29 +16,29 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">About <span className="text-primary">Kryverzent</span></h2>
+            <h2 id="about-heading" className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">About <span className="text-primary">Kryvazent</span></h2>
             <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-6 lg:mb-8" />
 
             <p className="text-muted text-sm lg:text-lg mb-4 lg:mb-6 leading-relaxed font-rajdhani">
-              Founded at the intersection of imagination and engineering, Kryverzent is a premier software development firm dedicated to building the infrastructure of tomorrow.
+              Kryvazent is a software development and technology engineering company based in Colombo, Western Province, Sri Lanka. We help teams turn product ideas, operational problems, and growth goals into reliable digital systems.
             </p>
             <p className="text-muted text-sm lg:text-lg mb-8 lg:mb-10 leading-relaxed font-rajdhani">
-              We don't just write code; we architect experiences. Our team of elite engineers and visionary designers work in tandem to deliver solutions that are as beautiful as they are powerful.
+              Our work covers product planning, web applications, mobile apps, backend systems, APIs, cloud infrastructure, AI-enabled features, and UI/UX engineering for startups and growing businesses.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-primary"><Target className="w-6 h-6" /></div>
                 <div>
-                  <h4 className="font-bold mb-1">Our Mission</h4>
-                  <p className="text-sm text-subtle">To accelerate the transition to a more efficient, automated future.</p>
+                  <h3 className="font-bold mb-1">Our Mission</h3>
+                  <p className="text-sm text-subtle">To build practical software that makes business workflows faster, clearer, and easier to scale.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-primary"><Users className="w-6 h-6" /></div>
                 <div>
-                  <h4 className="font-bold mb-1">Our Team</h4>
-                  <p className="text-sm text-subtle">A global collective of world-class developers and creative thinkers.</p>
+                  <h3 className="font-bold mb-1">Our Approach</h3>
+                  <p className="text-sm text-subtle">Discovery, design, engineering, deployment, and iteration handled with one product-focused workflow.</p>
                 </div>
               </div>
             </div>

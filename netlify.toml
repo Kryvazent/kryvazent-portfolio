@@ -3,9 +3,27 @@
   publish = "out"
 
 [build.environment]
-  NEXT_PUBLIC_SITE_URL = "https://taupe-brigadeiros-7b3b57.netlify.app"
+  NEXT_PUBLIC_SITE_URL = "https://www.kryvazent.com/"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "https://kryvazent.com/*"
+  to = "https://www.kryvazent.com/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

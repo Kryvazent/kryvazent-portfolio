@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronRight, FolderOpen, Globe, MessageSquare, Rocket, Shield, Zap } from "lucide-react";
 import FloatingShapes from "./FloatingShapes";
@@ -71,23 +72,23 @@ const Hero = () => {
               </h1>
 
               <p className="max-w-xl text-base lg:text-xl text-muted mb-8 lg:mb-12 leading-relaxed font-rajdhani font-medium">
-                Kryverzent builds custom web apps, mobile apps, AI-enabled systems, cloud infrastructure, backend platforms, and digital product experiences for businesses that need reliable technology.
+                Kryvazent builds custom web apps, mobile apps, AI-enabled systems, cloud infrastructure, backend platforms, and digital product experiences for businesses that need reliable technology.
               </p>
 
               <div className="flex flex-col gap-4 lg:gap-6">
                 <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-6">
-                  <button className="w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-5 bg-primary text-white font-bold text-xs lg:text-sm tracking-widest uppercase hover:scale-105 transition-all border-glow flex items-center justify-center gap-3 group font-syncopate">
+                  <Link href="/#contact" className="w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-5 bg-primary text-white font-bold text-xs lg:text-sm tracking-widest uppercase hover:scale-105 transition-all border-glow flex items-center justify-center gap-3 group font-syncopate">
                     Start a Project
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </Link>
                   <div className="flex items-center gap-4 py-2 px-4 glass rounded-xl w-full sm:w-auto justify-center">
-                    <a href="/" aria-label="Kryverzent website" className="text-muted hover:text-primary transition-colors p-2">
+                    <a href="/" aria-label="Kryvazent website" className="text-muted hover:text-primary transition-colors p-2">
                       <Globe className="w-5 h-5" />
                     </a>
-                    <a href="#projects" aria-label="Kryverzent projects" className="text-muted hover:text-primary transition-colors p-2">
+                    <a href="/#projects" aria-label="Kryvazent projects" className="text-muted hover:text-primary transition-colors p-2">
                       <FolderOpen className="w-5 h-5" />
                     </a>
-                    <a href="mailto:info@kryverzent.com" aria-label="Email Kryverzent" className="text-muted hover:text-primary transition-colors p-2">
+                    <a href="mailto:info@kryvazent.com" aria-label="Email Kryvazent" className="text-muted hover:text-primary transition-colors p-2">
                       <MessageSquare className="w-5 h-5" />
                     </a>
                   </div>

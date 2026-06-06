@@ -1,6 +1,6 @@
-# Kryverzent - Engineering the Impossible
+# Kryvazent - Engineering the Impossible
 
-A futuristic, high-tech minimalist portfolio website for Kryverzent, a high-performance technology foundry.
+A futuristic, high-tech business website for Kryvazent, a software development and technology engineering company in Colombo, Sri Lanka.
 
 ## Features
 
@@ -10,6 +10,7 @@ A futuristic, high-tech minimalist portfolio website for Kryverzent, a high-perf
 - **Infinite Marquee**: High-performance partner/customer scrolling.
 - **Fully Responsive**: Optimized for desktop and mobile with adaptive layouts.
 - **Modern Tech Stack**: Built with Next.js 15, React, Tailwind CSS 4, and Framer Motion.
+- **SEO Foundation**: Metadata, sitemap, robots rules, JSON-LD schema, visible FAQs, Open Graph image, and crawlable service pages.
 
 ## Development
 
@@ -39,7 +40,16 @@ This project is configured as a static Next.js export for Netlify. Do not set th
 For metadata, sitemap, Open Graph, and AI/business enrichment tools, set:
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
+NEXT_PUBLIC_SITE_URL=https://www.kryvazent.com/
 ```
 
 Use the real production domain once one is connected. Tools such as Apollo often enrich company data by domain, so a temporary `netlify.app` URL may not have a company record even when the page itself is working.
+
+The app currently generates these static service URLs for search discovery:
+
+- `/services/custom-web-application-development/`
+- `/services/mobile-application-development/`
+- `/services/ai-machine-learning-product-integration/`
+- `/services/cloud-infrastructure-devops/`
+- `/services/backend-api-development/`
+- `/services/ui-ux-engineering/`

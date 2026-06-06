@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Syncopate, Rajdhani } from "next/font/google";
 import StructuredData from "@/components/StructuredData";
+import { primaryKeywords, site } from "@/lib/seo";
 import { siteUrlObject } from "@/lib/site";
 import "./globals.css";
 
@@ -28,57 +29,52 @@ const rajdhani = Rajdhani({
 
 export const metadata: Metadata = {
   metadataBase: siteUrlObject,
-  applicationName: "Kryverzent",
+  applicationName: site.name,
   title: {
-    default: "Kryverzent | Software Development, AI, Cloud and Digital Product Engineering",
-    template: "%s | Kryverzent",
+    default: site.title,
+    template: `%s | ${site.name}`,
   },
-  description:
-    "Kryverzent is a software development and technology engineering company in Sri Lanka building custom web applications, mobile apps, AI-enabled products, cloud infrastructure, backend systems, APIs, and digital product experiences for startups and growing businesses.",
-  keywords: [
-    "Kryverzent",
-    "software development company",
-    "custom web application development",
-    "mobile app development",
-    "AI product development",
-    "cloud infrastructure",
-    "backend engineering",
-    "UI UX engineering",
-    "digital product studio",
-    "technology company Sri Lanka",
-  ],
-  authors: [{ name: "Kryverzent" }],
-  creator: "Kryverzent",
-  publisher: "Kryverzent",
+  description: site.description,
+  keywords: primaryKeywords,
+  authors: [{ name: site.name, url: "/" }],
+  creator: site.name,
+  publisher: site.name,
   category: "Technology",
-  classification: "Software development, AI engineering, cloud infrastructure, mobile app development, and digital product engineering",
+  classification:
+    "Software development, AI engineering, cloud infrastructure, mobile app development, backend development, API development, and digital product engineering",
   alternates: {
     canonical: "/",
+    languages: {
+      "en-LK": "/",
+    },
   },
   manifest: "/manifest.webmanifest",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: site.locale,
     url: "/",
-    siteName: "Kryverzent",
-    title: "Kryverzent | Software Development, AI, Cloud and Digital Product Engineering",
-    description:
-      "A technology engineering company for custom web apps, mobile apps, AI systems, cloud infrastructure, scalable backend platforms, and polished digital experiences.",
+    siteName: site.name,
+    title: site.title,
+    description: site.shortDescription,
     images: [
       {
-        url: "/logo_new.png",
-        width: 512,
-        height: 512,
-        alt: "Kryverzent logo",
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kryvazent custom software, AI, cloud, and mobile engineering",
       },
     ],
   },
   twitter: {
-    card: "summary",
-    title: "Kryverzent | Software Development and Technology Engineering",
-    description:
-      "Custom web apps, mobile apps, AI-enabled products, cloud infrastructure, backend systems, and UI/UX engineering for growing businesses.",
-    images: ["/logo_new.png"],
+    card: "summary_large_image",
+    title: site.title,
+    description: site.shortDescription,
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -96,11 +92,23 @@ export const metadata: Metadata = {
     apple: "/logo_new.png",
   },
   other: {
+    "geo.region": "LK",
+    "geo.placename": `${site.city}, ${site.region}, ${site.country}`,
     "ai-purpose":
-      "Kryverzent builds custom software products including web apps, mobile apps, AI systems, cloud infrastructure, backend platforms, APIs, and UI/UX experiences.",
-    "business-location": "Colombo, Western Province, Sri Lanka",
-    "contact-email": "info@kryverzent.com",
+      "Kryvazent builds custom software products including web apps, mobile apps, AI systems, cloud infrastructure, backend platforms, APIs, and UI/UX experiences.",
+    "business-location": `${site.city}, ${site.region}, ${site.country}`,
+    "contact-email": site.email,
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f8fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#050505" },
+  ],
 };
 
 export default function RootLayout({

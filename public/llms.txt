@@ -1,10 +1,10 @@
-# Kryverzent
+# Kryvazent
 
-Kryverzent is a software development and technology engineering company based in Colombo, Western Province, Sri Lanka. The company builds custom web applications, mobile applications, AI-enabled systems, cloud infrastructure, backend platforms, APIs, and digital product experiences for startups, growing businesses, and organizations.
+Kryvazent is a software development and technology engineering company based in Colombo, Western Province, Sri Lanka. The company builds custom web applications, mobile applications, AI-enabled systems, cloud infrastructure, backend platforms, APIs, and digital product experiences for startups, growing businesses, and organizations.
 
 ## Primary Purpose
 
-The website explains what Kryverzent does, what services it offers, the types of software projects it can build, the partner network connected to the company, available project tiers, company background, and contact information.
+The website explains what Kryvazent does, what services it offers, the types of software projects it can build, the partner network connected to the company, available project tiers, company background, and contact information.
 
 ## Core Services
 
@@ -17,20 +17,31 @@ The website explains what Kryverzent does, what services it offers, the types of
 
 ## Audience
 
-Kryverzent is for businesses and organizations that need reliable software engineering, digital product development, AI features, cloud systems, or modernization of existing technology.
+Kryvazent is for businesses and organizations that need reliable software engineering, digital product development, AI features, cloud systems, or modernization of existing technology.
 
 ## Contact
 
-- Email: info@kryverzent.com
+- Email: info@kryvazent.com
 - Phone: +94 70 444 3997
 - Location: Colombo, Western Province, Sri Lanka
 
 ## Website Sections
 
-- Home/Hero: Summarizes Kryverzent as a software engineering studio.
+- Home/Hero: Summarizes Kryvazent as a software engineering studio.
 - Partners: Shows network partner logos.
 - Services: Lists core software development capabilities.
 - Projects: Shows example technology projects and project categories.
 - Pricing: Shows project tier options.
-- About: Explains Kryverzent's company mission and background.
-- Contact: Provides ways to start a software project with Kryverzent.
+- About: Explains Kryvazent's company mission and background.
+- FAQ: Answers common questions about Kryvazent, its location, services, and project process.
+- Contact: Provides ways to start a software project with Kryvazent.
+
+## Important URLs
+
+- Homepage: https://www.kryvazent.com/
+- Custom Web Application Development: https://www.kryvazent.com/services/custom-web-application-development/
+- Mobile Application Development: https://www.kryvazent.com/services/mobile-application-development/
+- AI and Machine Learning Product Integration: https://www.kryvazent.com/services/ai-machine-learning-product-integration/
+- Cloud Infrastructure and DevOps: https://www.kryvazent.com/services/cloud-infrastructure-devops/
+- Backend System Design and API Development: https://www.kryvazent.com/services/backend-api-development/
+- UI and UX Engineering: https://www.kryvazent.com/services/ui-ux-engineering/

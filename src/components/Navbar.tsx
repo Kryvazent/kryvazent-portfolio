@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { primaryNavLinks } from "@/lib/seo";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
@@ -19,18 +20,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "Partners", href: "#customers" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
-  ];
-
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
+      aria-label="Primary navigation"
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 py-4",
         isScrolled ? "glass border-b border-line py-3" : "bg-transparent"
@@ -41,19 +35,19 @@ const Navbar = () => {
           <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-2xl bg-white p-1.5 shadow-[0_0_22px_rgba(255,255,255,0.18)] ring-1 ring-white/70 transition-transform group-hover:scale-105 sm:h-12 sm:w-12">
             <Image
               src="/logo_new.png"
-              alt="Kryverzent Logo"
+              alt="Kryvazent Logo"
               fill
               sizes="48px"
               className="object-contain p-1"
             />
           </div>
           <span className="text-base font-bold tracking-normal text-primary uppercase font-syncopate sm:text-xl">
-            Kryverzent
+            Kryvazent
           </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {primaryNavLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
@@ -63,7 +57,7 @@ const Navbar = () => {
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/#contact"
             className="px-5 py-2 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary/80 transition-all border-glow"
           >
             Get in Touch
@@ -90,7 +84,7 @@ const Navbar = () => {
             className="md:hidden glass border-t border-line mt-4 overflow-hidden"
           >
             <div className="flex flex-col gap-4 p-6">
-              {navLinks.map((link) => (
+              {primaryNavLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}

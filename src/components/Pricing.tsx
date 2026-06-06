@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, Zap, Shield, Cpu } from "lucide-react";
 import FloatingShapes from "./FloatingShapes";
@@ -34,11 +35,11 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="py-12 lg:py-32 px-6 bg-surface-strong relative overflow-hidden">
+    <section id="pricing" aria-labelledby="pricing-heading" className="py-12 lg:py-32 px-6 bg-surface-strong relative overflow-hidden">
       <FloatingShapes />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-8 lg:mb-20">
-          <h2 className="text-2xl md:text-5xl font-bold uppercase tracking-normal text-foreground font-syncopate mb-4 lg:mb-6">
+          <h2 id="pricing-heading" className="text-2xl md:text-5xl font-bold uppercase tracking-normal text-foreground font-syncopate mb-4 lg:mb-6">
             System <span className="text-primary">Tiers</span>
           </h2>
           <p className="text-muted font-rajdhani max-w-2xl mx-auto text-sm lg:text-lg">
@@ -95,13 +96,13 @@ const Pricing = () => {
                 ))}
               </div>
 
-              <button className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-xs font-syncopate transition-all ${
+              <Link href="/#contact" className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-xs font-syncopate transition-all text-center ${
                 plan.highlight
                   ? "bg-primary text-white hover:bg-primary/90 border-glow"
                   : "bg-surface text-foreground hover:bg-primary/10 border border-line"
               }`}>
                 Initialize Tier
-              </button>
+              </Link>
             </motion.div>
           ))}
         </div>

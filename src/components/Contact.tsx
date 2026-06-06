@@ -48,28 +48,28 @@ const Contact = () => {
   const isSending = status === "sending";
 
   return (
-    <section id="contact" className="py-12 lg:py-24 px-6 relative overflow-hidden">
+    <section id="contact" aria-labelledby="contact-heading" className="py-12 lg:py-24 px-6 relative overflow-hidden">
       <FloatingShapes />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <div>
-            <h2 className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Build Your Software Project</h2>
+            <h2 id="contact-heading" className="text-2xl md:text-5xl font-bold mb-4 font-syncopate">Build Your Software Project</h2>
             <div className="w-16 lg:w-20 h-1.5 bg-primary rounded-full mb-4 lg:mb-6" />
             <p className="text-muted max-w-md mb-8 lg:mb-12 text-sm lg:text-base font-rajdhani">
-              Talk to Kryverzent about custom web applications, mobile apps, AI features, cloud infrastructure, backend systems, or UI/UX engineering for your next product.
+              Talk to Kryvazent about custom web applications, mobile apps, AI features, cloud infrastructure, backend systems, or UI/UX engineering for your next product.
             </p>
 
-            <div className="space-y-6 lg:space-y-8">
+            <address className="space-y-6 lg:space-y-8 not-italic">
               <div className="flex items-center gap-4 lg:gap-6 group">
                 <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl glass border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <Mail className="w-5 h-5 lg:w-6 lg:h-6" />
                 </div>
                 <div>
                   <p className="text-[10px] lg:text-xs text-subtle uppercase font-bold tracking-widest font-syncopate">Email Us</p>
-                  <a href="mailto:info@kryverzent.com" className="text-base lg:text-lg font-medium font-rajdhani hover:text-primary transition-colors">
-                    info@kryverzent.com
+                  <a href="mailto:info@kryvazent.com" className="text-base lg:text-lg font-medium font-rajdhani hover:text-primary transition-colors">
+                    info@kryvazent.com
                   </a>
                 </div>
               </div>
@@ -93,7 +93,7 @@ const Contact = () => {
                   <p className="text-base lg:text-lg font-medium leading-tight font-rajdhani">Colombo,<br />Western Province, Sri Lanka</p>
                 </div>
               </div>
-            </div>
+            </address>
           </div>
 
           <motion.div
@@ -104,8 +104,8 @@ const Contact = () => {
           >
             <form className="space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-              <input type="hidden" name="subject" value="New Kryverzent website contact request" />
-              <input type="hidden" name="from_name" value="Kryverzent Website" />
+              <input type="hidden" name="subject" value="New Kryvazent website contact request" />
+              <input type="hidden" name="from_name" value="Kryvazent Website" />
               <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                 <div className="space-y-2">

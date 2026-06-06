@@ -1,4 +1,4 @@
-const fallbackSiteUrl = "https://taupe-brigadeiros-7b3b57.netlify.app";
+const fallbackSiteUrl = "https://www.kryvazent.com/";
 
 const normalizeSiteUrl = (url: string) => url.replace(/\/+$/, "");
 
@@ -9,3 +9,7 @@ export const siteUrl = normalizeSiteUrl(
 );
 
 export const siteUrlObject = new URL(siteUrl);
+
+export const absoluteUrl = (path = "/") => {
+  return new URL(path, `${siteUrl}/`).toString();
+};

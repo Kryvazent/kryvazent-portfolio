@@ -129,12 +129,12 @@ const Customers = () => {
   );
 
   return (
-    <section id="customers" className="py-12 lg:py-28 px-4 sm:px-6 border-y border-line bg-surface-strong relative overflow-hidden">
+    <section id="customers" aria-labelledby="customers-heading" className="py-12 lg:py-28 px-4 sm:px-6 border-y border-line bg-surface-strong relative overflow-hidden">
       <FloatingShapes />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
-        <h2 className="text-xl md:text-3xl font-bold uppercase tracking-[0.16em] lg:tracking-[0.3em] text-foreground mb-8 lg:mb-12 font-syncopate">
+        <h2 id="customers-heading" className="text-xl md:text-3xl font-bold uppercase tracking-[0.16em] lg:tracking-[0.3em] text-foreground mb-8 lg:mb-12 font-syncopate">
           Verified <span className="text-primary">Network</span> Partners
         </h2>
 
