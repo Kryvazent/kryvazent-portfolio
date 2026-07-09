@@ -5,15 +5,33 @@ import { env } from "./config/env.js";
 import { bootstrapData } from "./services/bootstrap.js";
 import { startPublisher } from "./services/publisher.js";
 
-const start = async () => {
-  await connectDatabase();
-  await bootstrapData();
-  startPublisher();
-  app.listen(env.port, "0.0.0.0", () => {
-    console.log(`Kryvazent CMS API listening on 0.0.0.0:${env.port}`);
-  });
+let retryTimer;
+
+const initializeDatabase = async () => {
+  try {
+    console.log("Connecting to MongoDB...");
+    await connectDatabase();
+    await bootstrapData();
+    startPublisher();
+    console.log("MongoDB connected and application data initialized");
+  } catch (error) {
+    console.error("MongoDB initialization failed:", error instanceof Error ? error.message : error);
+    console.error("Retrying MongoDB connection in 15 seconds");
+    clearTimeout(retryTimer);
+    retryTimer = setTimeout(() => void initializeDatabase(), 15_000);
+  }
 };
-start().catch((error) => {
-  console.error("Failed to start API", error);
-  process.exit(1);
+
+const server = app.listen(env.port, "0.0.0.0", () => {
+  console.log(`Kryvazent CMS API listening on 0.0.0.0:${env.port}`);
+  void initializeDatabase();
 });
+
+const shutdown = (signal) => {
+  console.log(`${signal} received; shutting down`);
+  clearTimeout(retryTimer);
+  server.close(() => process.exit(0));
+};
+
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));
