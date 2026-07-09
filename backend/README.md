@@ -60,3 +60,19 @@ jobs and stores the finished MP4 URL before publishing.
 Deploy this directory as a persistent Node service and use MongoDB Atlas or
 another reachable MongoDB instance in production. Keep `JWT_SECRET`,
 `ADMIN_PASSWORD`, and `MONGODB_URI` server-side.
+
+## Railway deployment
+
+The repository root includes a production Dockerfile and `railway.json`.
+Connect the GitHub repository to a Railway service and leave its Root Directory
+set to `/`; Railway will build only the backend and check `/api/health`.
+
+Add every variable from `.env.example` in Railway's Variables tab. Do not copy
+the local `PORT`; Railway injects `PORT` automatically. Set `FRONTEND_URL` to
+the deployed frontend origin (multiple origins are comma-separated), and make
+sure MongoDB Atlas Network Access permits connections from the deployment.
+After deployment, generate a Railway public domain and verify:
+
+```text
+https://your-railway-domain/api/health
+```
