@@ -63,9 +63,10 @@ another reachable MongoDB instance in production. Keep `JWT_SECRET`,
 
 ## Railway deployment
 
-The repository root includes a production Dockerfile and `railway.json`.
-Connect the GitHub repository to a Railway service and leave its Root Directory
-set to `/`; Railway will build only the backend and check `/api/health`.
+The repository includes a production Dockerfile and `railway.json`. Connect the
+GitHub repository to a Railway service and set its Root Directory to
+`/backend`. The deployment configuration builds only the backend and checks
+`/api/health`.
 
 Add every variable from `.env.example` in Railway's Variables tab. Do not copy
 the local `PORT`; Railway injects `PORT` automatically. Set `FRONTEND_URL` to
