@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: www.kryvazent.com
+Sitemap: https://www.kryvazent.com/sitemap.xml
