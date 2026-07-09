@@ -4,6 +4,7 @@
 
 [build.environment]
   NEXT_PUBLIC_SITE_URL = "https://www.kryvazent.com/"
+  # Set NEXT_PUBLIC_API_URL in the Netlify environment to the deployed backend.
 
 [[headers]]
   for = "/*"

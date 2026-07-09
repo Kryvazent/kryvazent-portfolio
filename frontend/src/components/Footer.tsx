@@ -32,9 +32,13 @@ const Footer = () => {
             </Link>
           </div>
 
-          <p className="text-subtle text-sm font-rajdhani">
-            Copyright {new Date().getFullYear()} Kryvazent Systems Inc. All rights reserved.
-          </p>
+          <div className="text-subtle text-sm font-rajdhani">
+            <p>Copyright {new Date().getFullYear()} Kryvazent Systems Inc. All rights reserved.</p>
+            <div className="mt-1 flex justify-center gap-3 md:justify-start">
+              <Link href="/privacy/" className="hover:text-primary">Privacy Policy</Link>
+              <Link href="/terms/" className="hover:text-primary">Terms of Service</Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
