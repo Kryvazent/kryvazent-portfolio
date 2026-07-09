@@ -9,7 +9,9 @@ const start = async () => {
   await connectDatabase();
   await bootstrapData();
   startPublisher();
-  app.listen(env.port, () => console.log(`Kryvazent CMS API listening on port ${env.port}`));
+  app.listen(env.port, "0.0.0.0", () => {
+    console.log(`Kryvazent CMS API listening on 0.0.0.0:${env.port}`);
+  });
 };
 start().catch((error) => {
   console.error("Failed to start API", error);

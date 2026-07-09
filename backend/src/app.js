@@ -22,6 +22,11 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(express.json({ limit: "1mb" }));
+app.get("/", (_request, response) => response.json({
+  name: "Kryvazent CMS API",
+  status: "ok",
+  health: "/api/health",
+}));
 app.get("/api/health", (_request, response) => response.json({ status: "ok" }));
 app.use("/api/auth", authRouter);
 app.use("/api", contentRouter);
