@@ -1,114 +1,61 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Check, Zap, Shield, Cpu } from "lucide-react";
+import { Check, Cpu, Shield, Zap } from "lucide-react";
 import FloatingShapes from "./FloatingShapes";
+import { useSiteContent } from "./ContentProvider";
 
-const plans = [
-  {
-    name: "BASE_CORE",
-    price: "4,999",
-    description: "Essential systems for startups and small tech foundries.",
-    features: ["Single Core Architecture", "Standard Security Layer", "Weekly System Sync", "Cloud Deployment"],
-    icon: Zap,
-    highlight: false,
-  },
-  {
-    name: "ADVANCED_SYSTEM",
-    price: "12,999",
-    description: "Optimized performance for scaling digital frontiers.",
-    features: ["Multi-Core Architecture", "Advanced HUD Security", "24/7 Priority Uplink", "Auto-Scaling Nodes", "AI Integration V1"],
-    icon: Cpu,
-    highlight: true,
-  },
-  {
-    name: "ELITE_ENTERPRISE",
-    price: "Custom",
-    description: "Total tech dominance for global conglomerates.",
-    features: ["Infinite Architecture", "Quantum-Safe Encryption", "Dedicated On-Site Uplink", "Full AI Autonomous Systems", "Zero Latency Global Grid"],
-    icon: Shield,
-    highlight: false,
-  },
-];
+const icons = [Zap, Cpu, Shield];
 
-const Pricing = () => {
+export default function Pricing() {
+  const { content } = useSiteContent();
+  const { pricing } = content;
+
   return (
-    <section id="pricing" aria-labelledby="pricing-heading" className="py-12 lg:py-32 px-6 bg-surface-strong relative overflow-hidden">
+    <section id="pricing" aria-labelledby="pricing-heading" className="relative overflow-hidden bg-surface-strong px-6 py-12 lg:py-32">
       <FloatingShapes />
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-8 lg:mb-20">
-          <h2 id="pricing-heading" className="text-2xl md:text-5xl font-bold uppercase tracking-normal text-foreground font-syncopate mb-4 lg:mb-6">
-            System <span className="text-primary">Tiers</span>
-          </h2>
-          <p className="text-muted font-rajdhani max-w-2xl mx-auto text-sm lg:text-lg">
-            Choose the level of engineering required for your mission. Transparent pricing, no hidden protocols.
-          </p>
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="mb-8 text-center lg:mb-20">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-primary font-syncopate">{pricing.eyebrow}</p>
+          <h2 id="pricing-heading" className="mb-4 text-2xl font-bold tracking-normal text-foreground font-syncopate md:text-5xl lg:mb-6">{pricing.title}</h2>
+          <p className="mx-auto max-w-2xl text-sm text-muted font-rajdhani lg:text-lg">{pricing.description}</p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
-          {plans.map((plan, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className={`relative p-6 lg:p-8 rounded-3xl border ${
-                plan.highlight
-                  ? "bg-primary/5 border-primary shadow-[0_0_30px_rgba(214,33,51,0.2)]"
-                  : "bg-surface border-line"
-              } flex flex-col`}
-            >
-              {plan.highlight && (
-                <div className="absolute -top-3 lg:-top-4 left-1/2 -translate-x-1/2 px-3 lg:px-4 py-1 bg-primary text-white text-[8px] lg:text-[10px] font-bold uppercase tracking-widest rounded-full font-syncopate">
-                  Recommended
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-8">
+          {pricing.plans.map((plan, index) => {
+            const Icon = icons[index % icons.length];
+            return (
+              <motion.article
+                key={`${plan.name}-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className={`relative flex flex-col rounded-3xl border p-6 lg:p-8 ${plan.highlighted ? "border-primary bg-primary/5 shadow-[0_0_30px_rgba(214,33,51,0.2)]" : "border-line bg-surface"}`}
+              >
+                {plan.highlighted && <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-[9px] font-bold uppercase tracking-widest text-white font-syncopate">Recommended</div>}
+                <div className="mb-5 flex items-center gap-3">
+                  <div className={`rounded-xl p-3 ${plan.highlighted ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}><Icon className="h-6 w-6" /></div>
+                  <h3 className="text-lg font-bold uppercase text-foreground font-syncopate lg:text-xl">{plan.name}</h3>
                 </div>
-              )}
-
-              <div className="flex items-center gap-3 lg:gap-4 mb-4 lg:mb-6">
-                <div className={`p-2 lg:p-3 rounded-xl ${plan.highlight ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}>
-                  <plan.icon className="w-5 h-5 lg:w-6 lg:h-6" />
+                <p className="mb-6 min-h-12 text-sm leading-relaxed text-muted font-rajdhani lg:text-base">{plan.audience}</p>
+                <div className="mb-7">
+                  <p className="text-2xl font-bold text-foreground font-syncopate lg:text-3xl">{plan.price}</p>
+                  <p className="mt-2 text-xs text-subtle font-rajdhani">{plan.priceNote}</p>
                 </div>
-                <h3 className="text-lg lg:text-xl font-bold text-foreground font-syncopate uppercase tracking-normal">
-                  {plan.name}
-                </h3>
-              </div>
-
-              <div className="mb-4 lg:mb-8">
-                <span className="text-3xl lg:text-4xl font-bold text-foreground font-syncopate">
-                  {plan.price === "Custom" ? "" : "$"}{plan.price}
-                </span>
-                {plan.price !== "Custom" && <span className="text-subtle text-xs lg:text-sm ml-2 font-mono">/MO</span>}
-              </div>
-
-              <p className="text-muted text-xs lg:text-sm mb-6 lg:mb-8 font-rajdhani leading-relaxed">
-                {plan.description}
-              </p>
-
-              <div className="space-y-3 lg:space-y-4 mb-8 lg:mb-10 flex-grow">
-                {plan.features.map((feature, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-muted font-rajdhani">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Link href="/#contact" className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-xs font-syncopate transition-all text-center ${
-                plan.highlight
-                  ? "bg-primary text-white hover:bg-primary/90 border-glow"
-                  : "bg-surface text-foreground hover:bg-primary/10 border border-line"
-              }`}>
-                Initialize Tier
-              </Link>
-            </motion.div>
-          ))}
+                <div className="mb-9 flex-grow space-y-4">
+                  {plan.features.filter(Boolean).map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-start gap-3 text-sm text-muted font-rajdhani">
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" /><span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link href="/#contact" className={`w-full rounded-xl py-4 text-center text-xs font-bold uppercase tracking-widest font-syncopate transition-all ${plan.highlighted ? "border-glow bg-primary text-white hover:bg-primary/90" : "border border-line bg-surface text-foreground hover:bg-primary/10"}`}>Book a discovery call</Link>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>
   );
-};
-
-export default Pricing;
+}

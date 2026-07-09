@@ -19,6 +19,17 @@ npm install
 npm run dev
 ```
 
+The authenticated content editor is available at `/admin/`. It manages pricing,
+projects, testimonials, and partners through the Express/MongoDB API in
+`../backend`. Configure the API URL before building:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
+
+The public site uses built-in content if the API is unavailable, so a temporary
+backend outage does not leave these sections empty.
+
 ## Production
 
 ```bash

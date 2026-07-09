@@ -14,6 +14,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${siteUrl}/privacy/`,
+      lastModified: new Date("2026-07-09"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${siteUrl}/terms/`,
+      lastModified: new Date("2026-07-09"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
     ...seoServices.map((service) => ({
       url: `${siteUrl}${servicePath(service.slug)}`,
       lastModified,

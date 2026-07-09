@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Syncopate, Rajdhani } from "next/font/google";
 import StructuredData from "@/components/StructuredData";
 import { primaryKeywords, site } from "@/lib/seo";
 import { siteUrlObject } from "@/lib/site";
+import { ContentProvider } from "@/components/ContentProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -120,7 +121,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} ${syncopate.variable} ${rajdhani.variable} antialiased font-rajdhani`} suppressHydrationWarning>
         <StructuredData />
-        {children}
+        <ContentProvider>{children}</ContentProvider>
       </body>
     </html>
   );
