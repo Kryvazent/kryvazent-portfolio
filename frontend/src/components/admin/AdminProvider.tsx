@@ -25,7 +25,7 @@ type AdminContextValue = {
 const AdminContext = createContext<AdminContextValue | null>(null);
 
 export function AdminProvider({ children }: { children: React.ReactNode }) {
-  const { updateContent } = useSiteContent();
+  const { refreshContent, updateContent } = useSiteContent();
   const [draft, setDraft] = useState<SiteContent>(defaultSiteContent);
   const [token, setToken] = useState("");
   const [ready, setReady] = useState(false);
@@ -79,9 +79,17 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify(draft),
     });
-    const result = await response.json() as { message?: string };
-    if (!response.ok) throw new Error(result.message || "Publishing failed");
-    updateContent(draft);
+    const result: unknown = await response.json();
+    if (!response.ok) {
+      const message = result && typeof result === "object" && "message" in result
+        ? String(result.message)
+        : "Publishing failed";
+      throw new Error(message);
+    }
+    if (!isSiteContent(result)) throw new Error("The API saved an invalid content payload");
+    setDraft(result);
+    updateContent(result);
+    await refreshContent();
     setNotice("Changes published to MongoDB.");
   };
 

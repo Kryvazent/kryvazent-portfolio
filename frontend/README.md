@@ -27,8 +27,11 @@ projects, testimonials, and partners through the Express/MongoDB API in
 NEXT_PUBLIC_API_URL=http://localhost:4000
 ```
 
-The public site uses built-in content if the API is unavailable, so a temporary
-backend outage does not leave these sections empty.
+Set `NEXT_PUBLIC_API_URL` in the hosting provider before every production
+build. It must point to the public Railway backend domain. MongoDB/API content
+is authoritative; the browser refreshes it on page load, tab focus, and once
+per minute. Built-in content is shown only when the API has not yet responded
+or is temporarily unavailable.
 
 ## Production
 
