@@ -7,6 +7,7 @@ import { authRouter } from "./routes/authRoutes.js";
 import { contentRouter } from "./routes/contentRoutes.js";
 import { userRouter } from "./routes/userRoutes.js";
 import { marketingRouter } from "./routes/marketingRoutes.js";
+import { socialOAuthRouter } from "./routes/socialOAuthRoutes.js";
 
 export const app = express();
 const isAllowedOrigin = (origin) => {
@@ -46,5 +47,6 @@ app.use("/api/auth", authRouter);
 app.use("/api", contentRouter);
 app.use("/api/admin/users", userRouter);
 app.use("/api/admin/marketing", marketingRouter);
+app.use("/api", socialOAuthRouter);
 app.use(notFound);
 app.use(errorHandler);

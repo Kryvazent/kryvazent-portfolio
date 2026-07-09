@@ -15,4 +15,11 @@ export const env = {
   json2VideoApiKey: process.env.JSON2VIDEO_API_KEY || "",
   geminiDailyRequestLimit: Number(process.env.GEMINI_DAILY_REQUEST_LIMIT || 20),
   json2VideoCreditLimit: Number(process.env.JSON2VIDEO_TOTAL_CREDIT_LIMIT || 600),
+  backendPublicUrl: (process.env.BACKEND_PUBLIC_URL || `http://localhost:${process.env.PORT || 4000}`).replace(/\/$/, ""),
+  metaAppId: process.env.META_APP_ID || "",
+  metaAppSecret: process.env.META_APP_SECRET || "",
+  metaFacebookPageId: process.env.META_FACEBOOK_PAGE_ID || "",
+  metaInstagramAccountId: process.env.META_INSTAGRAM_ACCOUNT_ID || "",
+  tiktokClientKey: process.env.TIKTOK_CLIENT_KEY || "",
+  tiktokClientSecret: process.env.TIKTOK_CLIENT_SECRET || "",
 };

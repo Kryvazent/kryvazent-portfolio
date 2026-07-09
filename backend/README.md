@@ -57,6 +57,27 @@ video scripts through `GEMINI_API_KEY`. Video posts can be rendered directly
 through Json2Video using `JSON2VIDEO_API_KEY`; the worker polls active render
 jobs and stores the finished MP4 URL before publishing.
 
+## Native social connections
+
+Facebook and Instagram share the Meta OAuth callback:
+
+```text
+${BACKEND_PUBLIC_URL}/api/oauth/meta/callback
+```
+
+TikTok uses:
+
+```text
+${BACKEND_PUBLIC_URL}/api/oauth/tiktok/callback
+```
+
+Configure these exact URLs in the provider dashboards. Meta requires access to
+the configured Facebook Page and its linked Instagram Professional account,
+plus approval for the requested Page and Instagram publishing permissions.
+TikTok requires Content Posting API access, `video.publish` approval, and
+verification of the domain serving Json2Video media URLs. Until the TikTok app
+passes audit, direct posts may be restricted to private visibility.
+
 Deploy this directory as a persistent Node service and use MongoDB Atlas or
 another reachable MongoDB instance in production. Keep `JWT_SECRET`,
 `ADMIN_PASSWORD`, and `MONGODB_URI` server-side.

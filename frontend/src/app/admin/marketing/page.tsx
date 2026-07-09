@@ -6,7 +6,7 @@ import { useAdmin } from "@/components/admin/AdminProvider";
 import { Field, inputClass, labelClass, PageHeading } from "@/components/admin/EditorUI";
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000").replace(/\/$/, "");
-type Account = { _id: string; platform: string; accountName: string; handle: string; publishingWebhook: string; active: boolean };
+type Account = { _id: string; platform: string; accountName: string; handle: string; publishingWebhook: string; active: boolean; connectionType?: "oauth" | "webhook"; tokenExpiresAt?: string };
 type Campaign = { _id: string; name: string; goal: string; audience: string; offer: string; platforms: string[]; postsPerWeek: number; status: string; strategy?: { summary?: string; pillars?: string[] } };
 type Post = { _id: string; campaign?: { name?: string }; title: string; platform: string; format: string; caption: string; status: string; scheduledAt?: string; videoStatus: string; mediaUrl?: string; failureReason?: string };
 type Quota = { _id: string; provider: string; used: number; limit: number; unit: string; blockedUntil?: string | null; hardBlocked: boolean; reason?: string };
@@ -27,7 +27,14 @@ export default function MarketingPage() {
     setData(await response.json());
     setLoading(false);
   }, [token]);
-  useEffect(() => { void load().catch((error) => { setMessage(error.message); setLoading(false); }); }, [load]);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("status")) {
+      setMessage(params.get("status") === "connected" ? `${params.get("social")} account connected successfully.` : params.get("message") || "Social connection failed.");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+    void load().catch((error) => { setMessage(error.message); setLoading(false); });
+  }, [load]);
 
   const addAccount = async (event: FormEvent) => {
     event.preventDefault();
@@ -50,6 +57,12 @@ export default function MarketingPage() {
     if (!response.ok) { const result = await response.json().catch(() => ({})); throw new Error(result.message || "Action failed"); }
     await load();
   };
+  const connectOAuth = async (platform: "meta" | "tiktok") => {
+    const response = await fetch(`${API_URL}/api/admin/social/oauth/${platform}/start`, { headers: { Authorization: `Bearer ${token}` } });
+    const result = await response.json() as { url?: string; message?: string };
+    if (!response.ok || !result.url) return setMessage(result.message || `Unable to start ${platform} connection`);
+    window.location.assign(result.url);
+  };
 
   if (loading) return <p className="flex items-center gap-2 text-muted"><LoaderCircle className="h-4 w-4 animate-spin" /> Loading marketing workflow…</p>;
   return <div className="space-y-10">
@@ -65,8 +78,8 @@ export default function MarketingPage() {
     </section>
 
     <section className="glass rounded-3xl p-5 sm:p-8">
-      <h2 className="mb-2 flex items-center gap-2 text-xl font-bold font-syncopate"><Link2 className="text-primary" /> Social accounts</h2>
-      <p className="mb-6 text-sm text-muted">Connect a platform through its publishing webhook or an automation service such as n8n, Make, or Zapier.</p>
+      <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><h2 className="flex items-center gap-2 text-xl font-bold font-syncopate"><Link2 className="text-primary" /> Social accounts</h2><div className="flex flex-wrap gap-2"><button onClick={() => void connectOAuth("meta")} className="rounded-xl bg-[#1877F2] px-4 py-2 text-sm font-bold text-white">Connect Facebook + Instagram</button><button onClick={() => void connectOAuth("tiktok")} className="rounded-xl bg-black px-4 py-2 text-sm font-bold text-white ring-1 ring-white/20">Connect TikTok</button></div></div>
+      <p className="mb-6 text-sm text-muted">Use native OAuth for Meta and TikTok, or connect another destination through a secure publishing webhook.</p>
       <form onSubmit={addAccount} className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <label><span className={labelClass}>Platform</span><select value={account.platform} onChange={(e) => setAccount({ ...account, platform: e.target.value })} className={inputClass}>{["linkedin","instagram","facebook","tiktok","youtube","x","other"].map((value) => <option key={value}>{value}</option>)}</select></label>
         <Field label="Account name" value={account.accountName} onChange={(value) => setAccount({ ...account, accountName: value })} />
@@ -75,7 +88,7 @@ export default function MarketingPage() {
         <label><span className={labelClass}>Connector token</span><input type="password" value={account.accessToken} onChange={(e) => setAccount({ ...account, accessToken: e.target.value })} className={inputClass} /></label>
         <button className="self-end rounded-xl bg-primary px-4 py-3 font-bold text-white"><Plus className="mr-2 inline h-4 w-4" />Connect</button>
       </form>
-      <div className="mt-6 grid gap-3 md:grid-cols-2">{data.accounts.map((item) => <div key={item._id} className="flex items-center justify-between rounded-xl border border-line p-4"><div><strong className="capitalize">{item.platform}: {item.accountName}</strong><p className="text-xs text-muted">{item.handle || "No handle"} · {item.publishingWebhook ? "Connector ready" : "Missing webhook"}</p></div><button onClick={() => action(`/api/admin/marketing/accounts/${item._id}`, { method: "DELETE" }).catch((e) => setMessage(e.message))}><Trash2 className="h-4 w-4 text-muted" /></button></div>)}</div>
+      <div className="mt-6 grid gap-3 md:grid-cols-2">{data.accounts.map((item) => <div key={item._id} className="flex items-center justify-between rounded-xl border border-line p-4"><div><strong className="capitalize">{item.platform}: {item.accountName}</strong><p className="text-xs text-muted">{item.handle || "No handle"} · {item.connectionType === "oauth" ? "Native OAuth connected" : item.publishingWebhook ? "Webhook ready" : "Missing connector"}{item.tokenExpiresAt ? ` · expires ${new Date(item.tokenExpiresAt).toLocaleDateString()}` : ""}</p></div><button onClick={() => action(`/api/admin/marketing/accounts/${item._id}`, { method: "DELETE" }).catch((e) => setMessage(e.message))}><Trash2 className="h-4 w-4 text-muted" /></button></div>)}</div>
     </section>
 
     <section className="glass rounded-3xl p-5 sm:p-8">

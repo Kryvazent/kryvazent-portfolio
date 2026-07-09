@@ -3,6 +3,7 @@ import { Content } from "../models/Content.js";
 
 export const getPublicContent = async (_request, response) => {
   const source = await Content.findOne({ key: "main" }).lean() || defaultContent;
+  response.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   response.json({ ...source, projects: source.projects.filter((item) => item.published !== false), testimonials: source.testimonials.filter((item) => item.published !== false), partners: source.partners.filter((item) => item.published !== false) });
 };
 export const getAdminContent = async (_request, response) => response.json(await Content.findOne({ key: "main" }).lean() || defaultContent);
