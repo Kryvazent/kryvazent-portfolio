@@ -7,9 +7,9 @@ import { User } from "../models/User.js";
 export const bootstrapData = async () => {
   const admin = await User.findOne({ email: env.adminEmail });
   if (!admin) {
-    await User.create({ name: "Kryvazent Administrator", email: env.adminEmail, passwordHash: await bcrypt.hash(env.adminPassword, 12), role: "admin", active: true });
+    await User.create({ name: "Kryvazent Administrator", email: env.adminEmail, passwordHash: await bcrypt.hash(env.adminPassword, 12), role: "admin", team: "administrative", active: true });
   } else {
-    const updates = { role: "admin" };
+    const updates = { role: "admin", team: "administrative" };
     if (!admin.name) updates.name = "Kryvazent Administrator";
     if (admin.active === undefined) updates.active = true;
     await User.updateOne({ _id: admin._id }, { $set: updates });

@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { checkVideo, createAccount, createCampaign, deleteAccount, deleteCampaign, deletePost, generateCampaign, getMarketingDashboard, renderVideo, runPublisher, updateAccount, updateCampaign, updatePost } from "../controllers/marketingController.js";
-import { authenticate } from "../middleware/authenticate.js";
+import { authenticate, requireTeams } from "../middleware/authenticate.js";
 
 export const marketingRouter = Router();
-marketingRouter.use(authenticate);
+marketingRouter.use(authenticate, requireTeams("marketing"));
 marketingRouter.get("/", getMarketingDashboard);
 marketingRouter.post("/accounts", createAccount);
 marketingRouter.patch("/accounts/:id", updateAccount);
