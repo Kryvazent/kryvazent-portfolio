@@ -20,3 +20,8 @@ export const requireAdmin = (request, response, next) => {
   if (request.user?.role !== "admin") return response.status(403).json({ message: "Administrator access required" });
   next();
 };
+
+export const requireTeams = (...teams) => (request, response, next) => {
+  if (request.user?.role === "admin" || request.user?.team === "administrative" || teams.includes(request.user?.team)) return next();
+  response.status(403).json({ message: "Your team does not have access to this area" });
+};
