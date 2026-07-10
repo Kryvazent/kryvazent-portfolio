@@ -158,6 +158,13 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("beforeunload", warnIfUnsaved);
   }, [hasUnsavedChanges]);
 
+  useEffect(() => {
+    if (!notice) return;
+    const isErrorNotice = /failed|error|invalid|unable/i.test(notice);
+    const timer = window.setTimeout(() => setNotice(""), isErrorNotice ? 9000 : 4500);
+    return () => window.clearTimeout(timer);
+  }, [notice]);
+
   const publish = async () => saveContent(draft);
 
   const importContent = async (file: File) => {
