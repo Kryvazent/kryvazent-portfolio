@@ -9,6 +9,7 @@ import { userRouter } from "./routes/userRoutes.js";
 import { marketingRouter } from "./routes/marketingRoutes.js";
 import { socialOAuthRouter } from "./routes/socialOAuthRoutes.js";
 import { projectRouter } from "./routes/projectRoutes.js";
+import { uploadAdminRouter, uploadThingRouter } from "./routes/uploadRoutes.js";
 
 export const app = express();
 const isAllowedOrigin = (origin) => {
@@ -22,7 +23,6 @@ app.use(cors({
     callback(allowed ? null : new Error(`Origin ${origin} is not allowed by CORS`), allowed);
   },
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(express.json({ limit: "1mb" }));
 app.get("/", (_request, response) => response.json({
@@ -49,6 +49,8 @@ app.use("/api", contentRouter);
 app.use("/api/admin/users", userRouter);
 app.use("/api/admin/projects", projectRouter);
 app.use("/api/admin/marketing", marketingRouter);
+app.use("/api/admin/uploads", uploadAdminRouter);
+app.use("/api/uploadthing", uploadThingRouter);
 app.use("/api", socialOAuthRouter);
 app.use(notFound);
 app.use(errorHandler);
