@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { defaultSiteContent, isSiteContent, type SiteContent } from "@/lib/content";
 import { useSiteContent } from "@/components/ContentProvider";
 
@@ -14,6 +14,8 @@ type AdminContextValue = {
   user: AdminUser | null;
   ready: boolean;
   notice: string;
+  saveStatus: "idle" | "dirty" | "saving" | "saved" | "error";
+  hasUnsavedChanges: boolean;
   setNotice: (notice: string) => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -40,6 +42,10 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [ready, setReady] = useState(false);
   const [notice, setNotice] = useState("");
+  const [saveStatus, setSaveStatus] = useState<AdminContextValue["saveStatus"]>("idle");
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const lastSavedDraft = useRef(JSON.stringify(defaultSiteContent));
+  const lastLoaded = useRef(false);
 
   const loadAdminContent = async (authToken: string) => {
     const response = await fetch(`${API_URL}/api/admin/content`, { headers: { Authorization: `Bearer ${authToken}` } });
@@ -47,6 +53,10 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     const parsed: unknown = await response.json();
     if (!isSiteContent(parsed)) throw new Error("The API returned invalid content");
     setDraft(parsed);
+    lastSavedDraft.current = JSON.stringify(parsed);
+    lastLoaded.current = true;
+    setHasUnsavedChanges(false);
+    setSaveStatus("saved");
   };
   const loadCurrentUser = async (authToken: string) => {
     const response = await fetch(`${API_URL}/api/auth/me`, { headers: { Authorization: `Bearer ${authToken}` } });
@@ -97,31 +107,64 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setNotice("");
   };
 
-  const publish = async () => {
+  const canSaveContent = useCallback((currentUser = user) =>
+    Boolean(token && currentUser && (currentUser.role === "admin" || currentUser.team === "administrative" || currentUser.team === "maintenance")),
+  [token, user]);
+
+  const saveContent = useCallback(async (content: SiteContent) => {
+    if (!canSaveContent()) return;
+    setSaveStatus("saving");
     const response = await fetch(`${API_URL}/api/admin/content`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-      body: JSON.stringify(draft),
+      body: JSON.stringify(content),
     });
     const result: unknown = await response.json();
     if (!response.ok) {
+      setSaveStatus("error");
       const message = result && typeof result === "object" && "message" in result
         ? String(result.message)
-        : "Publishing failed";
+        : "Saving failed";
       throw new Error(message);
     }
-    if (!isSiteContent(result)) throw new Error("The API saved an invalid content payload");
+    if (!isSiteContent(result)) {
+      setSaveStatus("error");
+      throw new Error("The API saved an invalid content payload");
+    }
     setDraft(result);
+    lastSavedDraft.current = JSON.stringify(result);
+    setHasUnsavedChanges(false);
+    setSaveStatus("saved");
     updateContent(result);
     await refreshContent();
-    setNotice("Changes published to MongoDB.");
-  };
+    setNotice("Changes saved to MongoDB.");
+  }, [canSaveContent, refreshContent, token, updateContent]);
+
+  useEffect(() => {
+    if (!ready || !canSaveContent() || !lastLoaded.current) return;
+    const serialized = JSON.stringify(draft);
+    const dirty = serialized !== lastSavedDraft.current;
+    setHasUnsavedChanges(dirty);
+    setSaveStatus(dirty ? "dirty" : "saved");
+  }, [canSaveContent, draft, ready]);
+
+  useEffect(() => {
+    const warnIfUnsaved = (event: BeforeUnloadEvent) => {
+      if (!hasUnsavedChanges) return;
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warnIfUnsaved);
+    return () => window.removeEventListener("beforeunload", warnIfUnsaved);
+  }, [hasUnsavedChanges]);
+
+  const publish = async () => saveContent(draft);
 
   const importContent = async (file: File) => {
     const parsed: unknown = JSON.parse(await file.text());
     if (!isSiteContent(parsed)) throw new Error("Invalid Kryvazent content file");
     setDraft(parsed);
-    setNotice("Content imported. Publish when ready.");
+    setNotice("Content imported. Please save before leaving this page.");
   };
 
   const exportContent = () => {
@@ -135,10 +178,10 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const restoreDefaults = () => {
     setDraft(defaultSiteContent);
-    setNotice("Defaults restored as a draft. Publish to save them.");
+    setNotice("Defaults restored. Please save before leaving this page.");
   };
 
-  const value = useMemo(() => ({ draft, setDraft, token, user, ready, notice, setNotice, login, logout, publish, importContent, exportContent, restoreDefaults }), [draft, token, user, ready, notice]);
+  const value = useMemo(() => ({ draft, setDraft, token, user, ready, notice, saveStatus, hasUnsavedChanges, setNotice, login, logout, publish, importContent, exportContent, restoreDefaults }), [draft, token, user, ready, notice, saveStatus, hasUnsavedChanges, saveContent]);
   return <AdminContext.Provider value={value}>{children}</AdminContext.Provider>;
 }
 

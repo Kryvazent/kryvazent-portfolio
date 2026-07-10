@@ -7,7 +7,8 @@ import { useSiteContent } from "./ContentProvider";
 const tones = { dark: "bg-[#050505] text-white", gray: "bg-[#4a4a4a] text-white", light: "bg-white text-[#111318]" };
 
 export default function Customers() {
-  const { content } = useSiteContent();
+  const { content, isLoaded, error } = useSiteContent();
+  if (!isLoaded || error) return null;
   const partners = content.partners.filter((partner) => partner.published);
   if (!partners.length) return null;
   const group = (duplicate = false) => (

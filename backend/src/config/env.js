@@ -13,6 +13,7 @@ export const env = {
   geminiApiKey: process.env.GEMINI_API_KEY || "",
   geminiModel: process.env.GEMINI_MODEL || "gemini-3.5-flash",
   json2VideoApiKey: process.env.JSON2VIDEO_API_KEY || "",
+  uploadThingToken: process.env.UPLOADTHING_TOKEN || "",
   geminiDailyRequestLimit: Number(process.env.GEMINI_DAILY_REQUEST_LIMIT || 20),
   json2VideoCreditLimit: Number(process.env.JSON2VIDEO_TOTAL_CREDIT_LIMIT || 600),
   backendPublicUrl: (process.env.BACKEND_PUBLIC_URL || `http://localhost:${process.env.PORT || 4000}`).replace(/\/$/, ""),
@@ -20,6 +21,7 @@ export const env = {
   metaAppSecret: process.env.META_APP_SECRET || "",
   metaFacebookPageId: process.env.META_FACEBOOK_PAGE_ID || "",
   metaInstagramAccountId: process.env.META_INSTAGRAM_ACCOUNT_ID || "",
+  metaPageAccessToken: process.env.META_PAGE_ACCESS_TOKEN || "",
   tiktokClientKey: process.env.TIKTOK_CLIENT_KEY || "",
   tiktokClientSecret: process.env.TIKTOK_CLIENT_SECRET || "",
 };
