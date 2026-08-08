@@ -191,8 +191,8 @@ export default function HeroNew() {
             {/* glow behind */}
             <div aria-hidden className="absolute inset-[-40px_-30px] bg-[radial-gradient(closest-side,rgba(214,33,51,0.16),transparent_72%)] pointer-events-none -z-[1]" />
 
-            {/* Console */}
-            <div className="relative bg-[#0B0D13] border border-white/[0.10] rounded-[20px] shadow-[0_18px_48px_rgba(0,0,0,0.45)] overflow-hidden">
+            {/* Console — hidden on mobile, shifted up 20px on sm/md */}
+            <div className="hidden sm:block sm:-mt-5 lg:mt-0 relative bg-[#0B0D13] border border-white/[0.10] rounded-[20px] shadow-[0_18px_48px_rgba(0,0,0,0.45)] overflow-hidden">
               {/* top shine */}
               <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,71,87,0.6)] to-transparent" />
 

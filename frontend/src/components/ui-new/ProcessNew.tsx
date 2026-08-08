@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Palette, Code2, Rocket, RefreshCw } from "lucide-react";
+import { Search, Palette, Code2, Rocket, RefreshCw, type LucideIcon } from "lucide-react";
 import FloatingShapes from "@/components/FloatingShapes";
 
 const STEPS = [
@@ -11,6 +11,56 @@ const STEPS = [
   { num: "04", title: "Deployment",   body: "Ship to reliable cloud infrastructure with CI/CD and monitoring.",  Icon: Rocket     },
   { num: "05", title: "Iteration",    body: "Measure, refine, and keep improving after launch.",                 Icon: RefreshCw  },
 ] as const;
+
+/* ── Desktop card — matches reference image style ── */
+function DesktopCard({
+  num, title, body, Icon, delay,
+}: {
+  num: string; title: string; body: string; Icon: LucideIcon; delay: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay }}
+      className="group relative bg-surface border border-line rounded-[20px] p-7 overflow-hidden
+        transition-all duration-300 hover:-translate-y-[5px] hover:border-[rgba(214,33,51,0.4)]
+        hover:shadow-[0_12px_36px_rgba(0,0,0,0.18)] flex flex-col justify-between min-h-[200px]"
+    >
+      {/* Decorative circular blob behind icon */}
+      <div
+        aria-hidden
+        className="absolute bottom-[-28px] right-[-28px] w-[130px] h-[130px] rounded-full
+          bg-[rgba(214,33,51,0.07)] transition-all duration-500 group-hover:bg-[rgba(214,33,51,0.12)]
+          group-hover:scale-110 pointer-events-none"
+      />
+
+      {/* Top: title + body */}
+      <div>
+        <h3 className="font-syncopate text-[18px] font-bold mb-3 text-foreground leading-tight">
+          {title}
+        </h3>
+        <p className="text-muted text-[14px] leading-[1.65] font-rajdhani max-w-[340px]">{body}</p>
+      </div>
+
+      {/* Bottom row: step number left, icon right */}
+      <div className="flex items-end justify-between mt-6">
+        <span className="font-syncopate text-[28px] font-black text-primary leading-none">
+          {num}
+        </span>
+        <div
+          className="relative w-[52px] h-[52px] rounded-full border-2 border-[rgba(214,33,51,0.25)]
+            bg-[rgba(214,33,51,0.08)] flex items-center justify-center text-primary z-10
+            transition-all duration-300 group-hover:border-primary group-hover:bg-[rgba(214,33,51,0.16)]
+            group-hover:scale-110"
+        >
+          <Icon className="w-[22px] h-[22px]" />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function ProcessNew() {
   return (
@@ -47,36 +97,25 @@ export default function ProcessNew() {
         </motion.div>
 
         {/* ══════════════════════════════════════
-            DESKTOP  ≥ lg  — 5-column dot grid
+            DESKTOP  ≥ lg
+            Reference style: title top-left,
+            body below, step number bottom-left
+            in primary colour, large icon
+            bottom-right on a circular blob bg.
+            Laid out as 2+3 row (first row 2 cards,
+            second row 3 cards) to fill nicely.
         ══════════════════════════════════════ */}
-        <div className="hidden lg:block">
-          <div className="relative grid grid-cols-5 gap-4">
-            {/* Horizontal connector */}
-            <div
-              aria-hidden
-              className="absolute top-[26px] left-[6%] right-[6%] h-px bg-gradient-to-r from-transparent via-[rgba(214,33,51,0.4)] to-transparent pointer-events-none"
-            />
-            {STEPS.map(({ num, title, body, Icon }, i) => (
-              <motion.div
-                key={num}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="relative bg-surface border border-line rounded-[16px] pt-[44px] pb-[22px] px-5 text-center transition-all duration-300 hover:-translate-y-[5px] hover:border-[rgba(214,33,51,0.4)] group"
-              >
-                {/* Dot */}
-                <span className="absolute top-[14px] left-1/2 -translate-x-1/2 w-[26px] h-[26px] rounded-full bg-background border-2 border-primary flex items-center justify-center font-syncopate text-[9.5px] font-black text-primary z-10">
-                  {num}
-                </span>
-                <div className="flex justify-center mb-3">
-                  <span className="w-10 h-10 rounded-[10px] bg-[rgba(214,33,51,0.10)] border border-[rgba(214,33,51,0.22)] flex items-center justify-center text-primary transition-transform duration-300 group-hover:scale-110">
-                    <Icon className="w-[18px] h-[18px]" />
-                  </span>
-                </div>
-                <h3 className="font-syncopate text-[15px] font-bold mb-2">{title}</h3>
-                <p className="text-subtle text-[13px] leading-[1.55] font-rajdhani">{body}</p>
-              </motion.div>
+        <div className="hidden lg:flex flex-col gap-5">
+          {/* Row 1 — 2 wide cards */}
+          <div className="grid grid-cols-2 gap-5">
+            {STEPS.slice(0, 2).map(({ num, title, body, Icon }, i) => (
+              <DesktopCard key={num} num={num} title={title} body={body} Icon={Icon} delay={i * 0.08} />
+            ))}
+          </div>
+          {/* Row 2 — 3 standard cards */}
+          <div className="grid grid-cols-3 gap-5">
+            {STEPS.slice(2).map(({ num, title, body, Icon }, i) => (
+              <DesktopCard key={num} num={num} title={title} body={body} Icon={Icon} delay={(i + 2) * 0.08} />
             ))}
           </div>
         </div>
