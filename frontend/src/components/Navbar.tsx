@@ -14,11 +14,19 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 24);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <motion.nav
@@ -26,78 +34,83 @@ const Navbar = () => {
       animate={{ y: 0 }}
       aria-label="Primary navigation"
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 py-4",
-        isScrolled ? "glass border-b border-line py-3" : "bg-transparent"
+        "fixed top-0 z-50 w-full border-b border-line bg-background px-4 transition-[padding,box-shadow] duration-300 sm:px-6",
+        isScrolled
+          ? "py-3 shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
+          : "py-4 shadow-none"
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-2xl bg-white p-1.5 shadow-[0_0_22px_rgba(255,255,255,0.18)] ring-1 ring-white/70 transition-transform group-hover:scale-105 sm:h-12 sm:w-12">
+      <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <Link href="/" className="group flex items-center gap-2.5">
+          <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-white p-1.5 ring-1 ring-line transition-transform group-hover:scale-105 sm:h-11 sm:w-11">
             <Image
               src="/logo_new.png"
               alt="Kryvazent Logo"
               fill
-              sizes="48px"
-              className="object-contain p-1"
+              sizes="44px"
+              className="object-contain p-0.5"
+              priority
             />
           </div>
-          <span className="text-base font-bold tracking-normal text-primary uppercase font-syncopate sm:text-xl">
+          <span className="font-syncopate text-base font-bold uppercase tracking-normal text-foreground transition-colors group-hover:text-primary sm:text-lg">
             Kryvazent
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-1 md:flex">
           {primaryNavLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-muted hover:text-primary transition-colors"
+              className="relative px-3.5 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
             >
               {link.name}
             </Link>
           ))}
           <Link
             href="/#contact"
-            className="px-5 py-2 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary/80 transition-all border-glow"
+            className="ml-3 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-red"
           >
             Get in Touch
           </Link>
         </div>
 
-        {/* Mobile Menu Trigger */}
         <button
-          className="md:hidden text-foreground p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle navigation menu"
+          type="button"
+          className="rounded-lg border border-line p-2 text-foreground transition-colors hover:bg-surface-strong hover:text-primary md:hidden"
+          onClick={() => setIsMobileMenuOpen((open) => !open)}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-nav-menu"
+          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-nav-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-line mt-4 overflow-hidden"
+            className="mt-3 overflow-hidden border-t border-line bg-background md:hidden"
           >
-            <div className="flex flex-col gap-4 p-6">
+            <div className="flex flex-col gap-1 px-1 py-4">
               {primaryNavLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-muted hover:text-primary transition-colors font-rajdhani"
+                  className="rounded-lg px-3 py-3 font-rajdhani text-lg font-medium text-muted transition-colors hover:bg-surface-strong hover:text-foreground"
                 >
                   {link.name}
                 </Link>
               ))}
               <Link
-                href="#contact"
+                href="/#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full text-center py-4 rounded-xl bg-primary text-white font-bold tracking-widest uppercase text-sm font-syncopate border-glow"
+                className="mt-2 w-full rounded-lg bg-primary py-3.5 text-center font-syncopate text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-accent-red"
               >
                 Get in Touch
               </Link>
