@@ -1,11 +1,11 @@
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import NavNew from "@/components/ui-new/NavNew";
+import FooterNew from "@/components/ui-new/FooterNew";
 
 export default function NotFound() {
   return (
     <>
-      <Navbar />
+      <NavNew />
       <main className="min-h-screen bg-background px-6 pb-20 pt-36 text-foreground">
         <section className="mx-auto flex max-w-4xl flex-col items-start">
           <p className="text-xs font-bold uppercase tracking-[0.35em] text-primary font-syncopate">404</p>
@@ -26,7 +26,7 @@ export default function NotFound() {
           </div>
         </section>
       </main>
-      <Footer />
+      <FooterNew />
     </>
   );
 }

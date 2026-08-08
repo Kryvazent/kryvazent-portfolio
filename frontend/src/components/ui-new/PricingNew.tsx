@@ -101,7 +101,7 @@ export default function PricingNew() {
               className={`relative flex flex-col rounded-[22px] p-[32px_28px] overflow-hidden transition-all duration-300
                 ${
                   plan.highlighted
-                    ? "border-0 shadow-[0_22px_56px_rgba(214,33,51,0.22)] md:-translate-y-[10px] md:hover:-translate-y-[15px]"
+                    ? "order-first md:order-none border-0 shadow-[0_22px_56px_rgba(214,33,51,0.22)] md:-translate-y-[10px] md:hover:-translate-y-[15px]"
                     : "border border-line bg-background hover:-translate-y-[6px] hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] hover:border-[rgba(214,33,51,0.35)]"
                 }`}
               style={

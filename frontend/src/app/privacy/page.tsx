@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import NavNew from "@/components/ui-new/NavNew";
+import FooterNew from "@/components/ui-new/FooterNew";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -14,7 +14,7 @@ const updated = "July 9, 2026";
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Navbar />
+      <NavNew />
       <main className="min-h-screen bg-background px-6 pb-16 pt-36 text-foreground">
       <article className="mx-auto max-w-4xl">
         <Link href="/" className="text-sm font-bold text-primary hover:underline">← Back to Kryvazent</Link>
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </article>
       </main>
-      <Footer />
+      <FooterNew />
     </>
   );
 }
