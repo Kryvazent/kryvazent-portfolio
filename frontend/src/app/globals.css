@@ -137,6 +137,56 @@
     from { transform: rotate(360deg); }
     to { transform: rotate(0deg); }
   }
+
+  .pricing-card-shader {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .pricing-card-shader::before,
+  .pricing-card-shader::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(40px);
+    opacity: 0.45;
+    animation: pricing-shader-drift 8s ease-in-out infinite alternate;
+  }
+
+  .pricing-card-shader::before {
+    top: -20%;
+    right: -15%;
+    width: 12rem;
+    height: 12rem;
+    background: rgba(214, 33, 51, 0.35);
+  }
+
+  .pricing-card-shader::after {
+    bottom: -25%;
+    left: -10%;
+    width: 10rem;
+    height: 10rem;
+    background: rgba(214, 33, 51, 0.18);
+    animation-delay: -3s;
+  }
+
+  .pricing-card-shader-strong::before {
+    opacity: 0.7;
+    background: rgba(214, 33, 51, 0.5);
+  }
+
+  .pricing-card-shader-strong::after {
+    opacity: 0.4;
+    background: rgba(255, 31, 31, 0.28);
+  }
+
+  @keyframes pricing-shader-drift {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(-12%, 10%, 0) scale(1.15); }
+  }
 }
 
 /* Custom Scrollbar */
