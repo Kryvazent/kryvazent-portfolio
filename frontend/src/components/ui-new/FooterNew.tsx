@@ -178,7 +178,7 @@ export default function FooterNew() {
 
         {/* ── Bottom bar — both layouts ── */}
         <div className="border-t border-line pt-5 lg:pt-[26px] flex flex-col sm:flex-row gap-3 sm:gap-[14px] justify-between items-start sm:items-center text-subtle text-[13px] lg:text-[13.5px] font-rajdhani mt-5 lg:mt-0">
-          <p>© {year} Kryvazent Systems Inc. All rights reserved.</p>
+          <p>© {year} Kryvazent. All rights reserved.</p>
           <div className="flex gap-5 sm:gap-[22px]">
             <Link href="/privacy/" className="text-subtle no-underline hover:text-primary transition-colors">Privacy Policy</Link>
             <Link href="/terms/"   className="text-subtle no-underline hover:text-primary transition-colors">Terms of Service</Link>
