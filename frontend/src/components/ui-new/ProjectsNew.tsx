@@ -52,7 +52,7 @@ export default function ProjectsNew() {
         {/* Head */}
         <div className="flex flex-wrap gap-5 justify-between items-end mb-[52px]">
           <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span className="inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] before:block before:w-[26px] before:h-[2px] before:rounded-full before:bg-gradient-to-r before:from-[#FF4757] before:to-[#9E1424]">
+            <span className="inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] eyebrow-line">
               Capabilities in action
             </span>
             <h2
@@ -87,7 +87,8 @@ export default function ProjectsNew() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group relative rounded-[20px] overflow-hidden border border-line bg-background aspect-[4/4.6] transition-all duration-300 hover:-translate-y-[7px] hover:border-[rgba(214,33,51,0.45)] hover:shadow-[0_18px_48px_rgba(0,0,0,0.45)]"
+              className="group relative rounded-[20px] overflow-hidden border border-line aspect-[4/4.6] transition-all duration-300 hover:-translate-y-[7px] hover:border-[rgba(214,33,51,0.45)] hover:shadow-[var(--shadow)]"
+              style={{ background: "var(--surface-strong)" }}
             >
               <Image
                 src={p.image}
@@ -98,8 +99,8 @@ export default function ProjectsNew() {
                 loading="lazy"
               />
 
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(4,5,8,0.97)] via-[rgba(4,5,8,0.72)] to-transparent to-78%" />
+              {/* Dark scrim — always dark regardless of theme so text stays readable over photo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(4,5,8,0.97)] via-[rgba(4,5,8,0.65)] to-[rgba(4,5,8,0.18)]" />
 
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-6">
@@ -108,7 +109,7 @@ export default function ProjectsNew() {
                   <span className="font-syncopate text-[9.5px] font-bold tracking-[0.1em] uppercase px-[11px] py-[5px] rounded-full bg-[rgba(214,33,51,0.92)] text-white">
                     {p.category}
                   </span>
-                  <span className="font-syncopate text-[9.5px] font-bold tracking-[0.1em] uppercase px-[11px] py-[5px] rounded-full bg-white/[0.12] text-[#e8eaf0] border border-white/[0.2] backdrop-blur-[6px]">
+                  <span className="font-syncopate text-[9.5px] font-bold tracking-[0.1em] uppercase px-[11px] py-[5px] rounded-full bg-white/[0.15] text-white border border-white/[0.25] backdrop-blur-[6px]">
                     {p.outcome}
                   </span>
                 </div>
@@ -117,15 +118,15 @@ export default function ProjectsNew() {
 
                 <div className="flex flex-wrap gap-[6px] mb-3">
                   {p.tech.map((t) => (
-                    <span key={t} className="font-mono text-[10px] text-[#d5d9e2] border border-white/[0.22] bg-black/[0.35] px-[9px] py-[3px] rounded-[6px]">
+                    <span key={t} className="font-mono text-[10px] text-white/80 border border-white/[0.25] bg-black/[0.40] px-[9px] py-[3px] rounded-[6px]">
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-[rgba(232,234,240,0.85)] text-[13.5px] leading-[1.6] font-rajdhani">{p.desc}</p>
+                <p className="text-white/80 text-[13.5px] leading-[1.6] font-rajdhani">{p.desc}</p>
 
-                <p className="mt-3 pt-3 border-t border-white/[0.12] font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/[0.55]">
+                <p className="mt-3 pt-3 border-t border-white/[0.15] font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/50">
                   Use case · {p.useCase}
                 </p>
               </div>

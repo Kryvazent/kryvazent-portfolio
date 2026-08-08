@@ -71,7 +71,7 @@ export default function PricingNew() {
           viewport={{ once: true }}
           className="text-center max-w-[640px] mx-auto mb-[56px]"
         >
-          <span className="inline-flex justify-center items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] before:block before:w-[26px] before:h-[2px] before:rounded-full before:bg-gradient-to-r before:from-[#FF4757] before:to-[#9E1424]">
+          <span className="inline-flex justify-center items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] eyebrow-line">
             Pricing tiers
           </span>
           <h2

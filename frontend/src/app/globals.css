@@ -290,6 +290,24 @@ html[data-theme="light"] {
 }
 
 /* ═══════════════════════════════════════════
+   EYEBROW — hide the dash line on mobile
+═══════════════════════════════════════════ */
+.eyebrow-line::before {
+  content: '';
+  display: none;
+  width: 26px;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #FF4757, #9E1424);
+  flex-shrink: 0;
+}
+@media (min-width: 640px) {
+  .eyebrow-line::before {
+    display: block;
+  }
+}
+
+/* ═══════════════════════════════════════════
    SCROLLBAR
 ═══════════════════════════════════════════ */
 ::-webkit-scrollbar        { width: 8px; }

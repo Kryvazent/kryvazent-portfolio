@@ -27,9 +27,17 @@ const FAQS = [
   },
 ] as const;
 
-function FAQItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-
+function FAQItem({
+  q,
+  a,
+  open,
+  onToggle,
+}: {
+  q: string;
+  a: string;
+  open: boolean;
+  onToggle: () => void;
+}) {
   return (
     <div
       className={`border rounded-[15px] overflow-hidden mb-3 transition-colors duration-300 ${
@@ -39,7 +47,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       <button
         className="w-full flex items-center justify-between gap-[18px] bg-transparent border-0 text-left px-[22px] py-5 cursor-pointer font-syncopate text-[15.5px] font-semibold text-foreground"
         aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
+        onClick={onToggle}
       >
         <span>{q}</span>
         <span
@@ -74,6 +82,10 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function FAQNew() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggle = (i: number) => setOpenIndex((prev) => (prev === i ? null : i));
+
   return (
     <section
       id="faq"
@@ -89,7 +101,7 @@ export default function FAQNew() {
           viewport={{ once: true }}
           className="text-center max-w-[640px] mx-auto mb-12"
         >
-          <span className="inline-flex justify-center items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] before:block before:w-[26px] before:h-[2px] before:rounded-full before:bg-gradient-to-r before:from-[#FF4757] before:to-[#9E1424]">
+          <span className="inline-flex justify-center items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] eyebrow-line">
             Good to know
           </span>
           <h2
@@ -117,7 +129,12 @@ export default function FAQNew() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
             >
-              <FAQItem q={q} a={a} />
+              <FAQItem
+                q={q}
+                a={a}
+                open={openIndex === i}
+                onToggle={() => toggle(i)}
+              />
             </motion.div>
           ))}
         </div>

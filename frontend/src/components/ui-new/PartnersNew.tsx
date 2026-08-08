@@ -94,7 +94,7 @@ export default function PartnersNew() {
 
       {/* Heading */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-[clamp(16px,4vw,24px)] mb-10 text-center">
-        <span className="inline-flex justify-center items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] before:block before:w-[26px] before:h-[2px] before:rounded-full before:bg-gradient-to-r before:from-[#FF4757] before:to-[#9E1424]">
+        <span className="inline-flex justify-center items-center gap-3 text-[11px] font-bold tracking-[0.28em] uppercase text-primary font-syncopate mb-[18px] eyebrow-line">
           Trusted network
         </span>
         <h2

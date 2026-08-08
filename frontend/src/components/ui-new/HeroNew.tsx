@@ -146,21 +146,38 @@ export default function HeroNew() {
 
             {/* Stats */}
             <div className="grid grid-cols-3 border-t border-line pt-[22px] w-full max-w-[560px]">
-              {[
-                { val: "100", suffix: "+", label: "Projects delivered" },
-                { val: "6", suffix: "", label: "Core service areas" },
-                { val: "SL", suffix: " → 🌏", label: "Colombo · global clients" },
-              ].map(({ val, suffix, label }, i) => (
-                <div
-                  key={label}
-                  className={`min-w-0 ${i === 0 ? "pr-[18px]" : "px-[18px] border-l border-line"}`}
-                >
-                  <b className="block font-syncopate text-[21px] font-black tracking-[-0.01em] whitespace-nowrap">
-                    {val}<span className="text-primary">{suffix}</span>
-                  </b>
-                  <small className="text-subtle text-[11px] font-medium tracking-[0.05em] uppercase block leading-snug">{label}</small>
-                </div>
-              ))}
+              {/* Stat 1 */}
+              <div className="min-w-0 pr-[18px]">
+                <b className="block font-syncopate text-[21px] font-black tracking-[-0.01em] whitespace-nowrap">
+                  100<span className="text-primary">+</span>
+                </b>
+                <small className="text-subtle text-[11px] font-medium tracking-[0.05em] uppercase block leading-snug">Projects delivered</small>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="min-w-0 px-[18px] border-l border-line">
+                <b className="block font-syncopate text-[21px] font-black tracking-[-0.01em] whitespace-nowrap">
+                  6
+                </b>
+                <small className="text-subtle text-[11px] font-medium tracking-[0.05em] uppercase block leading-snug">Core service areas</small>
+              </div>
+
+              {/* Stat 3 — SL flag via CDN image */}
+              <div className="min-w-0 px-[18px] border-l border-line">
+                <b className="flex items-center gap-[6px] font-syncopate text-[21px] font-black tracking-[-0.01em] whitespace-nowrap">
+                  SL
+                  <span className="text-primary text-[18px]">→</span>
+                  <img
+                    src="https://flagcdn.com/w40/lk.png"
+                    alt="Sri Lanka flag"
+                    width={24}
+                    height={16}
+                    className="inline-block rounded-[3px] shadow-sm"
+                    loading="eager"
+                  />
+                </b>
+                <small className="text-subtle text-[11px] font-medium tracking-[0.05em] uppercase block leading-snug">Colombo · global clients</small>
+              </div>
             </div>
           </motion.div>
 
