@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, LayoutGrid } from "lucide-react";
 import FloatingShapes from "@/components/FloatingShapes";
 
 const PROJECTS = [
@@ -69,13 +69,22 @@ export default function ProjectsNew() {
             </p>
           </motion.div>
 
-          <Link
-            href="#contact"
-            className="inline-flex items-center gap-2 text-primary font-syncopate font-bold text-[14px] no-underline hover:opacity-80 transition-opacity"
-          >
-            Discuss your project
-            <ArrowUpRight className="w-[15px] h-[15px]" />
-          </Link>
+          <div className="flex items-center gap-4 flex-wrap">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-5 py-[11px] rounded-[11px] border border-line bg-surface font-syncopate font-bold text-[13px] text-foreground no-underline hover:border-primary hover:text-primary transition-all duration-200"
+            >
+              <LayoutGrid className="w-[14px] h-[14px]" />
+              See More
+            </Link>
+            <Link
+              href="#contact"
+              className="inline-flex items-center gap-2 text-primary font-syncopate font-bold text-[14px] no-underline hover:opacity-80 transition-opacity"
+            >
+              Discuss your project
+              <ArrowUpRight className="w-[15px] h-[15px]" />
+            </Link>
+          </div>
         </div>
 
         {/* Grid */}

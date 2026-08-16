@@ -121,7 +121,7 @@ export default function ContactNew() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-4 h-full"
+            className="flex flex-col gap-4 h-full order-2 lg:order-1"
           >
             {/* 2×2 contact grid */}
             <div className="grid grid-cols-2 gap-3">
@@ -189,6 +189,7 @@ export default function ContactNew() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="order-1 lg:order-2"
           >
             <form
               className="bg-surface border border-line rounded-[22px] p-8 backdrop-blur-[10px] h-full"

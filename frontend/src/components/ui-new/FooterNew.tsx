@@ -1,25 +1,31 @@
 "use client";
 
-import { useState } from "react";import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Mail, Phone, Globe, MapPin, MessageCircle } from "lucide-react";
 
+/* ── helpers ─────────────────────────────────────────── */
+function sectionHref(anchor: string, isHome: boolean): string {
+  return isHome ? `#${anchor}` : `/#${anchor}`;
+}
+
 /* ── Data ─────────────────────────────────────────────── */
-const COMPANY_LINKS = [
-  { label: "About",    href: "#about"     },
-  { label: "Projects", href: "#projects"  },
-  { label: "Partners", href: "#customers" },
-  { label: "Pricing",  href: "#pricing"   },
-  { label: "FAQ",      href: "#faq"       },
+const COMPANY_SECTIONS = [
+  { label: "About",    anchor: "about"     },
+  { label: "Projects", anchor: "projects", page: "/projects" },
+  { label: "Partners", anchor: "customers" },
+  { label: "Pricing",  anchor: "pricing"   },
+  { label: "FAQ",      anchor: "faq"       },
 ];
 
-const SERVICE_LINKS = [
-  { label: "Custom Web Apps",        href: "#services" },
-  { label: "Mobile Development",     href: "#services" },
-  { label: "AI Product Engineering", href: "#services" },
-  { label: "Cloud & DevOps",         href: "#services" },
-  { label: "Backend & APIs",         href: "#services" },
-  { label: "UI/UX Engineering",      href: "#services" },
+const SERVICE_SECTIONS = [
+  { label: "Custom Web Apps",        anchor: "services" },
+  { label: "Mobile Development",     anchor: "services" },
+  { label: "AI Product Engineering", anchor: "services" },
+  { label: "Cloud & DevOps",         anchor: "services" },
+  { label: "Backend & APIs",         anchor: "services" },
+  { label: "UI/UX Engineering",      anchor: "services" },
 ];
 
 const SOCIAL = [
@@ -37,9 +43,9 @@ const CONTACT_ITEMS = [
 ];
 
 /* ── Logo ─────────────────────────────────────────────── */
-function Logo() {
+function Logo({ isHome = false }: { isHome?: boolean }) {
   return (
-    <Link href="#hero" className="inline-flex items-center gap-[11px] no-underline group">
+    <Link href={isHome ? "#hero" : "/"} className="inline-flex items-center gap-[11px] no-underline group">
       <span className="w-[42px] h-[42px] rounded-[11px] bg-white border border-line flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.18)] flex-shrink-0 overflow-hidden transition-transform group-hover:scale-105">
         <Image src="/logo_new.png" alt="Kryvazent Logo" width={30} height={30} className="object-contain p-0.5" />
       </span>
@@ -57,7 +63,10 @@ function Logo() {
 
 /* ── Footer ───────────────────────────────────────────── */
 export default function FooterNew() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const year = new Date().getFullYear();
+  const contactHref = isHome ? "#contact" : "/#contact";
 
   return (
     <footer className="border-t border-line bg-surface-strong pt-10 pb-6 lg:pt-16 lg:pb-8">
@@ -69,7 +78,7 @@ export default function FooterNew() {
         <div className="lg:hidden flex flex-col items-center text-center pb-6">
 
           {/* Brand */}
-          <Logo />
+          <Logo isHome={isHome} />
           <p className="text-muted text-[13.5px] mt-4 mb-6 font-rajdhani leading-relaxed max-w-[300px]">
             Reliable software engineering for web, mobile, AI, cloud, and everything in between.
           </p>
@@ -91,7 +100,7 @@ export default function FooterNew() {
 
           {/* CTA */}
           <Link
-            href="#contact"
+            href={contactHref}
             className="w-full max-w-[320px] flex items-center justify-center py-[14px] rounded-[12px] font-syncopate text-[12px] font-bold uppercase tracking-[0.06em] text-white bg-gradient-to-br from-[#FF4757] via-[#D62133] to-[#A31527] shadow-[0_8px_22px_rgba(214,33,51,0.3)] hover:-translate-y-[1px] transition-all"
           >
             Start a Project
@@ -105,7 +114,7 @@ export default function FooterNew() {
 
           {/* Brand col */}
           <div>
-            <Logo />
+            <Logo isHome={isHome} />
             <p className="text-muted text-[14px] mt-4 mb-[22px] max-w-[300px] font-rajdhani leading-relaxed">
               Reliable software engineering for web, mobile, AI, cloud, and everything in between.
             </p>
@@ -128,9 +137,9 @@ export default function FooterNew() {
           <div>
             <h4 className="font-syncopate text-[12px] font-bold tracking-[0.2em] uppercase text-foreground mb-[18px]">Company</h4>
             <ul className="flex flex-col gap-[11px] list-none p-0 m-0">
-              {COMPANY_LINKS.map(({ label, href }) => (
+              {COMPANY_SECTIONS.map(({ label, anchor }) => (
                 <li key={label}>
-                  <Link href={href} className="text-muted text-[14px] no-underline transition-colors hover:text-primary font-rajdhani">
+                  <Link href={sectionHref(anchor, isHome)} className="text-muted text-[14px] no-underline transition-colors hover:text-primary font-rajdhani">
                     {label}
                   </Link>
                 </li>
@@ -142,9 +151,9 @@ export default function FooterNew() {
           <div>
             <h4 className="font-syncopate text-[12px] font-bold tracking-[0.2em] uppercase text-foreground mb-[18px]">Services</h4>
             <ul className="flex flex-col gap-[11px] list-none p-0 m-0">
-              {SERVICE_LINKS.map(({ label, href }) => (
+              {SERVICE_SECTIONS.map(({ label, anchor }) => (
                 <li key={label}>
-                  <Link href={href} className="text-muted text-[14px] no-underline transition-colors hover:text-primary font-rajdhani">
+                  <Link href={sectionHref(anchor, isHome)} className="text-muted text-[14px] no-underline transition-colors hover:text-primary font-rajdhani">
                     {label}
                   </Link>
                 </li>

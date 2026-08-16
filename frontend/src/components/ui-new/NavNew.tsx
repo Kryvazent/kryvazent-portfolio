@@ -3,26 +3,49 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Menu, X, ChevronRight, Mail, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+const NAV_SECTIONS = [
+  { label: "Services",  anchor: "services"  },
+  { label: "About",     anchor: "about"     },
+  { label: "Projects",  anchor: "projects", page: "/projects" },
+  { label: "Pricing",   anchor: "pricing"   },
+  { label: "FAQ",       anchor: "faq"       },
+  { label: "Contact",   anchor: "contact"   },
 ] as const;
 
-const DRAWER_EXTRA = [{ label: "Partners", href: "#customers" }];
+const DRAWER_EXTRA_SECTIONS = [{ label: "Partners", anchor: "customers" }] as const;
+
+const MOBILE_ICON_BTN =
+  "max-lg:bg-surface-strong max-lg:shadow-[var(--shadow-sm)] max-lg:w-[42px] max-lg:h-[42px]";
+
+/* ── helpers ─────────────────────────────────────────── */
+/** Returns the correct href: anchor on homepage, full path+hash on sub-pages. */
+function sectionHref(anchor: string, isHome: boolean): string {
+  return isHome ? `#${anchor}` : `/#${anchor}`;
+}
 
 /* ── Logo ─────────────────────────────────────────────── */
-function Logo() {
+function Logo({ pill = false, isHome = false }: { pill?: boolean; isHome?: boolean }) {
   return (
-    <Link href="#hero" className="flex items-center gap-[11px] no-underline group" aria-label="Kryvazent home">
-      <span className="w-[42px] h-[42px] rounded-[11px] bg-white border border-line flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.18)] flex-shrink-0 transition-transform group-hover:scale-105 overflow-hidden p-1">
+    <Link
+      href={isHome ? "#hero" : "/"}
+      className={cn(
+        "flex items-center gap-[11px] no-underline group",
+        pill &&
+          "max-lg:gap-2.5 max-lg:rounded-full max-lg:border max-lg:border-line max-lg:bg-surface-strong max-lg:py-1.5 max-lg:pl-1.5 max-lg:pr-4 max-lg:shadow-[var(--shadow-sm)]"
+      )}
+      aria-label="Kryvazent home"
+    >
+      <span
+        className={cn(
+          "w-[42px] h-[42px] rounded-[11px] bg-white border border-line flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.18)] flex-shrink-0 transition-transform group-hover:scale-105 overflow-hidden p-1",
+          pill && "max-lg:h-[34px] max-lg:w-[34px] max-lg:rounded-full max-lg:border-0 max-lg:p-0.5 max-lg:shadow-none"
+        )}
+      >
         <Image
           src="/logo_new.png"
           alt="Kryvazent Logo"
@@ -33,10 +56,15 @@ function Logo() {
         />
       </span>
       <span className="flex flex-col leading-[1.12]">
-        <span className="font-syncopate font-black text-[16.5px] tracking-[0.1em] text-foreground">
+        <span
+          className={cn(
+            "font-syncopate font-black text-[16.5px] tracking-[0.1em] text-foreground",
+            pill && "max-lg:text-[13.5px] max-lg:tracking-[0.06em] max-lg:[font-family:var(--font-geist-sans),ui-sans-serif,system-ui,sans-serif]"
+          )}
+        >
           KRYV<em className="not-italic text-primary">A</em>ZENT
         </span>
-        <span className="hidden sm:block text-[8.5px] font-bold tracking-[0.34em] uppercase text-subtle">
+        <span className="hidden lg:block text-[8.5px] font-bold tracking-[0.34em] uppercase text-subtle">
           Software Engineering
         </span>
       </span>
@@ -89,7 +117,10 @@ function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-      className="w-[41px] h-[41px] rounded-[11px] border border-line bg-surface flex items-center justify-center cursor-pointer text-muted transition-all hover:border-primary hover:text-primary hover:-translate-y-px"
+      className={cn(
+        "w-[41px] h-[41px] rounded-[11px] border border-line bg-surface flex items-center justify-center cursor-pointer text-muted transition-all hover:border-primary hover:text-primary hover:-translate-y-px",
+        MOBILE_ICON_BTN
+      )}
     >
       {theme === "dark" ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
     </button>
@@ -124,6 +155,9 @@ export function BackToTop() {
 
 /* ── Main Nav ─────────────────────────────────────────── */
 export default function NavNew() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -134,9 +168,10 @@ export default function NavNew() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* scrollspy */
+  /* scrollspy — only meaningful on the homepage */
   useEffect(() => {
-    const ids = NAV_LINKS.map((l) => l.href.slice(1));
+    if (!isHome) return;
+    const ids = NAV_SECTIONS.map((s) => s.anchor);
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); });
@@ -145,7 +180,7 @@ export default function NavNew() {
     );
     ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
     return () => obs.disconnect();
-  }, []);
+  }, [isHome]);
 
   /* lock body when drawer open */
   useEffect(() => {
@@ -154,6 +189,7 @@ export default function NavNew() {
   }, [drawerOpen]);
 
   const closeDrawer = () => setDrawerOpen(false);
+  const contactHref = isHome ? "#contact" : "/#contact";
 
   return (
     <>
@@ -161,7 +197,7 @@ export default function NavNew() {
 
       {/* Skip link */}
       <a
-        href="#services"
+        href={isHome ? "#services" : "/#services"}
         className="fixed top-[-60px] left-4 z-[200] bg-primary text-white px-[18px] py-[10px] rounded-[10px] font-bold no-underline transition-[top_.25s] focus:top-[14px]"
       >
         Skip to content
@@ -171,44 +207,51 @@ export default function NavNew() {
         id="navbar"
         aria-label="Main navigation"
         className={cn(
-          "fixed top-0 left-0 right-0 z-[100] h-[74px] flex items-center transition-[background,border-color,box-shadow] duration-300 border-b",
+          "fixed top-0 left-0 right-0 z-[100] h-[74px] max-lg:h-[72px] flex items-center transition-[background,border-color,box-shadow] duration-300 border-b",
           scrolled
-            ? "backdrop-blur-[18px] border-line shadow-[var(--shadow-sm)]"
+            ? "backdrop-blur-[18px] border-line shadow-[var(--shadow-sm)] max-lg:border-transparent max-lg:shadow-none max-lg:backdrop-blur-none max-lg:![background:transparent]"
             : "border-transparent"
         )}
         style={scrolled ? { background: "var(--nav-bg)" } : undefined}
       >
         <div className="w-full max-w-[1200px] mx-auto px-[clamp(16px,4vw,24px)] flex items-center justify-between gap-3">
-          <Logo />
+          <Logo pill isHome={isHome} />
 
           {/* Desktop links */}
           <div className="hidden lg:flex items-center gap-0.5">
-            {NAV_LINKS.map(({ label, href }) => (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "relative px-[14px] py-[9px] text-[14.5px] font-medium rounded-[9px] transition-colors duration-200 no-underline",
-                  active === href.slice(1)
-                    ? "text-foreground after:absolute after:left-[14px] after:right-[14px] after:bottom-[2px] after:h-[2px] after:rounded-full after:bg-gradient-to-r after:from-[#FF4757] after:to-[#9E1424]"
-                    : "text-muted hover:text-foreground hover:bg-surface"
-                )}
-              >
-                {label}
-              </Link>
-            ))}
+            {NAV_SECTIONS.map(({ label, anchor }) => {
+              const href = sectionHref(anchor, isHome);
+              const isActive = isHome ? active === anchor : pathname.startsWith(`/${anchor}`);
+              return (
+                <Link
+                  key={anchor}
+                  href={href}
+                  className={cn(
+                    "relative px-[14px] py-[9px] text-[14.5px] font-medium rounded-[9px] transition-colors duration-200 no-underline",
+                    isActive
+                      ? "text-foreground after:absolute after:left-[14px] after:right-[14px] after:bottom-[2px] after:h-[2px] after:rounded-full after:bg-gradient-to-r after:from-[#FF4757] after:to-[#9E1424]"
+                      : "text-muted hover:text-foreground hover:bg-surface"
+                  )}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-[10px]">
             <ThemeToggle />
             <Link
-              href="#contact"
+              href={contactHref}
               className="hidden lg:inline-flex items-center justify-center px-5 py-[11px] rounded-[11px] text-[13px] font-semibold font-syncopate bg-gradient-to-br from-[#FF4757] via-[#D62133] to-[#A31527] text-white shadow-[0_10px_28px_rgba(214,33,51,0.35)] hover:-translate-y-[2px] hover:shadow-[0_16px_36px_rgba(214,33,51,0.5)] transition-all duration-200"
             >
               Start a Project
             </Link>
             <button
-              className="flex lg:hidden w-[41px] h-[41px] rounded-[11px] border border-line bg-surface items-center justify-center text-muted hover:border-primary hover:text-primary transition-all"
+              className={cn(
+                "flex lg:hidden w-[41px] h-[41px] rounded-[11px] border border-line bg-surface items-center justify-center text-muted hover:border-primary hover:text-primary transition-all",
+                MOBILE_ICON_BTN
+              )}
               onClick={() => setDrawerOpen(true)}
               aria-label="Open menu"
               aria-expanded={drawerOpen}
@@ -238,7 +281,7 @@ export default function NavNew() {
             >
               {/* Drawer head */}
               <div className="flex items-center justify-between mb-[26px]">
-                <Logo />
+                <Logo isHome={isHome} />
                 <button
                   onClick={closeDrawer}
                   aria-label="Close menu"
@@ -250,10 +293,10 @@ export default function NavNew() {
 
               {/* Links */}
               <div className="flex flex-col gap-1">
-                {[...NAV_LINKS, ...DRAWER_EXTRA].map(({ label, href }) => (
+                {[...NAV_SECTIONS, ...DRAWER_EXTRA_SECTIONS].map(({ label, anchor }) => (
                   <Link
-                    key={href}
-                    href={href}
+                    key={anchor}
+                    href={sectionHref(anchor, isHome)}
                     onClick={closeDrawer}
                     className="flex items-center justify-between no-underline text-foreground font-syncopate font-semibold text-[17px] px-3 py-[13px] rounded-[12px] transition-colors hover:bg-surface hover:text-primary"
                   >
@@ -264,7 +307,7 @@ export default function NavNew() {
               </div>
 
               <Link
-                href="#contact"
+                href={contactHref}
                 onClick={closeDrawer}
                 className="mt-[22px] w-full flex items-center justify-center px-5 py-[15px] rounded-[13px] font-syncopate font-bold text-[13px] tracking-[0.01em] bg-gradient-to-br from-[#FF4757] via-[#D62133] to-[#A31527] text-white shadow-[0_10px_28px_rgba(214,33,51,0.35)] hover:-translate-y-[2px] transition-all"
               >
