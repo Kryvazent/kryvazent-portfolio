@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import ContactNew from "@/components/ui-new/ContactNew";
+import FooterNew from "@/components/ui-new/FooterNew";
+import NavNew from "@/components/ui-new/NavNew";
 import Particles from "@/components/Particles";
 import { absoluteUrl } from "@/lib/site";
 import { primaryKeywords, seoServices, servicePath, site, type SeoService } from "@/lib/seo";
@@ -193,7 +193,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       />
       <div className="scanline" />
       <Particles />
-      <Navbar />
+      <NavNew />
 
       <section className="relative px-6 pt-32 pb-14 lg:pt-40 lg:pb-20 overflow-hidden">
         <div className="absolute inset-0 grid-background opacity-20 pointer-events-none" />
@@ -350,8 +350,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      <Contact />
-      <Footer />
+      <ContactNew />
+      <FooterNew />
     </main>
   );
 }
