@@ -101,7 +101,7 @@ function ThemeToggle() {
     // Read current data-theme set by the inline script (or default)
     const current = document.documentElement.getAttribute("data-theme") as "dark" | "light" | null;
     const saved = localStorage.getItem("kv-theme") as "dark" | "light" | null;
-    const initial = saved ?? current ?? "dark";
+    const initial = saved ?? current ?? "light";
     setTheme(initial);
     document.documentElement.setAttribute("data-theme", initial);
   }, []);
