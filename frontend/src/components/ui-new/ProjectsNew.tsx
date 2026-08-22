@@ -6,7 +6,29 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, LayoutGrid } from "lucide-react";
 import FloatingShapes from "@/components/FloatingShapes";
 
-const PROJECTS = [
+const ALL_PROJECTS = [
+  {
+    image: "/partners/rajapura-bg.png",
+    alt: "Rajapura Herbal — herbal product e-commerce platform",
+    category: "E-Commerce",
+    outcome: "Live product",
+    title: "Rajapura Herbal",
+    tech: ["Web", "E-Commerce", "Product Catalogue"],
+    desc: "A full e-commerce platform for a heritage Sri Lankan herbal brand — built with product catalogues, online ordering, and brand storytelling.",
+    useCase: "Herbal & wellness retail",
+    link: "https://rajapuraherbal.lk",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+    alt: "Emerge Sri Lanka — community and social impact platform",
+    category: "Web Application",
+    outcome: "Live platform",
+    title: "Emerge Sri Lanka",
+    tech: ["Next.js", "Web", "Community Platform"],
+    desc: "A digital platform for Emerge Sri Lanka — enabling community engagement, programme visibility, and social impact communication.",
+    useCase: "Non-profit & community",
+    link: "https://emergesrilanka.org",
+  },
   {
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
     alt: "AI Analytics Dashboard",
@@ -16,6 +38,7 @@ const PROJECTS = [
     tech: ["Next.js", "Python", "ML Workflows"],
     desc: "A reporting platform concept for teams that need predictive insights, workflow visibility, and decision-ready dashboards.",
     useCase: "Data-led operations",
+    link: null,
   },
   {
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
@@ -26,6 +49,7 @@ const PROJECTS = [
     tech: ["React", "Node.js", "Cloud APIs"],
     desc: "A secure portal pattern for customer records, service requests, internal approvals, notifications, and admin reporting.",
     useCase: "Growing service teams",
+    link: null,
   },
   {
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
@@ -36,8 +60,12 @@ const PROJECTS = [
     tech: ["Docker", "CI/CD", "Monitoring"],
     desc: "A deployment and infrastructure workflow for applications that need stable releases, monitoring, backups, and scaling paths.",
     useCase: "Production software",
+    link: null,
   },
-] as const;
+];
+
+/* Only the first 3 shown on the homepage */
+const PROJECTS = ALL_PROJECTS.slice(0, 3);
 
 export default function ProjectsNew() {
   return (
@@ -135,9 +163,23 @@ export default function ProjectsNew() {
 
                 <p className="text-white/80 text-[13.5px] leading-[1.6] font-rajdhani">{p.desc}</p>
 
-                <p className="mt-3 pt-3 border-t border-white/[0.15] font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/50">
-                  Use case · {p.useCase}
-                </p>
+                <div className="mt-3 pt-3 border-t border-white/[0.15] flex items-center justify-between gap-2">
+                  <p className="font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/50">
+                    Use case · {p.useCase}
+                  </p>
+                  {p.link && (
+                    <a
+                      href={p.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-syncopate text-[10px] font-bold tracking-[0.1em] uppercase text-primary hover:opacity-80 transition-opacity whitespace-nowrap"
+                      aria-label={`Visit ${p.title} website`}
+                    >
+                      Visit Site
+                      <ArrowUpRight className="w-[11px] h-[11px]" />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.article>
           ))}

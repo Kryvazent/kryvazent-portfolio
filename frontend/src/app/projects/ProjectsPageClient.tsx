@@ -11,6 +11,30 @@ import FloatingShapes from "@/components/FloatingShapes";
 /* Static fallback projects (mirrors ProjectsNew) */
 const FALLBACK_PROJECTS = [
   {
+    image: "/partners/rajapura-bg.png",
+    category: "E-Commerce",
+    outcome: "Live product",
+    title: "Rajapura Herbal",
+    tech: ["Web", "E-Commerce", "Product Catalogue"],
+    description:
+      "A full e-commerce platform for a heritage Sri Lankan herbal brand — built with product catalogues, online ordering, and brand storytelling.",
+    useCase: "Herbal & wellness retail",
+    published: true,
+    link: "https://rajapuraherbal.lk",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+    category: "Web Application",
+    outcome: "Live platform",
+    title: "Emerge Sri Lanka",
+    tech: ["Next.js", "Web", "Community Platform"],
+    description:
+      "A digital platform for Emerge Sri Lanka — enabling community engagement, programme visibility, and social impact communication.",
+    useCase: "Non-profit & community",
+    published: true,
+    link: "https://emergesrilanka.org",
+  },
+  {
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
     category: "AI Engineering",
     outcome: "Faster reporting",
@@ -20,6 +44,7 @@ const FALLBACK_PROJECTS = [
       "A reporting platform concept for teams that need predictive insights, workflow visibility, and decision-ready dashboards.",
     useCase: "Data-led operations",
     published: true,
+    link: null,
   },
   {
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
@@ -31,6 +56,7 @@ const FALLBACK_PROJECTS = [
       "A secure portal pattern for customer records, service requests, internal approvals, notifications, and admin reporting.",
     useCase: "Growing service teams",
     published: true,
+    link: null,
   },
   {
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
@@ -42,6 +68,7 @@ const FALLBACK_PROJECTS = [
       "A deployment and infrastructure workflow for applications that need stable releases, monitoring, backups, and scaling paths.",
     useCase: "Production software",
     published: true,
+    link: null,
   },
   {
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
@@ -53,17 +80,7 @@ const FALLBACK_PROJECTS = [
       "A cross-platform mobile storefront with product catalogues, cart management, checkout flows, and push notification support.",
     useCase: "Retail & e-commerce",
     published: true,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
-    category: "Backend & APIs",
-    outcome: "Scalable systems",
-    title: "Multi-Tenant SaaS API",
-    tech: ["Node.js", "PostgreSQL", "Redis"],
-    description:
-      "A multi-tenant REST API layer with role-based access, usage billing hooks, rate limiting, and audit logging built in.",
-    useCase: "SaaS platforms",
-    published: true,
+    link: null,
   },
   {
     image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&q=80&w=800",
@@ -75,6 +92,7 @@ const FALLBACK_PROJECTS = [
       "A scalable design system with tokenised variables, accessible components, dark/light modes, and full Storybook documentation.",
     useCase: "Growing product teams",
     published: true,
+    link: null,
   },
 ];
 
@@ -195,9 +213,23 @@ export default function ProjectsPageClient() {
                     {p.description}
                   </p>
 
-                  <p className="mt-3 pt-3 border-t border-white/[0.15] font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/50">
-                    Use case · {p.useCase}
-                  </p>
+                  <div className="mt-3 pt-3 border-t border-white/[0.15] flex items-center justify-between gap-2">
+                    <p className="font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/50">
+                      Use case · {p.useCase}
+                    </p>
+                    {"link" in p && typeof p.link === "string" && p.link && (
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-syncopate text-[10px] font-bold tracking-[0.1em] uppercase text-primary hover:opacity-80 transition-opacity whitespace-nowrap"
+                        aria-label={`Visit ${p.title} website`}
+                      >
+                        Visit Site
+                        <ArrowUpRight className="w-[11px] h-[11px]" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </motion.article>
             ))}

@@ -96,14 +96,15 @@ function ProgressBar() {
 /* ── Theme toggle ─────────────────────────────────────── */
 function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Read current data-theme set by the inline script (or default)
-    const current = document.documentElement.getAttribute("data-theme") as "dark" | "light" | null;
     const saved = localStorage.getItem("kv-theme") as "dark" | "light" | null;
-    const initial = saved ?? current ?? "light";
+    const fromDom = document.documentElement.getAttribute("data-theme") as "dark" | "light" | null;
+    const initial = saved ?? fromDom ?? "dark";
     setTheme(initial);
     document.documentElement.setAttribute("data-theme", initial);
+    setMounted(true);
   }, []);
 
   const toggle = () => {
@@ -113,16 +114,25 @@ function ThemeToggle() {
     try { localStorage.setItem("kv-theme", next); } catch (_) {}
   };
 
+  // Render a neutral placeholder until mounted to avoid SSR/client mismatch
+  const icon = !mounted ? null : theme === "dark"
+    ? <Sun className="w-[18px] h-[18px]" />
+    : <Moon className="w-[18px] h-[18px]" />;
+
+  const label = !mounted
+    ? "Toggle theme"
+    : theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
+
   return (
     <button
       onClick={toggle}
-      aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={label}
       className={cn(
         "w-[41px] h-[41px] rounded-[11px] border border-line bg-surface flex items-center justify-center cursor-pointer text-muted transition-all hover:border-primary hover:text-primary hover:-translate-y-px",
         MOBILE_ICON_BTN
       )}
     >
-      {theme === "dark" ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
+      {icon}
     </button>
   );
 }

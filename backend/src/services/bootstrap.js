@@ -18,6 +18,12 @@ export const bootstrapData = async () => {
   }
   await Content.findOneAndUpdate({ key: "main" }, { $setOnInsert: { key: "main", ...defaultContent } }, { upsert: true });
 
+  // Patch: update Rajapura Herbal project image if it still has the old Unsplash placeholder
+  await Content.updateOne(
+    { key: "main", "projects.title": "Rajapura Herbal", "projects.image": { $regex: "unsplash" } },
+    { $set: { "projects.$.image": "/partners/rajapura-bg.png" } }
+  );
+
   if (env.metaPageAccessToken && env.metaFacebookPageId) {
     const encryptedPageToken = encryptSecret(env.metaPageAccessToken);
     await SocialAccount.findOneAndUpdate(
