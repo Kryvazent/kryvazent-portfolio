@@ -71,30 +71,7 @@ export const ALL_PROJECTS: Project[] = [
     useCase: "Production software",
     link: null,
   },
-  {
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
-    alt: "Mobile Commerce App",
-    category: "Mobile Development",
-    outcome: "Faster adoption",
-    title: "Mobile Commerce App",
-    tech: ["React Native", "Node.js", "Stripe"],
-    description:
-      "A cross-platform mobile storefront with product catalogues, cart management, checkout flows, and push notification support.",
-    useCase: "Retail & e-commerce",
-    link: null,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&q=80&w=800",
-    alt: "Design System & Component Library",
-    category: "UI/UX Engineering",
-    outcome: "Higher engagement",
-    title: "Design System & Component Library",
-    tech: ["React", "Storybook", "Figma"],
-    description:
-      "A scalable design system with tokenised variables, accessible components, dark/light modes, and full Storybook documentation.",
-    useCase: "Growing product teams",
-    link: null,
-  },
+  
 ];
 
 /** First 3 projects shown on the homepage */
