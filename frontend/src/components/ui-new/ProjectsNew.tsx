@@ -5,67 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, LayoutGrid } from "lucide-react";
 import FloatingShapes from "@/components/FloatingShapes";
-
-const ALL_PROJECTS = [
-  {
-    image: "/partners/rajapura-bg.png",
-    alt: "Rajapura Herbal — herbal product e-commerce platform",
-    category: "E-Commerce",
-    outcome: "Live product",
-    title: "Rajapura Herbal",
-    tech: ["Web", "E-Commerce", "Product Catalogue"],
-    desc: "A full e-commerce platform for a heritage Sri Lankan herbal brand — built with product catalogues, online ordering, and brand storytelling.",
-    useCase: "Herbal & wellness retail",
-    link: "https://rajapuraherbal.lk",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
-    alt: "Emerge Sri Lanka — community and social impact platform",
-    category: "Web Application",
-    outcome: "Live platform",
-    title: "Emerge Sri Lanka",
-    tech: ["Next.js", "Web", "Community Platform"],
-    desc: "A digital platform for Emerge Sri Lanka — enabling community engagement, programme visibility, and social impact communication.",
-    useCase: "Non-profit & community",
-    link: "https://emergesrilanka.org",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-    alt: "AI Analytics Dashboard",
-    category: "AI Engineering",
-    outcome: "Faster reporting",
-    title: "AI Analytics Dashboard",
-    tech: ["Next.js", "Python", "ML Workflows"],
-    desc: "A reporting platform concept for teams that need predictive insights, workflow visibility, and decision-ready dashboards.",
-    useCase: "Data-led operations",
-    link: null,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-    alt: "Customer Operations Portal",
-    category: "Web Application",
-    outcome: "Cleaner workflows",
-    title: "Customer Operations Portal",
-    tech: ["React", "Node.js", "Cloud APIs"],
-    desc: "A secure portal pattern for customer records, service requests, internal approvals, notifications, and admin reporting.",
-    useCase: "Growing service teams",
-    link: null,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
-    alt: "Cloud Automation Layer",
-    category: "Cloud & DevOps",
-    outcome: "Reliable launches",
-    title: "Cloud Automation Layer",
-    tech: ["Docker", "CI/CD", "Monitoring"],
-    desc: "A deployment and infrastructure workflow for applications that need stable releases, monitoring, backups, and scaling paths.",
-    useCase: "Production software",
-    link: null,
-  },
-];
-
-/* Only the first 3 shown on the homepage */
-const PROJECTS = ALL_PROJECTS.slice(0, 3);
+import { FEATURED_PROJECTS } from "@/data/projects";
 
 export default function ProjectsNew() {
   return (
@@ -117,7 +57,7 @@ export default function ProjectsNew() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[22px]">
-          {PROJECTS.map((p, i) => (
+          {FEATURED_PROJECTS.map((p, i) => (
             <motion.article
               key={p.title}
               initial={{ opacity: 0, y: 20 }}
@@ -141,7 +81,6 @@ export default function ProjectsNew() {
 
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-6">
-                {/* Meta chips */}
                 <div className="flex flex-wrap gap-2 mb-3">
                   <span className="font-syncopate text-[9.5px] font-bold tracking-[0.1em] uppercase px-[11px] py-[5px] rounded-full bg-[rgba(214,33,51,0.92)] text-white">
                     {p.category}
@@ -161,7 +100,7 @@ export default function ProjectsNew() {
                   ))}
                 </div>
 
-                <p className="text-white/80 text-[13.5px] leading-[1.6] font-rajdhani">{p.desc}</p>
+                <p className="text-white/80 text-[13.5px] leading-[1.6] font-rajdhani">{p.description}</p>
 
                 <div className="mt-3 pt-3 border-t border-white/[0.15] flex items-center justify-between gap-2">
                   <p className="font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/50">

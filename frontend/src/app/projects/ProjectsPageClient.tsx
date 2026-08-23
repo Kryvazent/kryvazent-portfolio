@@ -5,117 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, SlidersHorizontal } from "lucide-react";
-import { useSiteContent } from "@/components/ContentProvider";
 import FloatingShapes from "@/components/FloatingShapes";
-
-/* Static fallback projects (mirrors ProjectsNew) */
-const FALLBACK_PROJECTS = [
-  {
-    image: "/partners/rajapura-bg.png",
-    category: "E-Commerce",
-    outcome: "Live product",
-    title: "Rajapura Herbal",
-    tech: ["Web", "E-Commerce", "Product Catalogue"],
-    description:
-      "A full e-commerce platform for a heritage Sri Lankan herbal brand — built with product catalogues, online ordering, and brand storytelling.",
-    useCase: "Herbal & wellness retail",
-    published: true,
-    link: "https://rajapuraherbal.lk",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
-    category: "Web Application",
-    outcome: "Live platform",
-    title: "Emerge Sri Lanka",
-    tech: ["Next.js", "Web", "Community Platform"],
-    description:
-      "A digital platform for Emerge Sri Lanka — enabling community engagement, programme visibility, and social impact communication.",
-    useCase: "Non-profit & community",
-    published: true,
-    link: "https://emergesrilanka.org",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-    category: "AI Engineering",
-    outcome: "Faster reporting",
-    title: "AI Analytics Dashboard",
-    tech: ["Next.js", "Python", "ML Workflows"],
-    description:
-      "A reporting platform concept for teams that need predictive insights, workflow visibility, and decision-ready dashboards.",
-    useCase: "Data-led operations",
-    published: true,
-    link: null,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-    category: "Web Application",
-    outcome: "Cleaner workflows",
-    title: "Customer Operations Portal",
-    tech: ["React", "Node.js", "Cloud APIs"],
-    description:
-      "A secure portal pattern for customer records, service requests, internal approvals, notifications, and admin reporting.",
-    useCase: "Growing service teams",
-    published: true,
-    link: null,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
-    category: "Cloud & DevOps",
-    outcome: "Reliable launches",
-    title: "Cloud Automation Layer",
-    tech: ["Docker", "CI/CD", "Monitoring"],
-    description:
-      "A deployment and infrastructure workflow for applications that need stable releases, monitoring, backups, and scaling paths.",
-    useCase: "Production software",
-    published: true,
-    link: null,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
-    category: "Mobile Development",
-    outcome: "Faster adoption",
-    title: "Mobile Commerce App",
-    tech: ["React Native", "Node.js", "Stripe"],
-    description:
-      "A cross-platform mobile storefront with product catalogues, cart management, checkout flows, and push notification support.",
-    useCase: "Retail & e-commerce",
-    published: true,
-    link: null,
-  },
-  {
-    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&q=80&w=800",
-    category: "UI/UX Engineering",
-    outcome: "Higher engagement",
-    title: "Design System & Component Library",
-    tech: ["React", "Storybook", "Figma"],
-    description:
-      "A scalable design system with tokenised variables, accessible components, dark/light modes, and full Storybook documentation.",
-    useCase: "Growing product teams",
-    published: true,
-    link: null,
-  },
-];
+import { ALL_PROJECTS } from "@/data/projects";
 
 const ALL_LABEL = "All";
 
 export default function ProjectsPageClient() {
-  const { content } = useSiteContent();
-
-  /* Merge CMS projects with fallbacks — CMS wins if it has items */
-  const cmsProjects = content.projects.filter((p) => p.published);
-  const projects = cmsProjects.length > 0 ? cmsProjects : FALLBACK_PROJECTS;
-
-  /* Unique categories */
   const categories = useMemo(() => {
-    const cats = Array.from(new Set(projects.map((p) => p.category)));
+    const cats = Array.from(new Set(ALL_PROJECTS.map((p) => p.category)));
     return [ALL_LABEL, ...cats];
-  }, [projects]);
+  }, []);
 
   const [active, setActive] = useState(ALL_LABEL);
 
   const filtered = useMemo(
-    () => (active === ALL_LABEL ? projects : projects.filter((p) => p.category === active)),
-    [active, projects],
+    () => (active === ALL_LABEL ? ALL_PROJECTS : ALL_PROJECTS.filter((p) => p.category === active)),
+    [active],
   );
 
   return (
@@ -170,10 +75,9 @@ export default function ProjectsPageClient() {
                 className="group relative rounded-[20px] overflow-hidden border border-line aspect-[4/4.6] transition-all duration-300 hover:-translate-y-[7px] hover:border-[rgba(214,33,51,0.45)] hover:shadow-[var(--shadow)]"
                 style={{ background: "var(--surface-strong)" }}
               >
-                {/* Image */}
                 <Image
                   src={p.image}
-                  alt={p.title}
+                  alt={p.alt}
                   fill
                   sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
                   className="object-cover grayscale brightness-[0.85] transition-all duration-[800ms] group-hover:scale-[1.08] group-hover:grayscale-0 group-hover:brightness-90"
@@ -217,7 +121,7 @@ export default function ProjectsPageClient() {
                     <p className="font-syncopate text-[10px] font-semibold tracking-[0.14em] uppercase text-white/50">
                       Use case · {p.useCase}
                     </p>
-                    {"link" in p && typeof p.link === "string" && p.link && (
+                    {p.link && (
                       <a
                         href={p.link}
                         target="_blank"
