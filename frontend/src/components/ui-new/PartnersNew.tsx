@@ -1,93 +1,131 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import FloatingShapes from "@/components/FloatingShapes";
-import { useSiteContent } from "@/components/ContentProvider";
 
-/** Map CMS tone → card background + text */
-const TONE_CLS = {
-  dark:  "bg-[#050505] text-white",
-  gray:  "bg-[#4a4a4a] text-white",
-  light: "bg-white text-[#111318]",
-} as const;
-
-/** Static fallback shown while content loads or if API fails */
-const FALLBACK = [
-  { name: "Vision Expert", tagline: "Optical Studio", logoUrl: "", initials: "VE", tone: "dark"  as const },
-  { name: "Rajapura",      tagline: "Since 1973",     logoUrl: "", initials: "R",  tone: "gray"  as const },
-  { name: "EMergeSL",      tagline: "",               logoUrl: "/partners/emergesl.jpeg", initials: "ES", tone: "light" as const },
-  { name: "Vision Expert", tagline: "Optical Studio", logoUrl: "", initials: "VE", tone: "dark"  as const },
-  { name: "Rajapura",      tagline: "Since 1973",     logoUrl: "", initials: "R",  tone: "gray"  as const },
-  { name: "EMergeSL",      tagline: "",               logoUrl: "/partners/emergesl.jpeg", initials: "ES", tone: "light" as const },
-];
-
-type Partner = {
+/* ─────────────────────────────────────────────────────────────
+   Partner data
+   Each partner is one of three visual variants:
+   • "logo"   — white card, image/logo fills the card
+   • "text"   — solid coloured card, initials + tagline
+   • "photo"  — full-bleed photo background + dark scrim + text
+───────────────────────────────────────────────────────────── */
+type LogoPartner = {
+  type: "logo";
   name: string;
-  tagline: string;
-  logoUrl: string;
-  initials: string;
-  tone: "dark" | "gray" | "light";
+  src: string;
 };
 
-function PartnerCard({ partner }: { partner: Partner }) {
-  return (
-    <motion.div
-      whileHover={{ y: -5 }}
-      className={`
-        relative flex h-24 w-[190px] shrink-0 items-center justify-center
-        overflow-hidden rounded-[16px] border border-line p-4
-        shadow-[0_8px_24px_rgba(0,0,0,0.12)]
-        transition-[border-color,transform] duration-300
-        hover:border-[rgba(214,33,51,0.4)]
-        ${TONE_CLS[partner.tone]}
-      `}
-    >
-      {partner.logoUrl ? (
-        <img
-          src={partner.logoUrl}
-          alt={`${partner.name} logo`}
-          className="h-full w-full object-contain"
-        />
-      ) : (
-        <div className="text-center">
-          <strong className="block font-syncopate font-black text-[16px] tracking-[0.06em]">
-            {partner.initials || partner.name}
-          </strong>
-          {partner.tagline && (
-            <span className="mt-1 block text-[9px] uppercase tracking-[0.16em] opacity-70">
-              {partner.tagline}
-            </span>
-          )}
-        </div>
-      )}
-    </motion.div>
-  );
-}
+type PhotoPartner = {
+  type: "photo";
+  name: string;
+  initials: string;
+  tagline: string;
+  src: string;
+};
 
-function Group({ partners, duplicate = false }: { partners: Partner[]; duplicate?: boolean }) {
+type Partner = LogoPartner | PhotoPartner;
+
+const PARTNERS: Partner[] = [
+  {
+    type: "photo",
+    name: "Rajapura",
+    initials: "Rajapura",
+    tagline: "Since 1973",
+    src: "/partners/rajapura1.png",
+  },
+  {
+    type: "logo",
+    name: "EMergeSL",
+    src: "/partners/emergesl.jpeg",
+  },
+];
+
+/* ─────────────────────────────────────────────────────────────
+   Card variants
+───────────────────────────────────────────────────────────── */
+function LogoCard({ partner }: { partner: LogoPartner }) {
   return (
-    <div aria-hidden={duplicate} className="flex shrink-0 items-center gap-5 pr-5">
-      {partners.map((partner, i) => (
-        <PartnerCard key={`${duplicate ? "d" : "o"}-${partner.name}-${i}`} partner={partner} />
-      ))}
+    <div className="relative h-full w-full bg-white overflow-hidden">
+      <Image
+        src={partner.src}
+        alt={`${partner.name} logo`}
+        fill
+        className="object-contain p-3"
+        sizes="190px"
+      />
     </div>
   );
 }
 
+function PhotoCard({ partner }: { partner: PhotoPartner }) {
+  return (
+    <div className="relative h-full w-full overflow-hidden">
+      <Image
+        src={partner.src}
+        alt={partner.name}
+        fill
+        className="object-cover"
+        sizes="190px"
+      />
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Single card wrapper — shared sizing, border, hover
+───────────────────────────────────────────────────────────── */
+function PartnerCard({ partner }: { partner: Partner }) {
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="relative h-24 w-[190px] shrink-0 overflow-hidden rounded-[16px] border border-line shadow-[0_8px_24px_rgba(0,0,0,0.10)] transition-[border-color] duration-300 hover:border-[rgba(214,33,51,0.4)]"
+    >
+      {partner.type === "logo"  && <LogoCard  partner={partner} />}
+      {partner.type === "photo" && <PhotoCard partner={partner} />}
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Marquee row
+   Renders the list enough times to fill the viewport, then
+   animates exactly -50% so the loop is seamless at any count.
+───────────────────────────────────────────────────────────── */
+function MarqueeRow({ partners }: { partners: Partner[] }) {
+  // Duplicate the array so each "half" has enough cards to fill wide screens
+  const doubled = [...partners, ...partners, ...partners, ...partners];
+  return (
+    <div
+      className="flex w-max"
+      style={{ animation: "partners-marquee 18s linear infinite" }}
+    >
+      {/* First half — visible */}
+      <div className="flex shrink-0 items-center gap-5 pr-5">
+        {doubled.map((p, i) => (
+          <PartnerCard key={`a-${i}`} partner={p} />
+        ))}
+      </div>
+      {/* Second half — seamless duplicate (aria-hidden) */}
+      <div aria-hidden className="flex shrink-0 items-center gap-5 pr-5">
+        {doubled.map((p, i) => (
+          <PartnerCard key={`b-${i}`} partner={p} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Section
+───────────────────────────────────────────────────────────── */
 export default function PartnersNew() {
-  const { content, isLoaded } = useSiteContent();
-
-  // Use live CMS data when loaded, otherwise show fallback — never return null
-  const published = isLoaded
-    ? content.partners.filter((p) => p.published)
-    : [];
-
-  const partners: Partner[] = published.length > 0 ? published : FALLBACK;
-
   return (
     <section
       id="customers"
-      aria-labelledby="partners-new-heading"
+      aria-labelledby="partners-heading"
       className="relative scroll-mt-[86px] py-[76px] overflow-hidden border-y border-line bg-surface-strong"
     >
       <FloatingShapes />
@@ -98,7 +136,7 @@ export default function PartnersNew() {
           Trusted network
         </span>
         <h2
-          id="partners-new-heading"
+          id="partners-heading"
           className="font-syncopate font-bold text-[clamp(1.75rem,4vw,2.7rem)] tracking-[-0.02em] leading-[1.15]"
         >
           Verified{" "}
@@ -109,31 +147,23 @@ export default function PartnersNew() {
         </h2>
       </div>
 
-      {/* Marquee — tile 4× so short lists never show a gap */}
+      {/* Marquee */}
       <div
         className="relative z-10 overflow-hidden py-2"
         style={{
-          WebkitMaskImage: "linear-gradient(to right,transparent,black 8%,black 92%,transparent)",
-          maskImage:       "linear-gradient(to right,transparent,black 8%,black 92%,transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          maskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
         }}
       >
-        <div
-          className="flex w-max hover:[animation-play-state:paused]"
-          style={{ animation: "marquee-partners-new 18s linear infinite" }}
-        >
-          {/* Render 4 copies: the first 2 are the "real" set, the second 2 are
-              the seamless duplicate. translateX(-50%) snaps back to start. */}
-          <Group partners={partners} />
-          <Group partners={partners} />
-          <Group partners={partners} duplicate />
-          <Group partners={partners} duplicate />
-        </div>
+        <MarqueeRow partners={PARTNERS} />
       </div>
 
       <style>{`
-        @keyframes marquee-partners-new {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        @keyframes partners-marquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
         }
       `}</style>
     </section>

@@ -290,6 +290,49 @@ html[data-theme="dark"] {
 }
 
 /* ═══════════════════════════════════════════
+   PROJECT CARD — dual-layout theming
+   .pc-dark  → gradient scrim overlay (dark theme)
+   .pc-light → white panel overlay    (light theme)
+   Image fills the whole card in both themes —
+   no split divs, no seam line possible.
+═══════════════════════════════════════════ */
+
+/* ── Default (dark / no-theme): show dark overlay, hide light ── */
+.pc-dark  { display: flex; }
+.pc-light { display: none; }
+
+/* ── Light theme: swap ── */
+html[data-theme="light"] .pc-dark  { display: none; }
+html[data-theme="light"] .pc-light { display: flex; }
+
+/* ── Image filter per theme ── */
+/* Dark: desaturate + dim for cinematic feel */
+.project-card-img {
+  filter: grayscale(1) brightness(0.82);
+}
+.group:hover .project-card-img {
+  filter: grayscale(0) brightness(0.88);
+}
+
+/* Light: full colour, natural brightness */
+html[data-theme="light"] .project-card-img {
+  filter: brightness(0.96) contrast(1.03) saturate(1.05);
+}
+html[data-theme="light"] .group:hover .project-card-img {
+  filter: brightness(1.02) contrast(1.04) saturate(1.08);
+}
+
+/* ── Card frame — lift off white page in light mode ── */
+html[data-theme="light"] .project-card-frame {
+  border-color: rgba(31,41,55,0.12);
+  box-shadow: 0 2px 12px rgba(35,46,59,0.07), 0 6px 28px rgba(35,46,59,0.08);
+}
+html[data-theme="light"] .project-card-frame:hover {
+  border-color: rgba(214,33,51,0.40);
+  box-shadow: 0 18px 48px rgba(35,46,59,0.13);
+}
+
+/* ═══════════════════════════════════════════
    EYEBROW — hide the dash line on mobile
 ═══════════════════════════════════════════ */
 .eyebrow-line::before {

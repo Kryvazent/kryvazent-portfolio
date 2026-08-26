@@ -289,7 +289,7 @@ export default function ContactNew() {
                   role="status"
                   aria-live="polite"
                   className={`text-[13.5px] font-semibold mb-4 font-rajdhani ${
-                    status === "success" ? "text-primary" : "text-red-500"
+                    status === "success" ? "text-emerald-500" : "text-red-500"
                   }`}
                 >
                   {statusMsg}
