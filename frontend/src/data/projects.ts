@@ -35,6 +35,10 @@ export const ALL_PROJECTS: Project[] = [
     useCase: "Non-profit & community",
     link: "https://emergesrilanka.org",
   },
+
+
+];
+const Removed_Projects: Project[] = [
   {
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
     alt: "AI Analytics Dashboard",
@@ -71,8 +75,6 @@ export const ALL_PROJECTS: Project[] = [
     useCase: "Production software",
     link: null,
   },
-  
-];
-
+]
 /** First 3 projects shown on the homepage */
 export const FEATURED_PROJECTS = ALL_PROJECTS.slice(0, 3);
