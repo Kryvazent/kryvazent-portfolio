@@ -17,15 +17,6 @@ type LogoPartner = {
   src: string;
 };
 
-type TextPartner = {
-  type: "text";
-  name: string;
-  initials: string;
-  tagline: string;
-  bg: string;      // any valid CSS background colour
-  color: string;   // text colour
-};
-
 type PhotoPartner = {
   type: "photo";
   name: string;
@@ -34,17 +25,9 @@ type PhotoPartner = {
   src: string;
 };
 
-type Partner = LogoPartner | TextPartner | PhotoPartner;
+type Partner = LogoPartner | PhotoPartner;
 
 const PARTNERS: Partner[] = [
-  {
-    type: "text",
-    name: "Vision Expert",
-    initials: "VE",
-    tagline: "Optical Studio",
-    bg: "#050505",
-    color: "#ffffff",
-  },
   {
     type: "photo",
     name: "Rajapura",
@@ -76,24 +59,6 @@ function LogoCard({ partner }: { partner: LogoPartner }) {
   );
 }
 
-function TextCard({ partner }: { partner: TextPartner }) {
-  return (
-    <div
-      className="flex h-full w-full flex-col items-center justify-center text-center px-3"
-      style={{ background: partner.bg, color: partner.color }}
-    >
-      <strong className="block font-syncopate font-black text-[16px] tracking-[0.06em] leading-none">
-        {partner.initials}
-      </strong>
-      {partner.tagline && (
-        <span className="mt-[6px] block font-syncopate text-[9px] uppercase tracking-[0.18em] opacity-60">
-          {partner.tagline}
-        </span>
-      )}
-    </div>
-  );
-}
-
 function PhotoCard({ partner }: { partner: PhotoPartner }) {
   return (
     <div className="relative h-full w-full overflow-hidden">
@@ -119,33 +84,36 @@ function PartnerCard({ partner }: { partner: Partner }) {
       className="relative h-24 w-[190px] shrink-0 overflow-hidden rounded-[16px] border border-line shadow-[0_8px_24px_rgba(0,0,0,0.10)] transition-[border-color] duration-300 hover:border-[rgba(214,33,51,0.4)]"
     >
       {partner.type === "logo"  && <LogoCard  partner={partner} />}
-      {partner.type === "text"  && <TextCard  partner={partner} />}
       {partner.type === "photo" && <PhotoCard partner={partner} />}
     </motion.div>
   );
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Marquee row — renders 4 copies for seamless infinite scroll
+   Marquee row
+   Renders the list enough times to fill the viewport, then
+   animates exactly -50% so the loop is seamless at any count.
 ───────────────────────────────────────────────────────────── */
 function MarqueeRow({ partners }: { partners: Partner[] }) {
-  const copies = [0, 1, 2, 3];
+  // Duplicate the array so each "half" has enough cards to fill wide screens
+  const doubled = [...partners, ...partners, ...partners, ...partners];
   return (
     <div
       className="flex w-max"
-      style={{ animation: "partners-marquee 20s linear infinite" }}
+      style={{ animation: "partners-marquee 18s linear infinite" }}
     >
-      {copies.map((copyIdx) => (
-        <div
-          key={copyIdx}
-          aria-hidden={copyIdx > 0}
-          className="flex shrink-0 items-center gap-5 pr-5"
-        >
-          {partners.map((p, i) => (
-            <PartnerCard key={`${copyIdx}-${i}`} partner={p} />
-          ))}
-        </div>
-      ))}
+      {/* First half — visible */}
+      <div className="flex shrink-0 items-center gap-5 pr-5">
+        {doubled.map((p, i) => (
+          <PartnerCard key={`a-${i}`} partner={p} />
+        ))}
+      </div>
+      {/* Second half — seamless duplicate (aria-hidden) */}
+      <div aria-hidden className="flex shrink-0 items-center gap-5 pr-5">
+        {doubled.map((p, i) => (
+          <PartnerCard key={`b-${i}`} partner={p} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -195,7 +163,7 @@ export default function PartnersNew() {
       <style>{`
         @keyframes partners-marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-25%); }
+          to   { transform: translateX(-50%); }
         }
       `}</style>
     </section>
