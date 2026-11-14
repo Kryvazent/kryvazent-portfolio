@@ -316,9 +316,13 @@ html[data-theme="light"] .pc-light { display: flex; }
 
 /* Light: full colour, natural brightness */
 html[data-theme="light"] .project-card-img {
-  filter: brightness(0.96) contrast(1.03) saturate(1.05);
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.98) contrast(1.02) saturate(1.05);
 }
 html[data-theme="light"] .group:hover .project-card-img {
+  object-fit: cover;
+  object-position: center;
   filter: brightness(1.02) contrast(1.04) saturate(1.08);
 }
 

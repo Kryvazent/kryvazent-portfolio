@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, Menu, X, ChevronRight, Mail, Phone, MapPin } from "lucide-react";
+import { Sun, Moon, Menu, X, ChevronRight, Mail, Phone, MapPin, Package, ArrowUpRight, QrCode, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_SECTIONS = [
@@ -19,16 +19,22 @@ const NAV_SECTIONS = [
 
 const DRAWER_EXTRA_SECTIONS = [{ label: "Partners", anchor: "customers" }] as const;
 
+const PRODUCT_LINKS = [
+  { label: "QR Code Generator", href: "https://qr-code-generator-tan-zeta.vercel.app/", description: "Create branded QR codes" },
+  { label: "Bulk Email Sender", href: "https://react-sepia-beta.vercel.app/", description: "Personalized email campaigns" },
+  { label: "Bulk Certificate Generator", href: "https://msa-certificate-generator.vercel.app/", description: "Design attendance certificates" },
+] as const;
+
 const MOBILE_ICON_BTN =
   "max-lg:bg-surface-strong max-lg:shadow-[var(--shadow-sm)] max-lg:w-[42px] max-lg:h-[42px]";
 
-/* ── helpers ─────────────────────────────────────────── */
+/* â”€â”€ helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 /** Returns the correct href: anchor on homepage, full path+hash on sub-pages. */
 function sectionHref(anchor: string, isHome: boolean): string {
   return isHome ? `#${anchor}` : `/#${anchor}`;
 }
 
-/* ── Logo ─────────────────────────────────────────────── */
+/* â”€â”€ Logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Logo({ pill = false, isHome = false }: { pill?: boolean; isHome?: boolean }) {
   return (
     <Link
@@ -72,7 +78,7 @@ function Logo({ pill = false, isHome = false }: { pill?: boolean; isHome?: boole
   );
 }
 
-/* ── Progress Bar ─────────────────────────────────────── */
+/* â”€â”€ Progress Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ProgressBar() {
   const [width, setWidth] = useState(0);
   useEffect(() => {
@@ -93,7 +99,7 @@ function ProgressBar() {
   );
 }
 
-/* ── Theme toggle ─────────────────────────────────────── */
+/* â”€â”€ Theme toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mounted, setMounted] = useState(false);
@@ -137,7 +143,7 @@ function ThemeToggle() {
   );
 }
 
-/* ── Back-to-top ──────────────────────────────────────── */
+/* â”€â”€ Back-to-top â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export function BackToTop() {
   const [show, setShow] = useState(false);
   const prefersReduced = useRef(false);
@@ -163,7 +169,7 @@ export function BackToTop() {
   );
 }
 
-/* ── Main Nav ─────────────────────────────────────────── */
+/* â”€â”€ Main Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function NavNew() {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -171,6 +177,7 @@ export default function NavNew() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -178,7 +185,7 @@ export default function NavNew() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* scrollspy — only meaningful on the homepage */
+  /* scrollspy â€” only meaningful on the homepage */
   useEffect(() => {
     if (!isHome) return;
     const ids = NAV_SECTIONS.map((s) => s.anchor);
@@ -250,7 +257,25 @@ export default function NavNew() {
           </div>
 
           <div className="flex items-center gap-[10px]">
-            <ThemeToggle />
+            <div className="relative hidden lg:block">
+              <button type="button" onClick={() => setProductsOpen((open) => !open)} aria-label="Show Kryvazent products" aria-expanded={productsOpen} className="h-[42px] rounded-[11px] border border-line bg-surface px-3 flex items-center justify-center gap-2 text-muted hover:border-primary hover:text-primary transition-all">
+                <Package className="w-[18px] h-[18px]" /><span className="text-[13px] font-semibold">Products</span>
+              </button>
+              {productsOpen && <div className="absolute right-0 top-[52px] z-[120] w-[360px] overflow-hidden rounded-[20px] border border-line bg-surface-strong shadow-[0_24px_70px_rgba(18,24,32,0.22)] ring-1 ring-black/[0.03]">
+                <div className="flex items-center justify-between border-b border-line bg-[linear-gradient(115deg,rgba(255,71,87,0.12),transparent_70%)] px-5 py-4">
+                  <div><p className="m-0 text-[10px] font-bold uppercase tracking-[0.2em] text-primary font-syncopate">Kryvazent products</p><p className="mt-1 mb-0 text-[12px] text-muted">Small tools, ready to use</p></div>
+                  <span className="rounded-full border border-primary/15 bg-primary/10 px-2.5 py-1 text-[10px] font-bold text-primary">03 PRODUCTS</span>
+                </div>
+                <div className="p-2.5">
+                  {PRODUCT_LINKS.map((product, index) => { const ProductIcon = [QrCode, Mail, Award][index]; return <a key={product.href} href={product.href} target="_blank" rel="noopener noreferrer" onClick={() => setProductsOpen(false)} className="group flex items-center gap-3 rounded-[13px] px-3 py-3 text-foreground no-underline transition-all duration-200 hover:bg-surface hover:shadow-[0_5px_18px_rgba(20,25,32,0.06)]">
+                    <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-[12px] border border-primary/10 bg-primary/[0.07] text-primary transition-colors group-hover:bg-primary group-hover:text-white"><ProductIcon className="h-[19px] w-[19px]" strokeWidth={1.8}/></span>
+                    <span className="flex min-w-0 flex-1 flex-col gap-1"><strong className="text-[13px] font-semibold leading-tight">{product.label}</strong><small className="text-[12px] leading-snug text-muted">{product.description}</small></span>
+                    <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-subtle transition-all group-hover:bg-primary/10 group-hover:text-primary"><ArrowUpRight className="h-4 w-4"/></span>
+                  </a>})}
+                </div>
+                <div className="flex items-center gap-2 border-t border-line px-5 py-3 text-[10px] text-muted"><Package className="h-3.5 w-3.5 text-primary"/>Built by Kryvazent Software Engineering</div>
+              </div>}
+            </div>            <ThemeToggle />
             <Link
               href={contactHref}
               className="hidden lg:inline-flex items-center justify-center px-5 py-[11px] rounded-[11px] text-[13px] font-semibold font-syncopate bg-gradient-to-br from-[#FF4757] via-[#D62133] to-[#A31527] text-white shadow-[0_10px_28px_rgba(214,33,51,0.35)] hover:-translate-y-[2px] hover:shadow-[0_16px_36px_rgba(214,33,51,0.5)] transition-all duration-200"
@@ -315,6 +340,10 @@ export default function NavNew() {
                   </Link>
                 ))}
               </div>
+              <div className="mt-5 border-t border-line pt-5">
+                <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary font-syncopate">Kryvazent products</p>
+                {PRODUCT_LINKS.map((product) => <a key={product.href} href={product.href} target="_blank" rel="noopener noreferrer" onClick={closeDrawer} className="flex items-center justify-between gap-3 rounded-[12px] px-3 py-[12px] text-foreground no-underline hover:bg-surface transition-colors"><span className="flex items-center gap-3"><Package className="w-[17px] h-[17px] text-primary"/><span className="font-syncopate font-semibold text-[12px]">{product.label}</span></span><ArrowUpRight className="w-[15px] h-[15px] text-subtle"/></a>)}
+              </div>
 
               <Link
                 href={contactHref}
@@ -348,3 +377,5 @@ export default function NavNew() {
     </>
   );
 }
+
+

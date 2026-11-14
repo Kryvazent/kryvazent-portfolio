@@ -1,4 +1,4 @@
-export type Project = {
+﻿export type Project = {
   image: string;
   alt: string;
   category: string;
@@ -13,30 +13,61 @@ export type Project = {
 export const ALL_PROJECTS: Project[] = [
   {
     image: "/partners/rajapura-bg.png",
-    alt: "Rajapura Herbal — herbal e-commerce platform",
+    alt: "Rajapura Herbal â€” herbal e-commerce platform",
     category: "E-Commerce",
     outcome: "Live product",
     title: "Rajapura Herbal",
     tech: ["Web", "E-Commerce", "Product Catalogue"],
     description:
-      "A full e-commerce platform for a heritage Sri Lankan herbal brand — built with product catalogues, online ordering, and brand storytelling.",
+      "A full e-commerce platform for a heritage Sri Lankan herbal brand â€” built with product catalogues, online ordering, and brand storytelling.",
     useCase: "Herbal & wellness retail",
     link: "https://rajapuraherbal.lk",
   },
   {
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
-    alt: "Emerge Sri Lanka — community and social impact platform",
+    alt: "Emerge Sri Lanka â€” community and social impact platform",
     category: "Web Application",
     outcome: "Live platform",
     title: "Emerge Sri Lanka",
     tech: ["Next.js", "Web", "Community Platform"],
     description:
-      "A digital platform for Emerge Sri Lanka — enabling community engagement, programme visibility, and social impact communication.",
+      "A digital platform for Emerge Sri Lanka â€” enabling community engagement, programme visibility, and social impact communication.",
     useCase: "Non-profit & community",
     link: "https://emergesrilanka.org",
   },
-
-
+  {
+    image: "/products/qr-code-generator.jpg",
+    alt: "Kryvazent QR Code Generator creating a branded QR code",
+    category: "Web Application",
+    outcome: "Free product",
+    title: "QR Code Generator",
+    tech: ["React", "QR Codes", "SVG / PNG"],
+    description: "Generate custom QR codes from text or links, add a logo, adjust color and size, and export in print-ready formats.",
+    useCase: "Campaigns, events & product links",
+    link: "https://qr-code-generator-tan-zeta.vercel.app/",
+  },
+  {
+    image: "/products/bulk-email-sender.jpg",
+    alt: "Kryvazent Bulk Email Sender with recipient data and email preview",
+    category: "Web Application",
+    outcome: "Free product",
+    title: "Bulk Email Sender",
+    tech: ["React", "Gmail SMTP", "CSV / Excel"],
+    description: "Personalize Gmail messages from recipient spreadsheets, join extra data, preview campaigns, and export individual email drafts.",
+    useCase: "Community updates & outreach",
+    link: "https://react-sepia-beta.vercel.app/",
+  },
+  {
+    image: "/products/bulk-certificate-generator.jpg",
+    alt: "Kryvazent Bulk Certificate Generator with custom certificate fields",
+    category: "Web Application",
+    outcome: "Free product",
+    title: "Bulk Certificate Generator",
+    tech: ["React", "Excel Import", "PDF Export"],
+    description: "Build custom certificate layouts, map participant data from CSV or Excel, and export personalized certificates as a PDF batch.",
+    useCase: "Events, workshops & attendance",
+    link: "https://msa-certificate-generator.vercel.app/",
+  },
 ];
 const Removed_Projects: Project[] = [
   {
@@ -76,5 +107,9 @@ const Removed_Projects: Project[] = [
     link: null,
   },
 ]
-/** First 3 projects shown on the homepage */
-export const FEATURED_PROJECTS = ALL_PROJECTS.slice(0, 3);
+/** Products and projects showcased on the homepage */
+export const FEATURED_PROJECTS = ALL_PROJECTS;
+
+
+
+
