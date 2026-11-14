@@ -109,7 +109,7 @@ export default function ProjectCard({
       ══════════════════════════════════════════ */}
       <div
         className="pc-light absolute inset-x-0 bottom-0 hidden flex-col"
-        style={{ height: "62%" }}
+        style={{ height: "59%" }}
       >
         {/*
           Single background div — top 28% fades from white/0 to white,
